@@ -1,20 +1,14 @@
 @extends('pages.login')
-@section('nav')
-    {{--@include('modules.nav', ['link'=>'New Business', 'address'=>'/register'])--}}
-    @include('modules.gen-nav')
-@endsection
 
 @section('content')
     <div class="row">
         <div class="col s4 l4 m4"></div>
         <div class="col s4 l4 m4">
-            <form class="col s12" style="margin-top: -10em !important;" action="{{url('admin_login')}}" method="POST">
+            <form class="col s8 offset-s1" action="{{url('admin_login')}}" method="POST">
                 <div class="card white darken-1">
                     <div class="card-content white-text">
                         <div class="row">
-                            <blockquote>
-                                <h5>Administrator</h5>
-                            </blockquote>
+                            <h5 style="text-align: center">Administrator</h5>
                             <div class="input-field col s12">
                                 <input id="first_name" type="text" class="validate" name="username">
                                 <label for="first_name">Admin Username</label>

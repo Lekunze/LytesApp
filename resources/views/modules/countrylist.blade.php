@@ -81,7 +81,7 @@
     <option value="GM">Gambia</option>
     <option value="GE">Georgia</option>
     <option value="DE">Germany</option>
-    <option value="GH">Ghana</option>
+    <option value="GH" selected>Ghana</option>
     <option value="GI">Gibraltar</option>
     <option value="GR">Greece</option>
     <option value="GL">Greenland</option>

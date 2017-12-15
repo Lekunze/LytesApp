@@ -1,44 +1,68 @@
-<!--
 
-        input[type=file]{
-            padding:10px;
-            background:#2d2d2d;
-        }
-
-        img{
-            max-width:200px;
-        }
-
-        .btn{
-            background-color: black !important;
-            text-align: center !important;
-        }
-
-        .btn span{
-            text-transform: none !important;
-
-        }
-
-        .col.s4{
-            text-align: center !important;
-        }
-
-        p{
-            margin-left: 30px !important;
-            font-size: 1.1em;
-        }
--->
 @extends('layouts.smes')
 @section('products')
     <style>
-        blockquote{
-            border-color:darkred !important;
+
+        #image-preview-3, #image-preview, #image-preview-2{
+            background-color: whitesmoke !important;
+            color: black;
+            width: 100%;
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+            text-align: center !important;
         }
 
-        body{
-            background-color: whitesmoke !important;
-            font-family: 'Roboto';
+        #image-preview input, #image-preview-2 input, #image-preview-3 input{
+            line-height: 200px;
+            font-size: 200px;
+            position: absolute;
+            opacity: 0;
+            z-index: 10;
         }
+
+        #image-preview label, #image-preview-2 label, #image-preview-3 label{
+            position: absolute;
+            z-index: 5;
+            opacity: 0.8;
+            background-color: black;
+            width: 100px;
+            height: 50px;
+            font-size: 15px;
+            line-height: 50px;
+            color: white;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            text-align: center;
+            text-transform: none;
+        }
+
+        @media only screen
+        and (min-device-width: 1920px)
+        and (min-device-height: 1080px){
+
+            #image-preview-3, #image-preview, #image-preview-2{
+                height: 300px;
+            }
+
+        }
+
+        label{
+            font-weight: 400;
+        }
+
+        select option{
+            font-weight: 400 !important;
+        }
+
+
+
+
+
+
     </style>
     <script src="js/uploadPreview.min.js"></script>
 
@@ -49,26 +73,31 @@
     <div class="row">
 
         <div class="col s2 l2 m2"></div>
-        <div class="col s8 l8 m8 offset-s1 offset-l1 offset-m1">
+        <div class="col s8 l8 m8">
             <h4 style="text-align: center"> New Product </h4> <br>
             <div class="row">
-                <form class="col s12" >
+                <form class="col s12" action="{{url('product')}}" method="post" enctype="multipart/form-data">
                     <div class="row">
-                        <blockquote>
-                            <h5>Product Details</h5>
-                        </blockquote>
+                        <h5>Product Details</h5>
                         <div class="input-field col s12">
-                            <input id="first_name" type="text" class="validate">
-                            <label for="first_name">Product Name</label>
+                            <input id="product-name" type="text" class="validate" name="product-name" required>
+                            <label for="product-name">Product Name*</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="id_number" type="text" class="validate">
-                            <label for="id_number">Product Brand</label>
+                            <select name="product-shelf">
+                                <option value="" disabled selected>Choose shelf</option>
+                            @if(!empty($shelves))
+                                    @foreach($shelves as $shelf)
+                                        <option value="{{$shelf->product_shelf}}"> {{$shelf->product_shelf}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            <label>Shelf*</label>
                         </div>
                         <div class="input-field col s6">
-                            <select>
+                            <select name="product-category">
                                 <option value="" disabled selected>Choose your option</option>
                                 <option value="1">Accommodation</option>
                                 <option value="2">Automobile & Parts</option>
@@ -81,54 +110,43 @@
                                 <option value="9">Food</option>
                                 <option value="10">Other</option>
                             </select>
-                            <label>Category</label>
+                            <label>Category*</label>
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <div class="chips chips-autocomplete" id="color"></div>
-                            <label for="color">Price (GHS) </label>
+                            <input id="product-price" type="text" class="validate" name="product-price" required>
+                            <label for="product-price">Price (GHS)* </label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="phone_number" type="text" class="validate">
-                            <label for="phone_number">Quantity</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <div class="chips chips-autocomplete" id="color"></div>
-                            <label for="color">Color</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="phone_number" type="text" class="validate">
-                            <label for="phone_number">Shelf Name</label>
+                            <input id="product-color" type="text" class="validate" name="product-color" required>
+                            <label for="product-color">Color</label>
                         </div>
                     </div>
 
+
                     <div class="row">
-                        <blockquote>
-                            <h5>Display</h5>
-                        </blockquote>
-                        <p>Upload three images of the product</p>
+                        <h5>Display</h5>
+                        <p style="font-weight: 400; color: rgb(0,32,96)!important;">Upload three images of the product</p>
                         <div class="input-field col s12">
                             <div class="row" >
                                 <div class="col s4" >
                                     <div id="image-preview">
                                         <label for="image-upload" id="image-label">Image 1</label>
-                                        <input type="file" name="image" id="image-upload" />
+                                        <input type="file" name="pdt-image-1" id="image-upload" />
                                     </div>
                                 </div>
                                 <div class="col s4">
                                     <div id="image-preview-2">
                                         <label for="image-upload-2" id="image-label-2">Image 2</label>
-                                        <input type="file" name="image" id="image-upload-2" />
+                                        <input type="file" name="pdt-image-2" id="image-upload-2" />
                                     </div>
                                 </div>
                                 <div class="col s4">
                                     <div id="image-preview-3">
                                         <label for="image-upload-3" id="image-label-3">Image 3</label>
-                                        <input type="file" name="image" id="image-upload-3" />
+                                        <input type="file" name="pdt-image-3" id="image-upload-3" />
                                     </div>
                                 </div>
                             </div>
@@ -137,10 +155,12 @@
 
                         </div>
                     </div>
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+
 
                     <div class="row">
                         <div class="input-field col s12" style="text-align: center">
-                            <button class="btn waves-effect waves-light btn-large black" type="submit" name="action" style="background-color: darkred !important;"><b>Add Product</b>
+                            <button class="btn waves-effect waves-light btn-large black" type="submit" name="action" ><b>Add Product</b>
                                 <i class="material-icons right">add</i>
                             </button>
                         </div>
@@ -150,8 +170,7 @@
         </div>
 
         <div class="col s2 l2 m2"></div>
-        <!--<input id="files" type="file" multiple="multiple" />
-        <output id="result" /> -->
+
 
     </div>
 

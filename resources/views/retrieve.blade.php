@@ -1,6 +1,4 @@
-<h1> Hello </h1>
-@if($results)
-    @foreach($results as $datum)
-        <p>{{$datum->product_name}}</p>
-    @endforeach
-@endif
+<?php
+//$password = bcrypt(md5(uniqid(rand(), true)));
+$password = uniqid(str_random(1));
+echo $password;

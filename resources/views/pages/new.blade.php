@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>LytesApp - Register</title>
+    <link rel="icon" href="{!! asset('img/favicon.ico') !!}"/>
+
 
     <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -13,7 +15,6 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-
 
     <style>
         html, body {
@@ -53,10 +54,6 @@
             background-color: black !important;
         }
 
-        button.btn{
-            background-color: darkred !important;
-        }
-
         p{
             font-weight: 400;
             font-size: 1.1em;
@@ -68,6 +65,22 @@
 
         .nav-wrapper #logo{
             font-family: 'Pacifico', cursive !important;
+        }
+
+        nav{
+            background-color: rgb(0,32,96) !important;
+        }
+
+        .nav-wrapper ul li{
+            background-color: rgb(191,13,64) !important;
+        }
+        .nav-wrapper ul li a{
+            color: white !important;
+            font-weight: 400 !important;
+        }
+
+        small{
+            color: firebrick;
         }
 
     </style>
@@ -140,9 +153,9 @@
             cursor: pointer !important;
         }
 
-        small{
-            color: firebrick !important;
-        }
+        /*small{*/
+            /*color: firebrick !important;*/
+        /*}*/
 
         .input-field col s6 test{
             border-bottom: 1px solid #c7254e !important;
@@ -153,14 +166,14 @@
 
 <body>
 
-@include('modules.nav', ['link'=>'Sign In', 'address'=>'/login'])
+@include('modules.nav.x-nav', ['link'=>'Sign In', 'address'=>'/login'])
 
 <div class="slider">
     <ul class="slides">
         <li>
-            <img src="{{asset('img/new-1.jpeg')}}"/>
-            <div class="caption left-align" style="color:black">
-                <h3>New Business</h3>
+            <img src="{{asset('img/storeee.jpeg')}}"/>
+            <div class="caption center-align" style="color:black">
+                <h3 style="color:white; font-weight: 500">New Business</h3>
                 <h5 class="light grey-text text-lighten-3" style="color:white!important;">Register to sell your products online</h5>
             </div>
         </li>
@@ -178,33 +191,23 @@
                 <div class="row">
                     <br>
                     <br>
-                    {{--@if ($errors->any())--}}
-                        {{--<div class="alert alert-danger">--}}
-                            {{--<ul>--}}
-                                {{--@foreach ($errors->all() as $error)--}}
-                                    {{--<li>{{ $error }}</li>--}}
-                                {{--@endforeach--}}
-                            {{--</ul>--}}
-                        {{--</div>--}}
-                    {{--@endif--}}
-                    <blockquote>
-                        <h5>Personal Details</h5>
-                    </blockquote>
+                    <h4 style="margin-left:0.3em; font-size:1.8em;"> Personal Details </h4>
+                    <br>
 
                     <div class="input-field col s6" @if($errors->first('business_owner_last_name')){{' test'}}} @endif >
-                        <input id="first_name" type="text" class="validate" name="business_owner_last_name" value="{{old('business_owner_last_name')}}">
+                        <input id="first_name" type="text" class="validate" name="business_owner_last_name" value="{{old('business_owner_last_name')}}" required>
                         <label for="first_name">Surname*</label>
                         <small class="text-danger">{{ $errors->first('business_owner_last_name') }}</small>
                     </div>
                     <div class="input-field col s6">
-                        <input id="last_name" type="text" class="validate" name="business_owner_given_names" value="{{old('business_owner_given_names')}}">
+                        <input id="last_name" type="text" class="validate" name="business_owner_given_names" value="{{old('business_owner_given_names')}}" required >
                         <label for="last_name"> Given names*</label>
                         <small class="text-danger">{{ $errors->first('business_owner_given_names') }}</small>
                     </div>
                 </div>
                 <div class="row">
-                   <div class="input-field col s6">
-                       <input id="dob" type="text" class="datepicker" name="date_of_birth" value="{{old('date_of_birth')}}">
+                    <div class="input-field col s6">
+                        <input id="dob" type="text" class="datepicker" name="date_of_birth" value="{{old('date_of_birth')}}">
                         <label for="dob">Date of Birth*</label>
                     </div>
                     <div class="input-field col s6">
@@ -215,76 +218,58 @@
                     </div>
                 </div>
                 <div class="row">
-                   <div class="input-field col s6">
-                       <select name="id_type" value="{{old('id_type')}}">
-                           <option value="" disabled selected>Choose your option</option>
-                           <option value="1">Driver's License</option>
-                           <option value="2">National ID</option>
-                           <option value="3">Non-citizen ID</option>
-                           <option value="4">NHIS</option>
-                           <option value="5">Passport</option>
-                           <option value="6">Voter's ID</option>
-                       </select>
+                    <div class="input-field col s6">
+                        <select name="id_type" value="{{old('id_type')}}">
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="1">Driver's License</option>
+                            <option value="2">National ID</option>
+                            <option value="3">Non-citizen ID</option>
+                            <option value="4">NHIS</option>
+                            <option value="5">Passport</option>
+                            <option value="6">Voter's ID</option>
+                        </select>
                         <label>ID Type*</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="id_number" name="id_number" type="text" class="validate" value="{{old('id_number')}}">
+                        <input id="id_number" name="id_number" type="text" class="validate" value="{{old('id_number')}}" required>
                         <label for="id_number">ID Number*</label>
+                        <small class="text-danger">{{ $errors->first('id_number') }}</small>
                     </div>
                 </div>
                 <div class="row">
-                   <div class="input-field col s6">
-                       <input id="phone_number" type="text" class="validate" name="phone_number" value="{{old('phone_number')}}">
-                       <label for="phone_number">Phone Number*</label>
-                       <small class="text-danger">{{ $errors->first('phone_number') }}</small>
-                   </div>
+                    <div class="input-field col s6">
+                        <input id="phone_number" type="text" class="validate" name="phone_number" value="{{old('phone_number')}}" required>
+                        <label for="phone_number">Phone Number*</label>
+                        <small class="text-danger">{{ $errors->first('phone_number') }}</small>
+                    </div>
                     <div class="input-field col s6">
                         <input id="other_number" type="text" class="validate" name="phone_number_2" value="{{old('phone_number_2')}}">
                         <label for="other_number">Other Number</label>
                         <small class="text-danger">{{ $errors->first('phone_number_2') }}</small>
                     </div>
                 </div>
-                <!--<div class="row">
-                    <div class="col s6">
-                        <p> Upload a profile picture of yourself*</p>
-                        <div id="image-preview">
-                            <label for="image-upload" id="image-label">Add Photo</label>
-                            <input type="file" name="profile_picture" id="image-upload" required/>
-                        </div>
-                    </div>
-                    <div class="col s6">
-                        <p> Upload a picture of your valid ID*</p>
-                        <div id="image-preview-6">
-                            <label for="image-upload-6" id="image-label-6">Add Photo</label>
-                            <input type="file" name="id_picture" id="image-upload-6"/>
-                        </div>
-                    </div>
-                </div>-->
+
                 <br>
 
-               <!---Business Details -->
+                <!---Business Details -->
 
                 <div class="row">
-                    <blockquote>
-                        <h5>Business Details</h5>
-                    </blockquote>
+                    <h4 style="margin-left:0.3em; font-size:1.8em;"> Business Details </h4>
+                    <br>
                     <div class="input-field col s12">
-                        <input id="first_name" type="text" name="business_name" value="{{old('business_name')}}">
+                        <input id="first_name" type="text" name="business_name" value="{{old('business_name')}}" required>
                         <label for="first_name">Business/Shop Name*</label>
                         <small class="text-danger">{{ $errors->first('business_name') }}</small>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s4">
-                        <select name="country">
+                        <select name="country" disabled>
                             @include('modules.countrylist')
                         </select>
                         <label>Country*</label>
                     </div>
                     <div class="input-field col s4">
-                        {{--<input id="region" type="text" class="validate" name="region" value="{{old('region')}}">--}}
-                        {{--<label for="region">Region/State*</label>--}}
-                        {{--<small class="text-danger">{{ $errors->first('region') }}</small>--}}
                         <select name="region" value="{{old('region')}}">
                             <option value="" disabled selected>Choose your region</option>
                             <option value="AS"> Ashanti Region</option>
@@ -301,9 +286,6 @@
                         <label>Region*</label>
                     </div>
                     <div class="input-field col s4">
-                        {{--<input id="location" type="text" class="validate" name="area" value="{{old('area')}}">--}}
-                        {{--<label for="location">Area/Location*</label>--}}
-                        {{--<small class="text-danger">{{ $errors->first('area') }}</small>--}}
                         <select name="area" value="{{old('area')}}">
                             <option value="" disabled selected>Choose your location</option>
                             <option value="37M"> 37</option>
@@ -328,14 +310,14 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="address" type="text" class="validate" name="address" value="{{old('address')}}">
+                        <input id="address" type="text" class="validate" name="address" value="{{old('address')}}" required>
                         <label for="address">Address*</label>
                         <small class="text-danger">{{ $errors->first('address') }}</small>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="first_name" type="text" class="validate" name="business_number" value="{{old('business_number')}}">
+                        <input id="first_name" type="text" class="validate" name="business_number" value="{{old('business_number')}}" required>
                         <label for="first_name">Business Contact 1*</label>
                         <small class="text-danger">{{ $errors->first('business_number') }}</small>
                     </div>
@@ -347,8 +329,8 @@
                 </div>
 
                 <div class="row">
-                    <div class="input-field inline col s6">
-                    Do you provide delivery services?*
+                    <div class="input-field inline col s6" required>
+                        Do you provide delivery services?*
                         <span style="display: inline-block">
                             <input class="with-gap" name="delivery_services" type="radio" id="yes" value="yes"/>
                             <label for="yes">Yes</label>
@@ -377,28 +359,35 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="email" type="email" class="validate" name="email" value="{{old('email')}}">
+                        <input id="email" type="email" class="validate" name="email" value="{{old('email')}}" required>
                         <label for="email">Email address*</label>
                         <small class="text-danger">{{ $errors->first('email') }}</small>
                     </div>
                 </div>
+
+                <br>
+                <h4 style="margin-left:0.3em; font-size:1.8em;"> Media </h4>
+
+                <br>
                 <div class="row">
                     <div class="input-field col s12">
                         <p> Upload business logo or display picture (resolution at least 720 X 569)</p>
                         <div id="image-preview-2">
                             <label for="image-upload-2" id="image-label-2">Add Photo*</label>
-                            <input type="file" name="business_logo" id="image-upload-2" value="{{old('business_logo')}}"/>
+                            <input type="file" name="business_logo" id="image-upload-2" value="{{old('business_logo')}}" required/>
                         </div>
                         <small class="text-danger">{{ $errors->first('business_logo') }}</small>
                     </div>
                 </div>
+
+
 
                 <div class="row">
                     <p> Upload 3 cover images for business (resolution at least 1280 X 720)</p>
                     <div class="col s12">
                         <div id="image-preview-3">
                             <label for="image-upload-3" id="image-label-3">Add Image*</label>
-                            <input type="file" name="cover_image_1" id="image-upload-3" />
+                            <input type="file" name="cover_image_1" id="image-upload-3" required/>
                         </div>
                         <small class="text-danger">{{ $errors->first('cover_image_1') }}</small>
                     </div>
@@ -408,14 +397,14 @@
                     <div class="col s6">
                         <div id="image-preview-5">
                             <label for="image-upload-5" id="image-label-5">Add Photo*</label>
-                            <input type="file" name="cover_image_2" id="image-upload-5" />
+                            <input type="file" name="cover_image_2" id="image-upload-5" required/>
                         </div>
                         <small class="text-danger">{{ $errors->first('cover_image_2') }}</small>
                     </div>
                     <div class="col s6">
                         <div id="image-preview-4">
                             <label for="image-upload-4" id="image-label-4">Add Photo*</label>
-                            <input type="file" name="cover_image_3" id="image-upload-4" />
+                            <input type="file" name="cover_image_3" id="image-upload-4" required/>
                         </div>
                         <small class="text-danger">{{ $errors->first('cover_image_3') }}</small>
                     </div>
@@ -423,9 +412,7 @@
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <div class="row">
                     <div class="input-field col s12" style="text-align: center">
-                        <button class="btn waves-effect waves-light btn-large black" type="submit" name="action"><b>Register</b>
-                            <i class="material-icons right">add</i>
-                        </button>
+                        <button class="btn waves-effect waves-light btn-large black" type="submit" name="action"><b>Register</b></button>
                     </div>
                 </div>
 

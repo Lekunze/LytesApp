@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>LytesApp</title>
+    <link rel="icon" href="{!! asset('img/favicon.ico') !!}"/>
 
     <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -67,10 +68,6 @@
         #contain{
             background-color: silver;
         }
-
-
-
-
 
     </style>
 

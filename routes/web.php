@@ -25,17 +25,34 @@ Route::get('/hello', function () {
     return "<h2>Lytes App</h2>";
 });*/
 
+
 Route::get('/','PagesController@index');
 Route::get('/about','PagesController@about');
-Route::get('/sme','PagesController@sme');
+Route::get('/sme','DBController@sme');
+Route::get('/goldilocks','PagesController@goldilocks');
+
+Route::get('/business/{id}','DBController@smeguest');
 Route::get('/register','PagesController@register');
 //Route::get('/product','PagesController@product');
-Route::get('/login','PagesController@login');
-Route::get('/received','PagesController@received');
+Route::get('login','PagesController@login');
+Route::get('/success','PagesController@received');
 Route::get('/signup','PagesController@signup');
 
 
+Route::get('/product/{sme}/{product}','DBController@product');
+Route::get('/sme/{sme}','DBController@shop');
+Route::get('/view-product','DBController@viewProduct');
+Route::get('/view-sme','DBController@viewSME');
+
+
+Route::post('deleteshelf', 'DBController@deleteshelf');
+
+Route::post('product', 'DBController@addProduct');
+Route::post('shelf', 'DBController@shelf');
 Route::post('store', 'DBController@store');
+Route::post('changePassword', 'DBController@changePassword');
+//Route::get('/mail', 'DBController@mail');
+
 Route::post('customer','DBController@new_customer');
 Route::post('customer_login','DBController@customer_login');
 Route::post('business_login','DBController@business_login');
@@ -52,12 +69,21 @@ Route::get('/dashboard/reject/{id}', 'DBController@reject');
 
 //SME Page routing
 Route::get('/sme/manage','PagesController@sme');
-Route::get('/new','PagesController@new_pdt');
-Route::get('/change','PagesController@change');
+Route::get('/new','DBController@new_pdt');
+Route::get('/change','DBController@change');
+Route::get('/layout','DBController@store_info');
+Route::get('/products', 'DBController@manageProducts');
+
 
 Route::get('/retrieve', 'DBController@retrieve');
 
 Route::post('search', 'DBController@search');
 Route::get('/results', 'DBController@results');
+
+Route::get('logout', 'PagesController@logout');
+
+
+
+
 
 

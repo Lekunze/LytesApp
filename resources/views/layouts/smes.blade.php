@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{config('app.name')}}</title>
+    <title>
+         @if(!empty($business))
+                 {{((array) $business[0])['business_name']}}
+        @endif
+    </title>
+    <link rel="icon" href="{!! asset('img/favicon.ico') !!}"/>
+
 
     <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -26,22 +32,6 @@
             font-weight: 100;
             font-family: 'Lato';
 
-        }
-
-
-        .slider .indicators{
-            bottom: 52%;
-            z-index: 100;
-            text-align: right;
-        }
-        .slider ul.slides{
-            height:50% !important;
-        }
-        .slider{
-            height:50% !important;
-        }
-        .slider .slides li img{
-            height:100% !important;
         }
 
         #profile-img img{
@@ -101,49 +91,26 @@
             margin-left: 1em;
         }
 
+        @media only screen and (min-width : 1920px) {
+            .side-nav {
+                width: 15% !important;
+            }
+        }
+
+        .chip{
+            height: 4em;
+            width: 20em;
+            background-color: black;
+            color:white;
+        }
+
 
     </style>
 
     <style type="text/css">
         /*Source: http://opoloo.github.io/jquery_upload_preview/ */
 
-        #image-preview, #image-preview-2, #image-preview-3 {
-            width: 200px;
-            height: 200px;
-            position: relative;
-            overflow: hidden;
-            background-color: #ffffff;
-            color: #ecf0f1;
-        }
-        #image-preview input, #image-preview-2 input, #image-preview-3 input{
-            line-height: 200px;
-            font-size: 200px;
-            position: absolute;
-            opacity: 0;
-            z-index: 10;
-        }
 
-
-        #image-preview label, #image-preview-2 label, #image-preview-3 label{
-            position: absolute;
-            z-index: 5;
-            opacity: 0.8;
-            cursor: pointer;
-            background-color: black;
-            width: 100px;
-            height: 50px;
-            font-size: 15px;
-            line-height: 50px;
-            text-transform: uppercase;
-            color: white;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            margin: auto;
-            text-align: center;
-            text-transform: none;
-        }
 
         .page-flexbox-wrapper {
 
@@ -155,6 +122,23 @@
         main{
             flex: 1 1 auto;
 
+        }
+
+        .card-image img{
+            width: auto;
+            height:auto;
+        }
+
+        nav{
+            background-color: rgb(0,32,96) !important;
+        }
+
+        .page-footer{
+            background-color: #323232 !important;
+        }
+
+        .footer-copyright{
+            background-color: black !important;
         }
 
 
@@ -170,71 +154,59 @@
     <div class="navbar-fixed">
         <nav class="top-nav" style="background-color: black">
             <div class="nav-wrapper">
-                <ul class="right hide-on-med-and-down">
-                    <a href="/" class="brand-logo center" id="logo">Ooh Distin</a>
-                    <li style="background-color: #01579b"><a href="#">Logout</a></li>
-                </ul>
+                <a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
+                <a href="#!" class="brand-logo center"><img src="{{asset('img/open.png')}}"></a>
+
             </div>
         </nav>
     </div>
 
-    <ul style="width:15%; margin-top:65px; background-color: silver" class="side-nav fixed" >
+    <ul style="width:20%; margin-top:65px; background-color: silver" class="side-nav" id="slide-out">
         <div class="row">
             <br>
             <div class="col s10 offset-s1">
                 <img src="img/logo-1.jpg" alt="" class="circle responsive-img" id="img-logo">
-                <h4 style="text-align: center"> Xenou Computers</h4>
+                <h5 style="text-align: center; font-weight: bold">
+                    @if(!empty($business))
+                        {{((array) $business[0])['business_name']}}
+                    @endif
+                </h5>
             </div>
             <div class="col s1"></div>
             </hr>
         </div>
         <li><div class="divider"></div></li>
-        <li><a href="/sme"><i class="material-icons">shop</i>Store</a></li>
+        <li><a href="/sme"><i class="material-icons">store</i>Store</a></li>
         <li><div class="divider"></div></li>
         <li><a href="/new"><i class="material-icons">add_shopping_cart</i>Add Product</a></li>
         <li><div class="divider"></div></li>
+        <li><a href="/layout"><i class="material-icons">business</i>Account Info</a></li>
+        <li><div class="divider"></div></li>
+        <li><a href="/products  "><i class="material-icons">add_shopping_cart</i>Manage Products </a></li>
+        <li><div class="divider"></div></li>
         <li><a href="/change"> <i class="material-icons">settings</i> Settings</a></li>
         <li><div class="divider"></div></li>
-        <li><a href="#"> <i class="material-icons">remove_red_eye</i> Preview</a></li>
-        <li><div class="divider"></div></li>
-        <li><a href="#"> <i class="material-icons">exit_to_app</i> Logout</a></li>
+        {{--<li><a href="#"> <i class="material-icons">remove_red_eye</i> Preview</a></li>--}}
+        {{--<li><div class="divider"></div></li>--}}
+        <li><a href="/logout"> <i class="material-icons">exit_to_app</i> Logout</a></li>
         <li><div class="divider"></div></li>
     </ul>
 </header>
-<!--
-{{--@include('modules.nav.sme-nav')--}}
 
-
-<ul id="slide-out" class="side-nav fixed">
-    <li><a href="#!">First Sidebar Link</a></li>
-    <li><a href="#!">Second Sidebar Link</a></li>
-</ul>
-<a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
--->
 <main>
     @yield('products')
 </main>
-@include('modules.footers.sample')
+    @if(!empty($business))
+        @include('modules.footers.sample',['sme'=> ((array) $business[0])['business_name'],
+         'contact' => ((array) $business[0])['business_number'], 'email' => ((array) $business[0])['email'],
+         'tagline' => 'Buy computers, peripherals and accessories at discounted prices'])
+    @endif
 
-<!--<div class="profile-picture">
-    <div class="row">
-        <div class="col s4 l4 m4"></div>
-        <div class="col s4 l4 m4" id="profile-img">
-            <img src="img/logo-1.jpg" alt="" class="circle responsive-img">
-        </div>
-        <div class="col s4 l4 m4"></div>
-    </div>
 </div>
 
-<div class="profile-name">
-    <h3> <b> Delali Computers </b> </h3>
-    {{--<span>Oxford Street, Osu <br> +233 302-323662 <br> info@dellretail.com</span>--}}
-</div>
-
-<br>
-<div class="divider"></div> <br>
--->
-</div>
+<script>
+    $(".button-collapse").sideNav();
+</script>
 
 
 

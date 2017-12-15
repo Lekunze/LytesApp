@@ -94,7 +94,7 @@
 
 <body>
 
-@include('modules.gen-nav'  )
+@include('modules.gen-nav')
 @include('modules.static-slider',['cover'=> $data->cover_image_1])
 
 <div class="profile-picture">
@@ -191,12 +191,13 @@
         </ul>
     </div>
     <div class="col s2">
-        <a class="btn green" href="{{url('/dashboard/approve/'.$data->id)}}">Approve<i class="material-icons">done</i></a> <br> <br>
+        {{--<a class="btn green" href="{{url('/dashboard/approve/'.$data->id)}}">Approve<i class="material-icons">done</i></a> <br> <br>--}}
+
         <a class="btn red" href="{{url('/dashboard/reject/'.$data->id)}}"> Reject <i class="material-icons">close</i></a>
     </div>
     <div class="col s1"></div>
 </div>
-
+<a href="{{url('/dashboard/approve/'.$data->id)}}">Approve</a> <br> <br>
 
 </body>
 

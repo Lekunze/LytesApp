@@ -26,44 +26,90 @@
             display: table;
             font-weight: 300;
             font-family: 'Roboto';
-            background-color: whitesmoke;
         }
+        @media (min-width: 1200px) {
+
+            .card-content h4{
+                /*font-weight: 400 !important;*/
+                font-size: 1.1em !important;
+            }
+            .card-content span{
+                font-size: 0.75em !important;
+            }
+
+            .col.s7.location{
+                font-size: 0.8em !important;
+            }
+            .col.s5.price{
+                font-size: 0.8em !important;
+            }
+        }
+
+        /* iMac*/
+        @media only screen
+        and (min-device-width: 1920px)
+        and (min-device-height: 1080px){
+
+            .card-content h4{
+                /*font-weight: 400 !important;*/
+                font-size: 1.3em !important;
+            }
+            .card-content span{
+                font-size: 0.85em !important;
+            }
+
+            .col.s7.location{
+                font-size: 0.9em !important;
+            }
+            .col.s5.price{
+                font-size: 0.9em !important;
+            }
+
+        }
+
 
 
         .nav-wrapper #logo{
             font-family: 'Pacifico', cursive !important;
         }
 
-        input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time],
-        input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], select,
-        textarea.materialize-textarea {
-            /*background-color: transparent;
-            border: none;*/
+
+        .select-wrapper{
+            color:black;
+            padding-left: 2em !important;
+
+        }
+        .select-dropdown{
+            -moz-border-radius: 15px 15px 15px 15px !important;
+            -webkit-border-radius: 15px 15px 15px 15px  !important;
+            border-radius: 15px 15px 15px 15px  !important;
+            font-weight: 500;
             border-bottom: 2px solid !important;
-            border-top: 2px solid !important;;
-            border-left: 2px solid !important;;
-            border-right: 2px solid !important;;
-            border-color: darkblue !important;;
-            /*color: red !important;
-            border-radius: 0;
-            outline: none;
-            height: 3rem;
-            width: 100%;
-            font-size: 1rem;
-            margin: 0 0 20px 0;
-            padding: 0;
-            box-shadow: none;
-            box-sizing: content-box;
-            transition: all 0.3s;*/
+            border-top: 2px solid !important;
+            border-left: 2px solid !important;
+            border-right: 2px solid !important;
+            border-color: black !important;
+        }
+
+        #search{
+            -moz-border-radius: 15px 0px 0px 15px !important;
+            -webkit-border-radius: 15px 0px 0px 15px !important;
+            border-radius: 15px 0px 0px 15px !important;
+            border-bottom: 2px solid !important;
+            border-top: 2px solid !important;
+            border-left: 2px solid !important;
+            border-right: 2px solid !important;
+            border-color: black !important;
+
         }
 
         #search-special{
             height: 3.3em !important;
-            background-color: darkblue;
+            background-color:black;
             padding-top: 0.5em;
-            -moz-border-radius: 0px;
-            -webkit-border-radius: 0px;
-            border-radius: 0px;
+            -moz-border-radius: 0px 15px 15px 0px !important;
+            -webkit-border-radius: 0px 15px 15px 0px  !important;
+            border-radius: 0px 15px 15px 0px  !important;
 
         }
 
@@ -76,12 +122,7 @@
             border-color: black !important;
         }
 
-        select multiple{
-            border-color: darkred !important;
-            outline: 2px;
-            color: rebeccapurple !important;
-            border: 1px solid #AAA;
-        }
+
 
         .input-field .col .s2{
             color: #c7254e !important;
@@ -106,10 +147,10 @@
         .card-image img{
             width: auto;
             height:auto;
-            /*max-width: 150px;
-            height: auto;
-            max-height: 100px;*/
+        }
 
+        span.caret{
+            padding-right: 1.2em !important;
         }
 
         h5{
@@ -117,14 +158,77 @@
         }
 
 
-        blockquote{
-            border-color: darkred !important;
-            /*background-color: silver;*/
-        }
-
         nav{
             overflow: visible !important;
         }
+
+        .card-content{
+            padding-top: 0em !important;
+            padding-bottom: 0.5em !important;
+            /*line-height: 80% !important;*/
+        }
+
+
+        .card-content h4{
+            font-weight: 400 !important;
+            margin-top: 0.5em !important;
+            margin-bottom: -0.1em !important;
+        }
+
+        .card-content h4 a{
+            color: black!important;
+        }
+
+        .card-content h4 a:hover{
+            /*text-decoration: underline;*/
+            color: firebrick !important;
+        }
+
+        .card-content span{
+            font-style: italic !important;
+        }
+
+        .card-action.row{
+            padding: 0em !important;
+            padding-top: 0.4em !important;
+            padding-bottom: 0.4em !important;
+            background-color: black !important;
+        }
+
+        .col.s7.location{
+            padding-left: 1.9em !important;
+            color: whitesmoke;
+        }
+        .col.s5.price{
+            padding-left: 1em !important;
+            color: whitesmoke!important;
+            /*font-size: 0.8em !important;*/
+
+        }
+
+        .select-wrapper input.select-dropdown{
+            /*padding-left: 1em !important;*/
+        }
+
+        .collapsible-header{
+            background-color: black;
+            color:white;
+        }
+
+        .collapsible-body{
+            padding-top: 0.5em !important;
+            padding-bottom: 0.5em !important;
+        }
+
+        nav{
+            background-color: black !important;
+        }
+
+        option{
+            color: black !important;
+        }
+
+
 
 
     </style>
@@ -134,57 +238,35 @@
 
 <body>
 
-@include('modules.nav', ['link'=>'Sign In', 'address'=>'/login'])
+@include('modules.nav.x-nav', ['link'=>'', 'address'=>''])
 
 <div class="row">
 
-    <div class="col s2 m2 l2" style="background-color: white !important; height: 57.8em!important;"></div>
+    <div class="col s1 m1 l1">
 
-    <div class="col s8 m8 l8">
+
+    </div>
+
+    <div class="col s10 m10 l10">
         <div class="row" id="search-section">
-            <h4 style="text-align: center"> Search Results</h4>
+
+            <h4 style="text-align: center; font-size: 1.6em !important;"> Search Results</h4>
 
             <div class="row">
-                <div class="col s5 m5 l5 offset-l1">
+                <div class="col s6 m6 l6 offset-l1">
                 <form action="{{url('search')}}" method="POST" id="search-form">
-                        <a style="float:right; text-transform: none" id="search-special" class="btn waves-effect waves-light" onclick="document.getElementById('search-form').submit();">Search</a>
+                        <a style="float:right; text-transform: none" id="search-special" class="btn waves-effect waves-light" onclick="submit()">Search</a>
                     <div class="input-field" style="overflow:hidden">
-                        <input id="search" name="search" type="search" required>
+                        <input id="search" name="search" type="search" value="{{old('search')}}" required>
                         <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                     </div>
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
-
                 </form>
                 </div>
 
                 <div class="col s3 l3 m3">
                     <div class="input-field col s12">
-                        <select >
-                            <option value="" selected>  &nbsp Any Location</option>
-                            <option value="37M"> &nbsp 37</option>
-                            <option value="ABK"> &nbsp Abelenkpe</option>
-                            <option value="ACC"> &nbsp Accra Central </option>
-                            <option value="ACH"> &nbsp Achimota </option>
-                            <option value="ADT"> &nbsp Adenta </option>
-                            <option value="ALJ"> &nbsp Alajo </option>
-                            <option value="CIC"> &nbsp Circle</option>
-                            <option value="DNS"> &nbsp Dansoman</option>
-                            <option value="ELG"> &nbsp East Legon</option>
-                            <option value="HTS"> &nbsp Haatso</option>
-                            <option value="KWM"> &nbsp Kwashieman</option>
-                            <option value="LAP"> &nbsp Lapaz</option>
-                            <option value="MAD"> &nbsp Madina</option>
-                            <option value="RDG"> &nbsp Ridge</option>
-                            <option value="SPI"> &nbsp Spintex</option>
-                            <option value="TEM"> &nbsp Tema</option>
-                        </select>
-                    </div>
-                    <input type="hidden" name="_token" value="{{csrf_token()}}">
-                </div>
-
-                <div class="col s2 l2 m2">
-                    <div class="input-field col s12">
-                        <select >
+                        <select name="category" value="{{old('category')}}">
                             <option value="" selected>  &nbsp All Categories</option>
                             <option value="2"> &nbsp Automobile & Parts</option>
                             <option value="3"> &nbsp Beauty Products</option>
@@ -204,31 +286,65 @@
         </div>
         <div class="divider"></div> <br>
 
-        @if($products)
-            @foreach($products as $product)
-                <div class="col s12 m7">
-                    {{--<h2 class="header">{{$product->product_name}}</h2>--}}
-                    <div class="card horizontal">
-                        <div class="card-image">
-                            <img src="{{$product->product_image_1}}">
-                        </div>
-                        <div class="card-stacked">
-                            <span class="card-title" style="margin-left: 1em; margin-top: 0.5em; "><b> {{$product->product_name}} </b></span>
-                            <div class="card-content">
-                                <p>I am a very simple card. I am good at containing small bits of information.</p>
-                            </div>
-                            <div class="card-action">
-                                <a href="#">This is a link</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        @endif
+        <div class="row">
 
+            <div class="col l2 m2 s2">
+                <h5 style="font-size: large; text-align: center"> Filter Search </h5>
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header active">Price</div>
+                        <div class="collapsible-body">
+                            <span>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dignissim at libero sit amet congue.
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header active">Location</div>
+                        <div class="collapsible-body">
+                            <span>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dignissim at libero sit amet congue.
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="col s10 m10 l10">
+                <br> <br>
+                @if($products!=null )
+                    @foreach($products as $product)
+                        <div class="col l3 m3 s3">
+                            <div class="card">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img class="materialboxed" src="{{asset($product->product_image_1)}}">
+                                </div>
+                                <div class="card-content">
+                                    <h4><a href="#">{{$product->product_name}}</a></h4>
+                                    <span> {{$product->business_name}}</span>
+                                </div>
+                                <div class="card-action row">
+                                    <span class="col s7 location"><i class="fa fa-map-marker"></i>{{$product->area}}</span>
+                                    <span class="col s5 price" style="float:right !important;"><b>¢{{$product->product_price}}</b></span>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+                @else
+                    <div class="col s12 m12 l12">
+                        <h5 style="text-align: center; font-size: large">No results to display</h5>
+                    </div>
+                @endif
+            </div>
+
+        </div>
 
     </div>
-    <div class="col s2 m2 l2" style="background-color: white !important; height: 57.8em!important;"></div>
+    <div class="col s1 m1 l1"></div>
 
 </div>
 
@@ -237,6 +353,19 @@
     $(document).ready(function() {
         $('select').material_select();
     });
+
+    $(document).ready(function(){
+        $('.materialboxed').materialbox();
+    });
+
+    function submit(){
+        if(document.getElementById('search').value == ""){
+            alert('No data');
+        }else{
+            document.getElementById('search-form').submit();
+        }
+
+    }
 
 </script>
 

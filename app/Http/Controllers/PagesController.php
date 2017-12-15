@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\BusinessTemp;
 use App\Http\Requests;
+use App\Http\Controllers\Response;
+use Illuminate\Support\Facades\Cookie;
+
 
 class PagesController extends Controller
 {
@@ -16,9 +19,6 @@ class PagesController extends Controller
         return view('pages.about');
     }
 
-    public function sme(){
-        return view('pages.sme.home');
-    }
 
     public function register(){
         return view('pages.new');
@@ -29,6 +29,12 @@ class PagesController extends Controller
     }
 
     public function login(){
+//        $username = Cookie::get('username');
+//
+//        if(!$username){
+//            return view('pages.customer-signin');
+//        }
+
         return view('pages.customer-signin');
     }
 
@@ -57,14 +63,16 @@ class PagesController extends Controller
     }
 
     //SME Page handlers
-    public function new_pdt(){
-        return view('pages.sme.new-product');
-    }
-    public function change(){
-        return view('pages.sme.person');
-    }
 
 
+    public function logout(){
+        $cookie = Cookie::forget('username');
+        return  redirect('/')->withCookie($cookie);
+    }
+
+    public function goldilocks(){
+        return view('pages.sme.customer-view');
+    }
 
 
 }

@@ -18,25 +18,26 @@
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            display: table;
-            font-weight: 300;
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
             font-family: 'Roboto';
             background-color: whitesmoke;
         }
 
+        main {
+            flex: 1 0 auto;
+        }
+
         .slider .indicators{
-            bottom: 120%;
-            z-index: 100;
+            display: none !important;
             /* text-align: left; */
         }
         .slider ul.slides{
-            height:40% !important;
+            height:55% !important;
         }
         .slider{
-            height:40% !important;
+            height:55% !important;
         }
         .slider .slides li img{
             height:100% !important;
@@ -46,13 +47,6 @@
             border-color: darkred !important;
         }
 
-        .tabs{
-            margin-top: -13em !important;
-        }
-
-        form{
-            margin-top: -13em !important;
-        }
 
         form input{
             color: black !important;
@@ -91,13 +85,33 @@
         }
 
         .btn{
-            -moz-border-radius: 25px !important;
-            -webkit-border-radius: 25px !important;
-            border-radius: 25px !important;
+            /*-moz-border-radius: 25px !important;*/
+            /*-webkit-border-radius: 25px !important;*/
+            /*border-radius: 25px !important;*/
+        }
+
+        button.btn{
+            background-color:  rgb(191,13,64) !important;
         }
 
         .nav-wrapper #logo{
             font-family: 'Pacifico', cursive !important;
+        }
+
+        .row{
+            /*margin-bottom: -1em !important;*/
+        }
+
+        nav{
+            background-color: rgb(0,32,96) !important;
+        }
+
+        .nav-wrapper ul li{
+            background-color: rgb(191,13,64) !important;
+        }
+        .nav-wrapper ul li a{
+            color: white !important;
+            font-weight: 400 !important;
         }
 
     </style>
@@ -107,24 +121,20 @@
 
 <body>
 
-@include('modules.nav', ['link'=>'New Business', 'address'=>'/register'])
+<header>
+    @include('modules.nav.x-nav', ['link'=>'New Shop', 'address'=>'/register'])
+</header>
+
+<main>
+    <br> <br> <br>
+    @yield('content')
 
 
-<div class="slider">
-    <ul class="slides">
-        <li>
-            <img src="{{asset('img/login.jpeg')}}"/>
-            <div class="caption left-align" style="color:whitesmoke">
-                <h3>Get Started</h3>
-                <h5 class="light grey-text text-lighten-3" style="color:#000019!important;">Your ultimate shopping experience</h5>
-            </div>
-        </li>
-    </ul>
-</div>
+</main>
 
-@yield('content')
-
-@include('modules.footer')
+<footer>
+    @include('modules.footer')
+</footer>
 
 
 
@@ -148,17 +158,6 @@
 
 </script>
 
-<script>
-    $('.datepicker').pickadate({
-        selectMonths: true, // Creates a dropdown to control month
-        selectYears: 200, // Creates a dropdown of 15 years to control year,
-        today: 'Today',
-        clear: 'Clear',
-        max:true,
-        close: 'Ok',
-        closeOnSelect: false // Close upon selecting a date,
-    });
-</script>
 
 </body>
 </html>
