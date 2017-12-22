@@ -25,6 +25,15 @@ Route::get('/hello', function () {
     return "<h2>Lytes App</h2>";
 });*/
 
+Route::resource('businesses','SMEController');
+Route::resource('product','ProductController');
+
+Route::post('login','Controller@login');
+Route::post('/{sme}/shelf', 'DBController@shelf');
+Route::delete('/{sme}/deleteShelf', 'DBController@deleteshelf');
+
+
+
 
 Route::get('/','PagesController@index');
 Route::get('/about','PagesController@about');
@@ -45,10 +54,8 @@ Route::get('/view-product','DBController@viewProduct');
 Route::get('/view-sme','DBController@viewSME');
 
 
-Route::post('deleteshelf', 'DBController@deleteshelf');
 
-Route::post('product', 'DBController@addProduct');
-Route::post('shelf', 'DBController@shelf');
+//Route::post('product', 'DBController@addProduct');
 Route::post('store', 'DBController@store');
 Route::post('changePassword', 'DBController@changePassword');
 //Route::get('/mail', 'DBController@mail');
@@ -69,18 +76,20 @@ Route::get('/dashboard/reject/{id}', 'DBController@reject');
 
 //SME Page routing
 Route::get('/sme/manage','PagesController@sme');
-Route::get('/new','DBController@new_pdt');
-Route::get('/change','DBController@change');
-Route::get('/layout','DBController@store_info');
-Route::get('/products', 'DBController@manageProducts');
+Route::get('/{sme}/new','DBController@newProduct');
+Route::get('/{sme}/change','DBController@change');
+Route::get('/{sme}/shelves','DBController@shelves');
+Route::get('/{sme}/products', 'DBController@manageProducts');
 
 
 Route::get('/retrieve', 'DBController@retrieve');
 
-Route::post('search', 'DBController@search');
-Route::get('/results', 'DBController@results');
+Route::post('results', 'DBController@search');
+Route::get('/search', 'DBController@results');
 
 Route::get('logout', 'PagesController@logout');
+Route::get('/{sme}','DBController@sme');
+
 
 
 

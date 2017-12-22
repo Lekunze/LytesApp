@@ -77,7 +77,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\CustomerDetails::class,
+            'model' => App\User::class,
         ],
 
         'admins' => [
@@ -87,7 +87,7 @@ return [
 
         'businesses' => [
              'driver' => 'eloquent',
-             'model' => App\Businesses::class,
+             'model' => App\Business::class,
          ],
 
     ],

@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "Lytes.App",
+    "description": "E-Commerce Web Application",
+    "keywords": ["shop", "ghana","online","e-commerce","buy","sell"],
     "license": "MIT",
     "type": "project",
     "require": {
