@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSmeSelectionTable extends Migration
+class CreateShelvesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateSmeSelectionTable extends Migration
      */
     public function up()
     {
-        Schema::create('sme_selection', function (Blueprint $table) {
+        Schema::create('SHELVES', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('business_name');
-            $table->enum('approved',['Yes', 'No']);
+            $table->integer('sid')->unsigned()->nullable();
+            $table->string('shelf_name')->nullable();
+            $table->foreign('sid')->references('id')->on('BUSINESSES');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateSmeSelectionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sme_selection');
+        Schema::dropIfExists('SHELVES');
     }
 }
