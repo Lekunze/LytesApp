@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\BusinessTemp;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Response;
 use Illuminate\Support\Facades\Cookie;
@@ -66,8 +67,8 @@ class PagesController extends Controller
 
 
     public function logout(){
-        $cookie = Cookie::forget('username');
-        return  redirect('/')->withCookie($cookie);
+        Auth::logout();
+        return  redirect()->intended('/');
     }
 
     public function goldilocks(){
