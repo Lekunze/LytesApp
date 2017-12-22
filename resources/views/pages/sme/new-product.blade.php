@@ -64,7 +64,7 @@
 
 
     </style>
-    <script src="js/uploadPreview.min.js"></script>
+    <script src="{{asset('js/uploadPreview.min.js')}}"></script>
 
     <br>
 
@@ -80,24 +80,24 @@
                     <div class="row">
                         <h5>Product Details</h5>
                         <div class="input-field col s12">
-                            <input id="product-name" type="text" class="validate" name="product-name" required>
+                            <input id="product-name" type="text" class="validate" name="product_name" required>
                             <label for="product-name">Product Name*</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <select name="product-shelf">
+                            <select name="product_shelf">
                                 <option value="" disabled selected>Choose shelf</option>
                             @if(!empty($shelves))
                                     @foreach($shelves as $shelf)
-                                        <option value="{{$shelf->product_shelf}}"> {{$shelf->product_shelf}}</option>
+                                        <option value="{{$shelf->shelf_name}}"> {{$shelf->shelf_name}}</option>
                                     @endforeach
                                 @endif
                             </select>
                             <label>Shelf*</label>
                         </div>
                         <div class="input-field col s6">
-                            <select name="product-category">
+                            <select name="product_category">
                                 <option value="" disabled selected>Choose your option</option>
                                 <option value="1">Accommodation</option>
                                 <option value="2">Automobile & Parts</option>
@@ -116,11 +116,11 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="product-price" type="text" class="validate" name="product-price" required>
+                            <input id="product-price" type="text" class="validate" name="product_price" required>
                             <label for="product-price">Price (GHS)* </label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="product-color" type="text" class="validate" name="product-color" required>
+                            <input id="product-color" type="text" class="validate" name="product-color">
                             <label for="product-color">Color</label>
                         </div>
                     </div>
@@ -134,19 +134,19 @@
                                 <div class="col s4" >
                                     <div id="image-preview">
                                         <label for="image-upload" id="image-label">Image 1</label>
-                                        <input type="file" name="pdt-image-1" id="image-upload" />
+                                        <input type="file" name="products[]" id="image-upload" />
                                     </div>
                                 </div>
                                 <div class="col s4">
                                     <div id="image-preview-2">
                                         <label for="image-upload-2" id="image-label-2">Image 2</label>
-                                        <input type="file" name="pdt-image-2" id="image-upload-2" />
+                                        <input type="file" name="products[]" id="image-upload-2" />
                                     </div>
                                 </div>
                                 <div class="col s4">
                                     <div id="image-preview-3">
                                         <label for="image-upload-3" id="image-label-3">Image 3</label>
-                                        <input type="file" name="pdt-image-3" id="image-upload-3" />
+                                        <input type="file" name="products[]" id="image-upload-3" />
                                     </div>
                                 </div>
                             </div>
@@ -160,9 +160,16 @@
 
                     <div class="row">
                         <div class="input-field col s12" style="text-align: center">
-                            <button class="btn waves-effect waves-light btn-large black" type="submit" name="action" ><b>Add Product</b>
-                                <i class="material-icons right">add</i>
-                            </button>
+                            @if($shelves=="[]")
+                                <button class="btn waves-effect waves-light btn-large black disabled" type="submit" name="action" ><b>Add Product</b>
+                                    <i class="material-icons right">add</i>
+                                </button>
+                            @else
+                                <button class="btn waves-effect waves-light btn-large black " type="submit" name="action" ><b>Add Product</b>
+                                    <i class="material-icons right">add</i>
+                                </button>
+                            @endif
+
                         </div>
                     </div>
                 </form>
@@ -173,34 +180,6 @@
 
 
     </div>
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $.uploadPreview({
-                input_field: "#image-upload",
-                preview_box: "#image-preview",
-                label_field: "#image-label"
-            });
-
-            $.uploadPreview({
-                input_field: "#image-upload-2",
-                preview_box: "#image-preview-2",
-                label_field: "#image-label-2"
-            });
-
-            $.uploadPreview({
-                input_field: "#image-upload-3",
-                preview_box: "#image-preview-3",
-                label_field: "#image-label-3"
-            });
-        });
-    </script>
-
-
-
-
-
-
     <script>
         $(document).ready(function(){
             $('.slider').slider();
@@ -236,17 +215,34 @@
 
     </script>
 
-    <script>
-        $('.datepicker').pickadate({
-            selectMonths: true, // Creates a dropdown to control month
-            selectYears: 200, // Creates a dropdown of 15 years to control year,
-            today: 'Today',
-            clear: 'Clear',
-            max:true,
-            close: 'Ok',
-            closeOnSelect: false // Close upon selecting a date,
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.uploadPreview({
+                input_field: "#image-upload",
+                preview_box: "#image-preview",
+                label_field: "#image-label"
+            });
+
+            $.uploadPreview({
+                input_field: "#image-upload-2",
+                preview_box: "#image-preview-2",
+                label_field: "#image-label-2"
+            });
+
+            $.uploadPreview({
+                input_field: "#image-upload-3",
+                preview_box: "#image-preview-3",
+                label_field: "#image-label-3"
+            });
         });
     </script>
+
+
+
+
+
+
 
 @endsection
 

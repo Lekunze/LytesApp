@@ -49,7 +49,7 @@
 
 </style>
 
-<div class="resize"> <img class="responsive-img" src="{{asset('img/banner.jpg')}}" width="100%"> </div>
+<div class="resize"> <img class="responsive-img" src="<?php echo asset("/storage/sme/windsor/logo.jpg")?>" width="100%"> </div>
 <br>
 
     @if(!empty($shelves))
@@ -62,29 +62,27 @@
                         {{--<h5 style="color:black; text-decoration: underline !important;">{{$shelf->product_shelf}} </h5>--}}
                     </div>
                     <div class="col l8 m8 s8">
-                        <nav style="background-color:rgb(191,13,64) !important;">
-                            <div class="nav-wrapper">
-                                <a href="#" class="brand-logo center">{{$shelf->product_shelf}}</a>
-                            </div>
-                        </nav> <br>
+                        <h4 style="text-align: left !important; color:black !important;">{{$shelf->shelf_name}}</h4>
+                        <hr>
+                        <br>
             @foreach($products as $product)
-                   @if($product->product_shelf == $shelf->product_shelf)
+                   @if($product->product_shelf == $shelf->shelf_name)
                                 <div class="col l3 m3 s3">
                                     <div class="card">
                                         <div class="card-image waves-effect waves-block waves-light">
-                                            <img class="materialboxed" src="{{$product->product_image_1}}">
+                                            <img class="materialboxed" src="<?php echo asset(str_replace("public","storage",$product->product_images)."/product_1.jpg")?>">
                                         </div>
                                         <div class="card-content">
                                             <h4><a href="/view-product">{{$product->product_name}}</a></h4>
                                             <span>@if(!empty($business))
-                                                    {{((array) $business[0])['business_name']}}
+                                                    {{$business->business_name}}
                                                 @endif
                                             </span>
                                         </div>
                                         <div class="card-action row">
                                             <span class="col s7 location"><i class="fa fa-map-marker"></i>
                                                 @if(!empty($business))
-                                                    {{((array) $business[0])['area']}}
+                                                    {{$business->business_area}}
                                                 @endif
                                             </span>
                                             <span class="col s5 price" style="float:right !important;"><b>GHS {{$product->product_price}}</b></span>

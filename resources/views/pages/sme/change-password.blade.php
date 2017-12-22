@@ -5,7 +5,6 @@
     <div class="col s4">
         <br> <br>
         <h4 style="text-align: center">Manage Password</h4>
-        <br> <br>
 
         <form action="{{url('changePassword')}}" method="post">
             <p style="text-align: center; font-size: 1em; font-weight: 400; color:firebrick">
@@ -14,7 +13,7 @@
                 @endif
             </p>
             <div class="input-field col s12">
-                <input id="old-password" type="password" class="validate" name="old-password" required>
+                <input id="old-password" type="password" class="validate" name="old_password" required>
                 <label for="old-password">Enter Current Password</label>
             </div>
             <div class="input-field col s12">

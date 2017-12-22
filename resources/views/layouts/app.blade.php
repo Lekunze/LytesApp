@@ -195,7 +195,7 @@
         }
 
         .input-field .col .s2{
-            color: #c7254e !important;
+            color:rgb(191,13,64) !important;
         }
 
 
@@ -331,6 +331,7 @@
 
     </style>
 
+
 </head>
 
 <body>
@@ -376,17 +377,26 @@
 <!--<div class="section">-->
 <div class="row search-section" id="hidden">
     <div class="col s6 offset-s2">
-        <form action="{{url('search')}}" method="POST" id="search-form">
-            <a style="float:right; text-transform: none" id="search-special" class="btn waves-effect waves-light" onclick="search()">Search</a>
+        <form action="{{url('product')}}" method="GET" id="search-form">
+            <a style="float:right; text-transform: none" id="search-special" class="btn waves-effect waves-light" onclick="searchPdt()">Search</a>
             <div class="input-field" style="overflow:hidden">
-                <input id="search" name="search" type="search" required>
+                <input id="search" name="product" type="search" required>
                 <label class="label-icon" for="search"><i class="material-icons">search</i></label>
             </div>
             <input type="hidden" name="_token" value="{{csrf_token()}}">
         </form>
+        <script>
+            function searchPdt(){
+                if($('#search').val()==""){
+                    location.reload();
+                }else{
+                    document.getElementById('search-form').submit();
+                }
+            }
+        </script>
     </div>
     <div class="input-field col s2" id="select">
-        <select >
+        <select name="category">
             <option value="" selected>  &nbsp All Categories</option>
             <option value="2"> &nbsp Automobile & Parts</option>
             <option value="3"> &nbsp Beauty Products</option>
@@ -660,11 +670,7 @@
         $('.carousel').carousel();
     });
 
-    function search(){
-        if($('#search').val()!=""){
-            document.getElementById('search-form').submit();
-        }
-    }
+
 
 
 </script>

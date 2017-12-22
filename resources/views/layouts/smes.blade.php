@@ -3,7 +3,7 @@
 <head>
     <title>
          @if(!empty($business))
-                 {{((array) $business[0])['business_name']}}
+                 {{$business->business_name}}
         @endif
     </title>
     <link rel="icon" href="{!! asset('img/favicon.ico') !!}"/>
@@ -11,9 +11,15 @@
 
     <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="materialize-css/css/materialize.min.css">
+    {{--<link rel="stylesheet" href="materialize-css/css/materialize.min.css">--}}
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="materialize-css/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+    {{--<script src="materialize-css/js/materialize.min.js"></script>--}}
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
@@ -163,12 +169,17 @@
 
     <ul style="width:20%; margin-top:65px; background-color: silver" class="side-nav" id="slide-out">
         <div class="row">
-            <br>
+            <br> <br>
             <div class="col s10 offset-s1">
-                <img src="img/logo-1.jpg" alt="" class="circle responsive-img" id="img-logo">
+                {{--<img src="img/logo-1.jpg" alt="" class="circle responsive-img" id="img-logo">--}}
+                <div style="text-align: center;">
+                    @if(!empty($business))
+                        <a href="/{{$business->business_slug}}" style="color:black !important;"> <i class="medium material-icons">store</i>  </a>
+                    @endif
+                </div>
                 <h5 style="text-align: center; font-weight: bold">
                     @if(!empty($business))
-                        {{((array) $business[0])['business_name']}}
+                        {{$business->business_name}}
                     @endif
                 </h5>
             </div>
@@ -176,18 +187,14 @@
             </hr>
         </div>
         <li><div class="divider"></div></li>
-        <li><a href="/sme"><i class="material-icons">store</i>Store</a></li>
+        <li><a href="/{{$business->business_slug}}/shelves"><i class="material-icons">dns</i>Shelves</a></li>
         <li><div class="divider"></div></li>
-        <li><a href="/new"><i class="material-icons">add_shopping_cart</i>Add Product</a></li>
+        <li><a href="/{{$business->business_slug}}/new"><i class="material-icons">add_shopping_cart</i>Add Product</a></li>
         <li><div class="divider"></div></li>
-        <li><a href="/layout"><i class="material-icons">business</i>Account Info</a></li>
+        <li><a href="/{{$business->business_slug}}/products  "><i class="material-icons">edit</i>Manage Products </a></li>
         <li><div class="divider"></div></li>
-        <li><a href="/products  "><i class="material-icons">add_shopping_cart</i>Manage Products </a></li>
+        <li><a href="/{{$business->business_slug}}/change"> <i class="material-icons">settings</i> Settings</a></li>
         <li><div class="divider"></div></li>
-        <li><a href="/change"> <i class="material-icons">settings</i> Settings</a></li>
-        <li><div class="divider"></div></li>
-        {{--<li><a href="#"> <i class="material-icons">remove_red_eye</i> Preview</a></li>--}}
-        {{--<li><div class="divider"></div></li>--}}
         <li><a href="/logout"> <i class="material-icons">exit_to_app</i> Logout</a></li>
         <li><div class="divider"></div></li>
     </ul>
@@ -197,8 +204,8 @@
     @yield('products')
 </main>
     @if(!empty($business))
-        @include('modules.footers.sample',['sme'=> ((array) $business[0])['business_name'],
-         'contact' => ((array) $business[0])['business_number'], 'email' => ((array) $business[0])['email'],
+        @include('modules.footers.sample',['sme'=> $business->business_name,
+         'contact' => $business->business_number, 'email' => 'info@business.com',
          'tagline' => 'Buy computers, peripherals and accessories at discounted prices'])
     @endif
 

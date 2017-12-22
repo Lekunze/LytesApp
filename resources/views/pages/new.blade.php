@@ -187,7 +187,7 @@
     <div class="col s8 l8 m8">
         <div class="row">
 
-            <form class="col s12" action="{{url('store')}}" method="POST" enctype="multipart/form-data">
+            <form class="col s12" action="{{url('businesses')}}" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <br>
                     <br>
@@ -268,15 +268,16 @@
                             @include('modules.countrylist')
                         </select>
                         <label>Country*</label>
+                        <input type="hidden" name="country" value="GH" />
                     </div>
                     <div class="input-field col s4">
-                        <select name="region" value="{{old('region')}}">
-                            <option value="" disabled selected>Choose your region</option>
+                        <select name="region" value="{{old('region')}}" disabled>
+                            <option value="">Choose your region</option>
                             <option value="AS"> Ashanti Region</option>
                             <option value="BA"> Brong Ahafo Region</option>
                             <option value="CR"> Central Region</option>
                             <option value="ER"> Eastern Region</option>
-                            <option value="GR"> Greater Accra Region </option>
+                            <option value="GR" selected> Greater Accra Region </option>
                             <option value="NR"> Northern Region</option>
                             <option value="UE"> Upper East Region</option>
                             <option value="UW"> Upper West Region</option>
@@ -284,6 +285,7 @@
                             <option value="WR"> Western Region</option>
                         </select>
                         <label>Region*</label>
+                        <input type="hidden" name="region" value="GR" />
                     </div>
                     <div class="input-field col s4">
                         <select name="area" value="{{old('area')}}">
@@ -329,16 +331,10 @@
                 </div>
 
                 <div class="row">
-                    <div class="input-field inline col s6" required>
-                        Do you provide delivery services?*
-                        <span style="display: inline-block">
-                            <input class="with-gap" name="delivery_services" type="radio" id="yes" value="yes"/>
-                            <label for="yes">Yes</label>
-                        </span>
-                        <span style="display: inline-block">
-                            <input class="with-gap"  name="delivery_services" type="radio" id="no" value="no"/>
-                            <label for="no">No</label>
-                        </span>
+                    <div class="input-field col s6">
+                        <input id="slug" type="text" class="validate" name="slug" value="{{old('slug')}}" required>
+                        <label for="slug">Business Slug (Eg. lytesapp.com/{slug})*</label>
+                        <small class="text-danger">{{ $errors->first('slug') }}</small>
                     </div>
                     <div class="input-field col s6">
                         <select name="industry" value="{{old('industry')}}">
@@ -387,7 +383,7 @@
                     <div class="col s12">
                         <div id="image-preview-3">
                             <label for="image-upload-3" id="image-label-3">Add Image*</label>
-                            <input type="file" name="cover_image_1" id="image-upload-3" required/>
+                            <input type="file" name="cover_images[]" id="image-upload-3">
                         </div>
                         <small class="text-danger">{{ $errors->first('cover_image_1') }}</small>
                     </div>
@@ -397,14 +393,14 @@
                     <div class="col s6">
                         <div id="image-preview-5">
                             <label for="image-upload-5" id="image-label-5">Add Photo*</label>
-                            <input type="file" name="cover_image_2" id="image-upload-5" required/>
+                            <input type="file" name="cover_images[]" id="image-upload-5"/>
                         </div>
                         <small class="text-danger">{{ $errors->first('cover_image_2') }}</small>
                     </div>
                     <div class="col s6">
                         <div id="image-preview-4">
                             <label for="image-upload-4" id="image-label-4">Add Photo*</label>
-                            <input type="file" name="cover_image_3" id="image-upload-4" required/>
+                            <input type="file" name="cover_images[]" id="image-upload-4" />
                         </div>
                         <small class="text-danger">{{ $errors->first('cover_image_3') }}</small>
                     </div>
@@ -487,7 +483,7 @@
         clear: 'Clear',
         max:true,
         close: 'Ok',
-        closeOnSelect: false // Close upon selecting a date,
+        closeOnSelect: true// Close upon selecting a date,
     });
 </script>
 
