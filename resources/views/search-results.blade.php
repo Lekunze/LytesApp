@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>LytesApp - Register</title>
+    <title>Lytes.App: Search Results</title>
+    <link rel="icon" href="{!! asset('img/favicon.ico') !!}"/>
 
     <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -13,6 +14,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 
+
+    <script src="{{asset('js/search.js')}}"></script>
 
     <style>
         html, body {
@@ -230,14 +233,15 @@
                     <h4 style="font-size: 1.7em; margin-left: 0.5em; margin-top:1.1em !important;"> Search Results </h4>
                 </div>
                 <div class="col s5 m5 l5 offset-l1">
-                    <form id="search-form">
+                    <form action="{{url('search')}}" method="GET" id="search-form">
                             <button style="float:right; text-transform: none" id="search-special"
                                     class="btn waves-effect waves-light black"
-                                    type="submit" data-token="{{ csrf_token() }}">Search</button>
+                                    type="submit">Search</button>
                         <div class="input-field" style="overflow:hidden">
-                            <input id="search" name="search" type="search" value="{{old('search')}}" required>
+                            <input id="search" name="product" type="search" value="{{old('product')}}" required>
                             <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                         </div>
+                        <input type="hidden" name="category" value="0" id="category">
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                     </form>
 
@@ -286,7 +290,7 @@
                                     <label for="clothing">Clothing</label>
                                 </li>
                                 <li>
-                                    <input type="checkbox" class="filled-in" id="auto" value="5"/>
+                                    <input type="checkbox" class="filled-in" id="education" value="5"/>
                                     <label for="education">Education</label>
                                 </li>
                                 <li>
@@ -334,9 +338,9 @@
             </div>
 
             <div class="col s9 m9 l9">
-                <div class="row">
+                <div class="row" id="pdt">
 
-                    @if(!empty($products))
+                    @if(count($products)>0)
                         @foreach($products as $product)
                             <div class="col l4 m4 s4">
                                 <div class="card">
@@ -356,7 +360,7 @@
                         @endforeach
                     @else
                         <div class="col s12 m12 l12">
-                            <h5 style="text-align: center; font-size: large;">No results to display</h5>
+                            <h5 style="text-align: center; font-size: large;"><i>Sorry, we couldn't find the product you are looking for!</i></h5>
                         </div>
                     @endif
                 </div>
@@ -370,14 +374,76 @@
 </div>
 
 <script>
+
+    var categories = [];
+
+    /*https://stackoverflow.com/questions/19491336/get-url-parameter-jquery-or-how-to-get-query-string-values-in-js*/
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+    };
+
+    console.log("Categories: " + getUrlParameter("category"));
+    if(getUrlParameter("category").length == 1){
+        $(":checkbox[value="+getUrlParameter("category")+"]").prop("checked","true");
+    }else if(getUrlParameter("category").length > 1){
+        var selectedCategories = getUrlParameter("category").split(',');
+        for(var i=0; i<selectedCategories.length; i++){
+            $(":checkbox[value="+selectedCategories[i]+"]").prop("checked","true");
+        }
+        //console.log("No of categories = " + selectedCategories.length);
+    }
+
+    /*$.each($('input[type=checkbox]'),function(){
+        if($(this).val()== getUrlParameter("category")){
+            //console.log("Search.js Category: " + $(this).val());
+            $(this).prop('checked',true);
+
+        }
+    });*/
+
     var search_val = "";
+    //$("#search").click(function(event) {
 
-    $("#search-special").click(function(event) {
+    $('input[type=checkbox]').change(function(){
+       //alert('Value: ' + $(this).val());
+        var category = $(this).val();
 
-        if($('#search').val()==""){
-            window.open({{url('/')}});
+        if($(this).is(':checked')){
+            categories.push(category);
+            console.log("Pushed");
+            //alert('Checked');
+
+        }else{
+            var index = categories.indexOf(category);
+            if (index > -1) {
+                categories.splice(index, 1);
+            }
+            console.log("Popped");
+            //alert('Unchecked');
         }
 
+        $.each($('input[type=checkbox]:checked'),function(){
+            if(category !== $(this).val()){
+                categories.push($(this).val());
+            }
+        });
+        $("#search").val(getUrlParameter("product"));
+        $("#category").val(categories);
+        document.getElementById('search-form').submit();
+    });
+
+    /*
         event.preventDefault();
         //var categories = $('#food').is(':checked');
         var categories = [];
@@ -387,25 +453,50 @@
 
 
         $.ajax({
-            type: 'post',
-            url: 'results',
+            type: 'GET',
+            url: 'product',
             data: {
                 '_token': $('input[name=_token]').val(),
                 'product': $('#search').val(),
                 'category': categories
             },
+            processData:false,
             success: function(data) {
-                /*var shelf = '<tr id="shelf' + data.id + '"> <td>'+ data.shelf_name+' </td>';
-                shelf += '<td>' + '<button value= "' + data.id + '" class ="btn-small yellow" data-token="{{csrf_token()}}"> Edit </button>';
-                shelf += '<button value="' + data.id + '" class ="btn-small red delete" data-token="{{csrf_token()}}"> Delete </button> </td> </tr>';
-                $('#shelf-list').append(shelf);
-                $('#shelf').val("");
-                console.log(data.id);*/
-                console.log(data);
+                var result = '';
+                var content = '<div class="col s12 m12 l12">' +
+                    '<h5 style="text-align: center; font-size: large;">Sorry, we couldn\'t find the product you are looking for!</h5>' +
+                    '</div>';
+                if(data.length==0){
+                    document.getElementById("pdt").innerHTML = content;
+                }else{
+                    document.getElementById("pdt").innerHTML = result;
+                    for(var i=0; i<data.length; i++){
+                        result += '<div class="col l4 m4 s4">\n' +
+                            '                                <div class="card">\n' +
+                            '                                    <div class="card-image waves-effect waves-block waves-light">\n' +
+                            '                                        <img class="materialboxed" src="/product_1.jpg">\n' +
+                            '                                    </div>\n' +
+                            '                                    <div class="card-content">\n' +
+                            '                                        <h4><a href="#">'+ data[i].product_name+'</a></h4>\n' +
+                            '                                        <span> '+ data[i].business_name+'</span>\n' +
+                            '                                    </div>\n' +
+                            '                                    <div class="card-action row">\n' +
+                            '                                        <span class="col s7 location"><i class="fa fa-map-marker"></i>'+ data[i].business_area+'</span>\n' +
+                            '                                        <span class="col s5 price" style="float:right !important;"><b>¢'+ data[i].product_price+'</b></span>\n' +
+                            '                                    </div>\n' +
+                            '                                </div>\n' +
+                            '                            </div>';
+                        //console.log("Index " + i + ": " + data[i].product_name);
+                    }
+                }
+                content = '';
+
+               //data = null;
+
             }
-        });
-        console.log('Form Submitted');
-    })
+        });*/
+        //console.log('Form Submitted');
+    //})
 </script>
 
 <script>
@@ -418,14 +509,6 @@
         $('.materialboxed').materialbox();
     });
 
-    function submit(){
-        if(document.getElementById('search').value == ""){
-            alert('No data');
-        }else{
-            document.getElementById('search-form').submit();
-        }
-
-    }
 
 </script>
 

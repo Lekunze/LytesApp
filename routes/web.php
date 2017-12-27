@@ -26,7 +26,7 @@ Route::get('/hello', function () {
 });*/
 
 Route::resource('businesses','SMEController');
-Route::resource('product','ProductController');
+Route::resource('search','ProductController');
 
 Route::post('login','Controller@login');
 Route::post('/{sme}/shelf', 'DBController@shelf');
@@ -48,7 +48,7 @@ Route::get('/success','PagesController@received');
 Route::get('/signup','PagesController@signup');
 
 
-Route::get('/product/{sme}/{product}','DBController@product');
+//Route::get('/product/{sme}/{product}','DBController@product');
 Route::get('/sme/{sme}','DBController@shop');
 Route::get('/view-product','DBController@viewProduct');
 Route::get('/view-sme','DBController@viewSME');
@@ -85,7 +85,7 @@ Route::get('/{sme}/products', 'DBController@manageProducts');
 Route::get('/retrieve', 'DBController@retrieve');
 
 Route::post('results', 'DBController@search');
-Route::get('/search', 'DBController@results');
+//Route::get('/search', 'DBController@results');
 
 Route::get('logout', 'PagesController@logout');
 Route::get('/{sme}','DBController@sme');

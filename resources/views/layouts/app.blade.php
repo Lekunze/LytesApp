@@ -145,6 +145,7 @@
             height: 3.27em !important;
             background-color:  rgb(0,32,96);
             padding-top: 0.5em;
+            margin-top: 1em !important;
             -moz-border-radius: 0px 15px 15px 0px !important;
             -webkit-border-radius: 0px 15px 15px 0px  !important;
             border-radius: 0px 15px 15px 0px  !important;
@@ -376,39 +377,41 @@
 
 <!--<div class="section">-->
 <div class="row search-section" id="hidden">
-    <div class="col s6 offset-s2">
-        <form action="{{url('product')}}" method="GET" id="search-form">
-            <a style="float:right; text-transform: none" id="search-special" class="btn waves-effect waves-light" onclick="searchPdt()">Search</a>
-            <div class="input-field" style="overflow:hidden">
-                <input id="search" name="product" type="search" required>
-                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-            </div>
-            <input type="hidden" name="_token" value="{{csrf_token()}}">
-        </form>
-        <script>
-            function searchPdt(){
-                if($('#search').val()==""){
-                    location.reload();
-                }else{
-                    document.getElementById('search-form').submit();
+    <form action="{{url('search')}}" method="GET" id="search-form">
+
+        <div class="col s6 offset-s2">
+                <a style="float:right; text-transform: none" id="search-special" class="btn waves-effect waves-light" onclick="searchPdt()">Search</a>
+                <div class="input-field" style="overflow:hidden">
+                    <input id="search" name="product" type="search" required>
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                </div>
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
+            <script>
+                function searchPdt(){
+                    if($('#search').val()==""){
+                        location.reload();
+                    }else{
+                        document.getElementById('search-form').submit();
+                    }
                 }
-            }
-        </script>
-    </div>
-    <div class="input-field col s2" id="select">
-        <select name="category">
-            <option value="" selected>  &nbsp All Categories</option>
-            <option value="2"> &nbsp Automobile & Parts</option>
-            <option value="3"> &nbsp Beauty Products</option>
-            <option value="4"> &nbsp Books & Stationery</option>
-            <option value="5"> &nbsp Clothing</option>
-            <option value="6"> &nbsp Education</option>
-            <option value="7"> &nbsp Electronics</option>
-            <option value="8"> &nbsp Entertainment</option>
-            <option value="9"> &nbsp Food</option>
-            <option value="10"> &nbsp Others</option>
-        </select>
-    </div>
+            </script>
+        </div>
+        <div class="input-field col s2" id="select">
+            <select name="category">
+                <option value="0" selected>  &nbsp All Categories</option>
+                <option value="2"> &nbsp Automobile & Parts</option>
+                <option value="3"> &nbsp Beauty Products</option>
+                <option value="4"> &nbsp Books & Stationery</option>
+                <option value="5"> &nbsp Clothing</option>
+                <option value="6"> &nbsp Education</option>
+                <option value="7"> &nbsp Electronics</option>
+                <option value="8"> &nbsp Entertainment</option>
+                <option value="9"> &nbsp Food</option>
+                <option value="10"> &nbsp Others</option>
+            </select>
+        </div>
+    </form>
+
 </div>
 
 <div id="second-half">

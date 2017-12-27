@@ -14,9 +14,69 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        //return "Hello";
+
+        $products = ""; //Result
+        $product = $request->product;
+        $category = $request->category;
+
+        //return $category;
+        if (empty($category) || $category==0){
+            $products = Product::where('product_name','like',"$product%")
+                ->join('BUSINESSES','BUSINESSES.id','=','PRODUCTS.bid')
+                ->select('PRODUCTS.product_name','PRODUCTS.product_price','PRODUCTS.product_slug','PRODUCTS.product_images',
+                    'BUSINESSES.business_slug','BUSINESSES.business_name', 'BUSINESSES.business_area', 'BUSINESSES.business_number')
+                ->get();
+        }else{
+            $categories = explode(",",$category);
+            if(sizeof($categories)>1){
+                $products = Product::query();
+                $products = $products->where('product_name','like',"$product%");
+                $products->whereIn('product_category',$categories);
+                $products = $products->join('BUSINESSES','BUSINESSES.id','=','PRODUCTS.bid')
+                    ->select('PRODUCTS.product_name','PRODUCTS.product_price','PRODUCTS.product_slug','PRODUCTS.product_images',
+                        'BUSINESSES.business_slug','BUSINESSES.business_name', 'BUSINESSES.business_area', 'BUSINESSES.business_number')->get();
+                //return \Response::json($result);
+            }else{
+                //return \Response::json($category);
+                $products = Product::where('product_name','like',"$product%")
+                    ->where('product_category','=',$category)
+                    ->join('BUSINESSES','BUSINESSES.id','=','PRODUCTS.bid')
+                    ->select('PRODUCTS.product_name','PRODUCTS.product_price','PRODUCTS.product_slug','PRODUCTS.product_images',
+                        'BUSINESSES.business_slug','BUSINESSES.business_name', 'BUSINESSES.business_area', 'BUSINESSES.business_number')
+                    ->get();
+            }
+
+
+        }
+
+        if(!\Request::ajax()){
+            //return Input::get('product');
+            //$products = null;
+            //return $products;
+            $request->session()->keep(['product']);
+            //return redirect()->intended('/search')->with('products',$products);
+            return view('search-results',compact('products'));
+            //return redirect('/search')->with(compact('products'));
+            //return $products;
+        }
+        else{
+            return \Response::json($products);
+        }
+        //return "Hello";
+
+        //return "Categories: " . $category;
+
+
+        //return \Response::json($category);
+        //$category = Input::get('category');
+        //$location = Input::get('location');
+
+        return view('search-results',compact('products','shelves'));
+        return "Index";
     }
 
     /**
@@ -81,6 +141,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+        return "Show";
     }
 
     /**
