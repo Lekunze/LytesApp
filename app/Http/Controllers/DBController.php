@@ -53,10 +53,18 @@ class DBController extends Controller
 
     //------------------------VERIFIED BUSINESSESS FUNCTIONS----------------------------
 
-    public function sme(Request $request){
+
+
+    public function sme(Request $request, $sme){
 
         if(!Auth::check()){
-            return redirect('/login');
+            //return $sme;
+            //return redirect('/login');
+            $business= Business::where('business_slug','=',$sme)->get();
+            $products = Product::where('bid','=',$business[0]->id)->orderBy('product_shelf', 'asc')->get();
+            $shelves = Shelf::distinct()->select('shelf_name')->where('sid','=',$business[0]->id)->get();
+            return view('shop',compact('products','shelves','business'));
+
         }
 
         /*$products = DB::table('products')->where('business_id','=',$username)->orderBy('product_shelf', 'asc')->get();
@@ -138,11 +146,6 @@ class DBController extends Controller
         return view('pages.sme.change-password',compact('business'));
     }
 
-
-
-    //--------------------------------- END OF VERIFIED BUSINESS FUNCTIONS ----------------------------------------
-
-
     public function changePassword(Request $request){
         if(!Auth::check()){
             return redirect('/login');
@@ -174,6 +177,36 @@ class DBController extends Controller
     }
 
 
+    //--------------------------------- END OF VERIFIED BUSINESS FUNCTIONS ----------------------------------------
+
+
+    /*--------------------------------- GUEST VIEW ----------------------------------------------------------------*/
+
+    public function shop(Request $request, $sme){
+
+        //$username = DB::table('businesses')->distinct()->select('email')->where('slug','=',$sme)->get();
+        //$username = ((array) $username[0])['email'];
+        //$business = DB::table('businesses')->where('email','=',$username)->get();
+        $business= Business::where('business_slug','=',$sme)->get();
+
+        $products = Product::where('bid','=',$business[0]->id)->orderBy('product_shelf', 'asc')->get();
+        $shelves = Shelf::distinct()->select('product_shelf')->where('bid','=',$business[0]->id)->get();
+        //return $products;
+        return view('shop',compact('products','shelves','business'));
+    }
+
+    public function product(Request $request, $sme, $product){
+        //$username = DB::table('businesses')->distinct()->select('email','business_name')->where('business_slug','=',$sme)->get();
+        $business= Business::where('business_slug','=',$sme)->get();
+        $productX= Product::where('product_slug','=',$product)->where('bid','=',$business[0]->id)->get();
+        $business_name = $business[0]->business_name;
+        //return "Business: " . $business_name . "\nProduct: " . $product[0]->product_name;
+        //return ((array) $products[0])['product_image_1'];
+        return view('product',compact('productX','sme','business_name'));
+    }
+
+
+
 
 
 
@@ -195,28 +228,9 @@ class DBController extends Controller
         return redirect()->intended('/success');
     }
 
-    public function product(Request $request, $sme, $product){
-        $username = DB::table('businesses')->distinct()->select('email','business_name')->where('business_slug','=',$sme)->get();
-        $business_name = ((array) $username[0])['business_name'];
-        $username = ((array) $username[0])['email'];
-        $products = DB::table('products')->where('business_id','=',$username)
-                                        ->where('product_slug','=',$product)->get();
 
-        //return $username;
-        //return ((array) $products[0])['product_image_1'];
-        return view('product',compact('products','sme','business_name'));
-    }
 
-    public function shop(Request $request, $sme){
 
-        $username = DB::table('businesses')->distinct()->select('email')->where('slug','=',$sme)->get();
-        $username = ((array) $username[0])['email'];
-        $business = DB::table('businesses')->where('email','=',$username)->get();
-        $products = DB::table('products')->where('business_id','=',$username)->orderBy('product_shelf', 'asc')->get();
-        $shelves = DB::table('products')->distinct()->select('product_shelf')->where('business_id','=',$username)->get();
-        //return $products;
-        return view('shop',compact('products','shelves','business'));
-    }
 
 
     public function new_customer(Request $request){

@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>
-        @if(!empty($products))
-            {{((array) $products[0])['product_name']}}: {{$business_name}}
+        @if(!empty($productX))
+            {{$productX[0]->product_name}} | {{$business_name}}
         @endif
     </title>
     <link rel="icon" href="{!! asset('img/favicon.ico') !!}"/>
@@ -91,47 +91,53 @@
     <div class="navbar-fixed">
         <nav class="top-nav" style="background-color: black">
             <div class="nav-wrapper">
-                {{--<a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>--}}
                 <a href="/" class="brand-logo center"><img src="{{asset('img/open.png')}}"></a>
-
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li style="background-color: black"><a href="/login">Sign In</a></li>
+                </ul>
             </div>
         </nav>
     </div>
 </header>
 
 <main>
-
-    <br> <br>
+    <a href="{{URL::previous()}}"> <p style="margin-left: 1em"> <i class="tiny material-icons" style="">keyboard_backspace</i> <span style="font-size: 0.9em"> Return to main search </span></p></a>
     <div class="section">
         <div class="container">
             <div class="row">
-                @if(!empty($products))
+                @if(!empty($productX))
                     <div class="col offset-m1 m5">
-                        <img width="100%" src="{{asset(((array) $products[0])['product_image_1'])}}" class="materialboxed">
+                        <img width="100%" src="{{asset(str_replace("public","storage",$productX[0]->product_images)."/product_1.jpg")}}" class="materialboxed">
                     </div>
                     <div class="col m5 s12">
                         <div class="row">
                             <div class="col m4">
-                                <img width="100%" src="{{asset(((array) $products[0])['product_image_1'])}}" class="materialboxed">
+                                <img width="100%" src="{{asset(str_replace("public","storage",$productX[0]->product_images)."/product_2.jpg")}}" class="materialboxed">
                             </div>
                             <div class="col m4">
-                                <img width="100%" src="{{asset(((array) $products[0])['product_image_1'])}}" class="materialboxed">
+                                <img width="100%" src="{{asset(str_replace("public","storage",$productX[0]->product_images)."/product_3.jpg")}}" class="materialboxed">
                             </div>
                             <div class="col m4">
-                                <img width="100%" src="{{asset(((array) $products[0])['product_image_1'])}}" class="materialboxed">
+                                <img width="100%" src="{{asset(str_replace("public","storage",$productX[0]->product_images)."/product_1.jpg")}}" class="materialboxed">
                             </div>
                         </div>
 
 
-                        <span> <h4>{{((array) $products[0])['product_name']}}</h4></span>
-                        <div style="margin-top: -1em !important;"><a href="/sme/{{$sme}}">{{$business_name}}</a>
-                            <span class="rating"><span class="fa fa-star"></span><span class="fa fa-star">
+                        <span> <h4>{{$productX[0]->product_name}}</h4></span>
+                        <div style="margin-top: -1em !important;"><a href="/{{$sme}}">{{$business_name}}</a>
+                            <!--<span class="rating"><span class="fa fa-star"></span><span class="fa fa-star">
                                     </span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span>
-                            </span>
+                            </span>-->
                         </div>
                         {{--<span>27 Inch, 3.4 GHz Intel Core i5, 8GB RAM, 1TB Fusion Drive, Silver</span><br>--}}
-                        <div>
-                            <p style="color:darkred; font-size: 1.4em"> <strong> ¢{{((array) $products[0])['product_price']}}</strong> </p>
+                        <div style="margin-top: -1em !important;">
+                            <p style="color:darkred; font-size: 1.4em"> <strong> ¢{{$productX[0]->product_price}}</strong> </p>
+                        </div>
+                        <div style="margin-top: -1em !important;">
+                            <h5 style="font-size:1.2em">Description</h5>
+                            <p style="font-size:0.8em">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ornare in est vel scelerisque. In hac habitasse platea dictumst. Nunc congue, odio sed fermentum lacinia,
+                            </p>
                         </div>
                         <div > <button class="btn" style="background-color: black !important;"> <i class="fa fa-shopping-cart"></i> Go to Shop </button></div>
                         {{--<div><i class="fa fa-phone"></i> 0302444666</div>--}}

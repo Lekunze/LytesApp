@@ -22,35 +22,78 @@ class ProductController extends Controller
         $products = ""; //Result
         $product = $request->product;
         $category = $request->category;
+        $minPrice = $request->min;
+        $maxPrice = $request->max;
+
+        //return \Response::json($maxPrice);
+        //$maxPrice = 10000000000;
 
         //return $category;
         if (empty($category) || $category==0){
-            $products = Product::where('product_name','like',"$product%")
-                ->join('BUSINESSES','BUSINESSES.id','=','PRODUCTS.bid')
+
+            $products = Product::query();
+            $products = $products->where('product_name','like',"$product%");
+            $products->whereBetween('product_price',[$minPrice,$maxPrice]);
+            $products = $products->join('BUSINESSES','BUSINESSES.id','=','PRODUCTS.bid')
                 ->select('PRODUCTS.product_name','PRODUCTS.product_price','PRODUCTS.product_slug','PRODUCTS.product_images',
-                    'BUSINESSES.business_slug','BUSINESSES.business_name', 'BUSINESSES.business_area', 'BUSINESSES.business_number')
-                ->get();
-        }else{
+                    'BUSINESSES.business_slug','BUSINESSES.business_name', 'BUSINESSES.business_area', 'BUSINESSES.business_number');
+
+            if($request->has('filter')){
+                $filter = $request->filter;
+                switch ($filter){
+                    case '1':
+                        $products->orderBy('product_price','asc');
+                        break;
+                    case '2':
+                        $products->orderBy('product_price','desc');
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+            $products = $products->paginate(6);
+            //$products->appends(['product' => $product]);
+
+
+        }elseif(!empty($category)){
             $categories = explode(",",$category);
+
+            //Search product
+            $products = Product::query();
+            $products = $products->where('product_name','like',"$product%");
+            $products->whereBetween('product_price',[$minPrice,$maxPrice]);
+
             if(sizeof($categories)>1){
-                $products = Product::query();
-                $products = $products->where('product_name','like',"$product%");
                 $products->whereIn('product_category',$categories);
-                $products = $products->join('BUSINESSES','BUSINESSES.id','=','PRODUCTS.bid')
-                    ->select('PRODUCTS.product_name','PRODUCTS.product_price','PRODUCTS.product_slug','PRODUCTS.product_images',
-                        'BUSINESSES.business_slug','BUSINESSES.business_name', 'BUSINESSES.business_area', 'BUSINESSES.business_number')->get();
-                //return \Response::json($result);
             }else{
-                //return \Response::json($category);
-                $products = Product::where('product_name','like',"$product%")
-                    ->where('product_category','=',$category)
-                    ->join('BUSINESSES','BUSINESSES.id','=','PRODUCTS.bid')
-                    ->select('PRODUCTS.product_name','PRODUCTS.product_price','PRODUCTS.product_slug','PRODUCTS.product_images',
-                        'BUSINESSES.business_slug','BUSINESSES.business_name', 'BUSINESSES.business_area', 'BUSINESSES.business_number')
-                    ->get();
+                $products->where('product_category','=',$category);
             }
 
 
+            $products = $products->join('BUSINESSES','BUSINESSES.id','=','PRODUCTS.bid')
+                ->select('PRODUCTS.product_name','PRODUCTS.product_price','PRODUCTS.product_slug','PRODUCTS.product_images',
+                    'BUSINESSES.business_slug','BUSINESSES.business_name', 'BUSINESSES.business_area', 'BUSINESSES.business_number');
+
+            if($request->has('filter')){
+                $filter = $request->filter;
+                switch ($filter){
+                    case '1':
+                        $products->orderBy('product_price','asc');
+                        break;
+                    case '2':
+                        $products->orderBy('product_price','desc');
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+            $products = $products->paginate(6);
+
+            //$products = $products->get();
         }
 
         if(!\Request::ajax()){

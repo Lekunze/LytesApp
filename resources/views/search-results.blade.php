@@ -242,6 +242,9 @@
                             <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                         </div>
                         <input type="hidden" name="category" value="0" id="category">
+                        <input type="hidden" name="filter" value="0" id="filter">
+                        <input type="hidden" name="min" value="0" id="minP">
+                        <input type="hidden" name="max" value="100000000" id="maxP">
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                     </form>
 
@@ -249,10 +252,10 @@
                 <div class="col s3 l3 m3">
                     <div class="input-field col s12">
                         <select name="filterBy" value="{{old('filterBy')}}" id="filterBy">
-                            <option value="">  &nbsp Filter search results by...</option>
+                            <option value="0">  &nbsp Filter search results by...</option>
+                            <option value="1"> Price: Lowest to Highest </option>
                             <option value="2"> Price: Highest to Lowest</option>
-                            <option value="3"> Price: Lowest to Highest </option>
-                            <option value="4"> Relevance</option>
+                            {{--<option value="4"> Relevance</option>--}}
                         </select>
                     </div>
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -314,21 +317,20 @@
                 <ul class="collapsible" data-collapsible="expanded">
                     <li>
                         <div class="collapsible-header active">Price</div>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li>
-                                    <input type="checkbox" class="filled-in"  />
-                                    <label for="all">GHS 0 - 30</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="filled-in"  />
-                                    <label for="all">GHS 31 - 60</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="filled-in" />
-                                    <label for="all">GHS 61 - 100</label>
-                                </li>
-                            </ul>
+                        <div class="collapsible-body" style="overflow:hidden!important; margin-top: 0.5em !important;">
+                            <div class="input-field col l4 m12" style="display:block !important;">
+                                <input class="validate" type="text" name="min" id="min" value="" style="position:relative!important;">
+                                <label for="min">Min</label>
+                            </div>
+                            <div class="input-field col l4 m12" style="display:block !important;" style="position:relative!important;">
+                                <input class="validate" type="text" name="max" id="max" value="">
+                                <label for="max">Max</label>
+                            </div>
+                            <div class="input-field col l3 m12 small-btn-container" style="display:block !important;" style="position:relative!important;">
+                                <input id="price" type="submit" class="btn small-btn" value="Go" style="background-color: rgb(191,13,64) !important;width:20px !important;
+                                text-align: center; padding-left:1em !important; padding-right:2.2em !important;">
+                            </div>
+
                         </div>
 
                     </li>
@@ -348,8 +350,8 @@
                                         <img class="materialboxed" src="<?php echo asset(str_replace("public","storage",$product->product_images)."/product_1.jpg")?>">
                                     </div>
                                     <div class="card-content">
-                                        <h4><a href="#">{{$product->product_name}}</a></h4>
-                                        <span> {{$product->business_name}}</span>
+                                        <h4><a href="/{{$product->business_slug}}/{{$product->product_slug}}">{{$product->product_name}}</a></h4>
+                                        <span> <a> {{$product->business_name}} </a></span>
                                     </div>
                                     <div class="card-action row">
                                         <span class="col s7 location"><i class="fa fa-map-marker"></i>{{$product->business_area}}</span>
@@ -364,7 +366,12 @@
                         </div>
                     @endif
                 </div>
+                @if(count($products)>0)
+                    {{$products->appends($_GET)->links()}}
+                @endif
             </div>
+
+
 
         </div>
 
@@ -393,7 +400,7 @@
         }
     };
 
-    console.log("Categories: " + getUrlParameter("category"));
+
     if(getUrlParameter("category").length == 1){
         $(":checkbox[value="+getUrlParameter("category")+"]").prop("checked","true");
     }else if(getUrlParameter("category").length > 1){
@@ -443,6 +450,35 @@
         document.getElementById('search-form').submit();
     });
 
+    $("#price").click(function(){
+        //alert("here");
+        var min = $("#min").val();
+        var max = $("#max").val();
+        $.each($('input[type=checkbox]:checked'),function(){
+            //if(category !== $(this).val()){
+                categories.push($(this).val());
+            //}
+        });
+        $("#search").val(getUrlParameter("product"));
+        $("#category").val(categories);
+        $("#minP").val(min);
+        $("#maxP").val(max);
+        document.getElementById('search-form').submit();
+
+    });
+
+    $("#filterBy").change(function(){
+        //alert("Heya");
+        var filter = $("#filterBy").val();
+        $.each($('input[type=checkbox]:checked'),function(){
+            categories.push($(this).val());
+        });
+
+        $("#search").val(getUrlParameter("product"));
+        $("#category").val(categories);
+        $("#filter").val(filter);
+        document.getElementById('search-form').submit();
+    })
     /*
         event.preventDefault();
         //var categories = $('#food').is(':checked');

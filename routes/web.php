@@ -89,6 +89,7 @@ Route::post('results', 'DBController@search');
 
 Route::get('logout', 'PagesController@logout');
 Route::get('/{sme}','DBController@sme');
+Route::get('/{sme}/{product}','DBController@product');
 
 
 

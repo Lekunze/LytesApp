@@ -4,27 +4,30 @@
         <div class="row">
             <div class="col l6 s12">
                 <h5 class="white-text" style="font-size: 1.4em">Lytes.App </h5>
-                <p class="grey-text text-lighten-4" style="font-size: 0.8em">Your online shopping Mall</p>
-                <span style="font-size: 0.2em">
+                <p class="grey-text text-lighten-4" style="font-size: 0.8em" id="tagline">Your online shopping Mall</p>
+                <div id="social-media">
+                    <span style="font-size: 0.2em">
                     <a class="waves-effect waves-light btn-floating social facebook black">
                         <i class="fa fa-facebook"></i> Sign in with facebook
                     </a>
                 </span>
-                <span style="font-size: 0.2em">
+                    <span style="font-size: 0.2em">
                     <a class="waves-effect waves-light btn-floating social twitter black">
                         <i class="fa fa-twitter"></i> Sign in with twitter
                     </a>
                 </span>
-                <span style="font-size: 0.2em">
+                    <span style="font-size: 0.2em">
                     <a class="waves-effect waves-light btn-floating social instagram black">
                         <i class="fa fa-instagram"></i> Sign in with instagram
                     </a>
                 </span>
-                <span style="font-size: 0.2em">
+                    <span style="font-size: 0.2em">
                     <a class="waves-effect waves-light btn-floating social youtube black">
                         <i class="fa fa-youtube"></i>
                     </a>
                 </span>
+                </div>
+
             </div>
             <div class="col l4 offset-l2 s12">
                 <h5 class="white-text" style="font-size: 1.4em">Join us</h5>
