@@ -441,9 +441,11 @@
 
             #search-special-mob{
                 height: 3.27em !important;
-                /*background-color:  rgb(0,32,96);
-                padding-top: 0.5em;
-                margin-top: 1em !important;*/
+                /*background-color:  rgb(0,32,96);*/
+                padding-top: 0em;
+                font-size: 2em;
+                padding-bottom: 1.5em;
+                margin-top: 1em !important;
                 -moz-border-radius: 0px 0px 0px 0px   !important;
                 -webkit-border-radius: 0px 0px 0px 0px   !important;
                 border-radius: 0px 0px 0px 0px  !important;
@@ -465,7 +467,8 @@
             }
 
             footer h5{
-                font-size: 3.5em !important;
+                font-size: 3.3em !important;
+                font-weight: 400 !important;
             }
 
             .footer-copyright{
@@ -476,13 +479,13 @@
             }
 
             #tagline{
-                font-size: 2.2em !important;
+                font-size: 2.1em !important;
                 font-weight: 200 !important;
                 margin-top: -.05em !important;
 
             }
             footer li{
-                font-size: 2.2em !important;
+                font-size: 2.1em !important;
                 font-weight: 200 !important;
 
 
@@ -499,6 +502,47 @@
             #social-media span{
                 font-size: 1em !important;
 
+            }
+
+            #label-1{
+                font-size: 3.2em !important;
+                font-weight: 400 !important;
+            }
+
+            .card-image {
+                width: 30%;
+                float: left;
+                height: auto;
+                max-height: 250px;
+            }
+
+            .card .card-image {
+                position: relative;
+                overflow: hidden;
+            }
+
+            .card-content {
+                float: right;
+                width: 70%;
+                height: auto;
+                max-height: auto;
+                padding: 10px;
+            }
+
+            .card-content {
+                height: 120px;
+                max-height: 120px;
+                padding: 20px !important;
+
+            }
+            .card .card-content {
+                border-radius: 0 0 2px 2px;
+                background-clip: padding-box;
+                box-sizing: border-box;
+            }
+
+            .pdt-name{
+                font-size: 2.5em;
             }
 
 
@@ -623,17 +667,16 @@
     <div class="section">
         <div class="row">
             <div class="cards">
-                <div class="col l1 m1"></div>
 
-                <div class="col l10 m10 s12">
+                <div class="col l11 offset-l1 m12 s12">
                     <form action="{{url('search')}}" method="GET" id="search-mobile" style="display: none; z-index: 999 !important;">
                         <div class="row">
-                            <div class="col s8 offset-s1">
+                            <div class="col s7 offset-s1">
                                 <input id="search-mob" name="product" type="search" value="{{old('product')}}"
                                        placeholder="Enter product to search for" required>
                                 {{--<label class="label-icon" for="search"><i class="material-icons">search</i></label>--}}
                             </div>
-                            <div class="col s3">
+                            <div class="col s4">
                                 <button style="text-transform: none" id="search-special-mob"
                                         class="btn-large waves-effect waves-light black"
                                         type="submit">Search</button>
@@ -646,17 +689,18 @@
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                     </form>
 
-                    <h5 style="font-size: 1.6em; margin-left: 0.6em">Most viewed products <span style="font-size: 0.5em !important;float: right; margin-right: 1em"> <a href="#"> See more</a> </span></h5>
+                    <h5 style="font-size: 1.6em; margin-left: 0.6em" id="label-1">Most viewed products <span style="font-size: 0.5em !important;float: right; margin-right: 1em"> <a href="#"> See more</a> </span></h5>
 
                     <HR>
                     <div class="col s12">
                         <div class="card horizontal">
                             <div class="card-image">
-                                <img src="img/laptop-2.jpeg">
+                                <img src="img/robot.jpg">
                             </div>
                             <div class="card-stacked">
                                 <div class="card-content">
-                                    <p>I am a very simple card. I am good at containing small bits of information.</p>
+                                    <p class="pdt-name">iMac Pro 2015</p>
+                                    <span> A ioadsad n jadj adkas jd jas d ja djas jd ja d ja djsa dj  a</span>
                                 </div>
                                 <div class="card-action">
                                     <a href="#">This is a link</a>
@@ -664,15 +708,31 @@
                             </div>
                         </div>
                     </div>
-                    <hr>
                     <div class="col s12">
                         <div class="card horizontal">
                             <div class="card-image">
-                                <img src="img/laptop-2.jpeg">
+                                <img src="img/robot.jpg">
                             </div>
                             <div class="card-stacked">
                                 <div class="card-content">
-                                    <p>I am a very simple card. I am good at containing small bits of information.</p>
+                                    <p class="pdt-name">iMac Pro 2015</p>
+                                    <span> A ioadsad n jadj adkas jd jas d ja djas jd ja d ja djsa dj  a</span>
+                                </div>
+                                <div class="card-action">
+                                    <a href="#">This is a link</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <div class="card horizontal">
+                            <div class="card-image">
+                                <img src="img/laptop-1.jpeg">
+                            </div>
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <p class="pdt-name">iMac Pro 2015</p>
+                                    <span> A ioadsad n jadj adkas jd jas d ja djas jd ja d ja djsa dj  a</span>
                                 </div>
                                 <div class="card-action">
                                     <a href="#">This is a link</a>

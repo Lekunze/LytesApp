@@ -77,7 +77,7 @@ Route::get('/dashboard/reject/{id}', 'DBController@reject');
 //SME Page routing
 Route::get('/sme/manage','PagesController@sme');
 Route::get('/{sme}/new','DBController@newProduct');
-Route::get('/{sme}/change','DBController@change');
+Route::get('/change','DBController@change');
 Route::get('/{sme}/shelves','DBController@shelves');
 Route::get('/{sme}/products', 'DBController@manageProducts');
 

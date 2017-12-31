@@ -19,6 +19,10 @@ class ProductController extends Controller
         //
         //return "Hello";
 
+        if(!$request->has('product')){
+            return view('pages.new-ui.app-search');
+        }
+
         $products = ""; //Result
         $product = $request->product;
         $category = $request->category;
@@ -119,7 +123,6 @@ class ProductController extends Controller
         //$location = Input::get('location');
 
         return view('search-results',compact('products','shelves'));
-        return "Index";
     }
 
     /**

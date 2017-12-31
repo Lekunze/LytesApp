@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Cookie;
 class PagesController extends Controller
 {
     public function index(){
-        return view('pages.index');
+        return view('pages.new-ui.app');
     }
 
     public function about(){
@@ -22,7 +22,7 @@ class PagesController extends Controller
 
 
     public function register(){
-        return view('pages.new');
+        return view('pages.new-ui.app-signup');
     }
 
     public function product(){
@@ -30,13 +30,7 @@ class PagesController extends Controller
     }
 
     public function login(){
-//        $username = Cookie::get('username');
-//
-//        if(!$username){
-//            return view('pages.customer-signin');
-//        }
-
-        return view('pages.customer-signin');
+        return view('pages.new-ui.app-signin');
     }
 
     public function signup(){
