@@ -24,7 +24,7 @@ use App\Admin;
 class DBController extends Controller
 {
     public function results(Request $request){
-        return view('search-results');
+        return view('/');
     }
 
     public function viewProduct(Request $request){

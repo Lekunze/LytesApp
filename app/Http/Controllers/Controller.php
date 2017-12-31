@@ -23,9 +23,10 @@ class Controller extends BaseController
         );
 
         if(Auth::attempt($userdata)){
-
             return redirect()->intended('/'. Auth::user()->username);
-            //return redirect('/sme');
+        }else{
+            $error = 'Wrong username or password';
+            return view('pages.new-ui.app-signin',compact('error'));
         }
     }
 }
