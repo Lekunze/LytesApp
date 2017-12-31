@@ -1,0 +1,17 @@
+<option value="X" selected>Choose your location</option>
+<option value="37M"> 37</option>
+<option value="ABK"> Abelenkpe</option>
+<option value="ACC"> Accra Central </option>
+<option value="ACH"> Achimota </option>
+<option value="ADT"> Adenta </option>
+<option value="ALJ"> Alajo </option>
+<option value="CIC"> Circle</option>
+<option value="DNS"> Dansoman</option>
+<option value="ELG"> East Legon</option>
+<option value="HTS"> Haatso</option>
+<option value="KWM"> Kwashieman</option>
+<option value="LAP"> Lapaz</option>
+<option value="MAD"> Madina</option>
+<option value="RDG"> Ridge</option>
+<option value="SPI"> Spintex</option>
+<option value="TEM"> Tema</option>
