@@ -6,7 +6,7 @@
 	<link rel="icon" type="image/png" href="{{asset('new-ui/img/favicon.png')}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Shop - Lytes.App</title>
+	<title>{{$business->business_name}} - Lytes.App</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
@@ -18,6 +18,26 @@
 	<!-- CSS Files -->
 	<link href="{{asset('new-ui/css/bootstrap.min.css')}}" rel="stylesheet" />
 	<link href="{{asset('new-ui/css/material-kit.css')}}" rel="stylesheet"/>
+
+	<style>
+		.navbar-color-on-scroll{
+			background-color: black;
+		}
+
+		li.active{
+		}
+
+		.nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+			background-color: rgb(0, 32, 96);
+		}
+
+		.row.sharing-area.text-center a,.copyright a{
+			color: rgb(0, 32, 96) !important;
+		}
+
+
+
+	</style>
 
 </head>
 
@@ -52,7 +72,7 @@
                     <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings &nbsp<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                              <li><a href="/{{$business->business_slug}}/change">Change Password</a></li>
+                              <li><a href="/change">Change Password</a></li>
                               <li><a href="#">Edit Profile</a></li>
                             </ul>
                     </li>
@@ -88,18 +108,18 @@
 	                            <img src="{{asset('new-ui/img/logo-4.jpg')}}" alt="Circle Image" class="img-circle img-responsive img-raised">
 	                        </div>
 	                        <div class="name">
-	                            <h3 class="title">God Dey Electrical Shop <span class="label label-success">Open</span> </h3>
+	                            <h3 class="title">{{$business->business_name}} <span class="label label-success">Open</span> </h3>
                                 <!-- <h6>Electronics</h6> -->
                                 <div class="row sharing-area text-center">
-                                        <a href="#" style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12">
+                                        <a style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12">
                                             <i class="fa fa-phone-square"></i>
-                                            0302-444222
+											{{$business->business_number}}
                                         </a>
-                                        <a href="#" style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12">
+                                        <a style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12">
                                             <i class="fa fa-envelope"></i>
                                             info@business.com
                                         </a>
-                                        <a href="#" style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12">
+                                        <a style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12">
                                             <i class="fa fa-map-marker"></i>
                                             Adenta
                                         </a>
@@ -118,7 +138,18 @@
 							<div class="profile-tabs">
 								<div class="nav-align-center">
 									<ul class="nav nav-pills" role="tablist">
-										<li class="active">
+
+										@if(!empty($shelves))
+											@foreach($shelves as $shelf)
+												<li>
+													<a href="#{{$shelf->shelf_name}}" role="tab" data-toggle="tab">
+														<i class="material-icons">camera</i>
+														{{$shelf->shelf_name}}
+													</a>
+												</li>
+											@endforeach
+										@endif
+										<!--<li class="active">
 											<a href="#studio" role="tab" data-toggle="tab">
 												<i class="material-icons">camera</i>
 												Desktop
@@ -135,18 +166,39 @@
 												<i class="material-icons">favorite</i>
 												Motherboard
 											</a>
-										</li>
+										</li>-->
 									</ul>
 
 									<div class="tab-content gallery">
-										<div class="tab-pane active" id="studio">
+
+									@if(!empty($shelves) && !empty($products))
+										@foreach($shelves as $shelf)
+												<div class="tab-pane active" id="{{$shelf->shelf_name}}">
+													<div class="row">
+
+													@foreach($products as $product)
+														@if($product->product_shelf == $shelf->shelf_name)
+																	<div class="col-md-6">
+																		<a href="/{{$business->business_slug}}/{{$product->product_slug}}">
+																			<img src="<?php echo asset(str_replace("public","storage",$product->product_images)."/product_1.jpg")?>" class="img-rounded" />
+																		</a>
+																	</div>
+
+														@endif
+													@endforeach
+
+													</div>
+												</div>
+
+										@endforeach
+									@endif
+
+										<!--<div class="tab-pane active" id="studio">
 											<div class="row">
 												<div class="col-md-6">
 													<img src="{{asset('new-ui/img/laptop-1.jpeg')}}" class="img-rounded" />
-													<img src="{{asset('new-ui/img/laptop-1.jpeg')}}" class="img-rounded" />
 												</div>
 												<div class="col-md-6">
-													<img src="{{asset('new-ui/img/laptop-1.jpeg')}}" class="img-rounded" />
 													<img src="{{asset('new-ui/img/laptop-1.jpeg')}}" class="img-rounded" />
 												</div>
 
@@ -176,7 +228,7 @@
 													<img src="{{asset('new-ui/img/mother-2.jpg')}}" class="img-rounded" />
 												</div>
 											</div>
-										</div>
+										</div>-->
 
 									</div>
 								</div>

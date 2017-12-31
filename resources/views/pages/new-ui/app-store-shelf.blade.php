@@ -52,7 +52,7 @@
                     <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings &nbsp<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                              <li><a href="/{{$business->business_slug}}/change">Change Password</a></li>
+                              <li><a href="/change">Change Password</a></li>
                               <li><a href="#">Edit Profile</a></li>
                             </ul>
                     </li>
@@ -77,7 +77,7 @@
     </nav>
 
     <div class="wrapper">
-        <div class="header header-filter" style="background-image: url('new-ui/img/storeee.jpeg');">
+        <div class="header header-filter" style="background-image: url('../new-ui/img/storeee.jpeg');">
             <div class="container">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
@@ -106,13 +106,16 @@
 					<div class="row">
                         <div class="col-md-5 col-md-offset-4" style="margin-top:-30px; margin-bottom:20px;">
                                 <div class="col-sm-12">
+                                    <form>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Name of Shelf">
+                                            <input type="text" class="form-control" placeholder="Name of Shelf" id="shelf" name="shelf">
                                             <span class="input-group-addon">
-                                                    <button class="btn btn-primary">Add Shelf</button>
+                                                <a class="btn btn-primary" id="addShelf">Add Shelf</a>
                                             </span>
                                         </div>
-                                    </div>
+                                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                    </form>
+                                </div>
                         </div>
 						<div class="col-md-8 col-md-offset-2">
                                 <table class="table">
@@ -123,8 +126,24 @@
                                                 <th class="text-right">Actions</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
+                                        <tbody id="shelf-list">
+                                        @if(!empty($shelves))
+                                            @foreach($shelves as $shelf)
+                                                <tr id="task{{$shelf->id}}">
+                                                    <td class="text-center">{{$shelf->id}}</td>
+                                                    <td> {{$shelf->shelf_name}}</td>
+                                                    <td class="td-actions text-right">
+                                                        <button type="button" rel="tooltip" title="Edit Shelf" class="btn btn-success btn-simple btn-xs edit" value="{{$shelf->id}}" data-token="{{csrf_token()}}">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                        <button value="{{$shelf->id}}" data-token="{{ csrf_token() }}" type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs delete">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
+                                            <!--<tr>
                                                 <td class="text-center">1</td>
                                                 <td>Desktop</td>
                                                 <td class="td-actions text-right">
@@ -159,7 +178,7 @@
                                                         <i class="fa fa-times"></i>
                                                     </button>
                                                 </td>
-                                            </tr>
+                                            </tr>-->
                                         </tbody>
                                     </table>
                                             
@@ -228,6 +247,54 @@
     
     <script>
         $('[data-toggle="tooltip"]').tooltip();
+    </script>
+
+    <script>
+
+        $("#addShelf").click(function(event) {
+            event.preventDefault();
+
+            $.ajax({
+                type: 'post',
+                url: 'shelf',
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'shelf': $('#shelf').val()
+                },
+                success: function(data) {
+                    var shelf = '<tr id="task' + data.id + '"> <td class="text-center">'+data.id+'</td><td>'+ data.shelf_name+' </td>';
+                    shelf += '<td class="td-actions text-right">' + '<button type="button" rel="tooltip" title="Edit Shelf" value= "' + data.id + '" class ="btn btn-success btn-simple btn-xs edit" data-token="{{csrf_token()}}"> <i class="fa fa-edit"></i> </button>';
+                    shelf += '<button type="button" rel="tooltip" title="Remove" value="' + data.id + '" class ="btn btn-danger btn-simple btn-xs delete" data-token="{{csrf_token()}}"> <i class="fa fa-times"></i> </button> </td> </tr>';
+                    $('#shelf-list').append(shelf);
+                    $('#shelf').val("");
+                    console.log(data.id);
+                }
+            });
+            console.log('Form Submitted');
+        })
+        $(".delete").click(function(event) {
+            event.preventDefault();
+
+            var id = $(this).val();
+            var token = $(this).data("token");
+
+            $.ajax({
+                type: 'delete',
+                url: 'deleteShelf',
+                data: {
+                    '_token': token,
+                    'id': id
+                },
+                success: function(data) {
+                    $('#task' + data).remove();
+                    console.log(data);
+                }, error: function (data) {
+                    console.log('Error:' + data);
+
+                }
+            });
+        })
+
     </script>
 
 </html>

@@ -43,16 +43,95 @@
 			color:white !important;
 		}
 
-        @media screen and (min-width: 768px){
+		@media screen and (min-width: 360px){
+			div.col-md-12.capt{
+				font-size: 0.4em;
+				left: 50%;
+				top: 30%;
+			}
+
+			.title{
+				font-size: 2.2em !important;
+			}
+
+			.shop{
+				margin-top:-9em;
+				max-height: 30px;
+				max-width: 120px;
+				font-size: 1.5em !important;
+				/* padding: 0;     */
+				padding: 5px 5px 5px 5px !important;
+
+			}
+			.shop i{
+				font-size: 1.3em !important;
+			}
+
+			.pull-left{
+				float: none !important;
+				text-align: center !important;
+
+			}
+			footer ul li a {
+				padding:10px !important;
+			}
+		}
+
+
+        @media screen and (min-width: 1024px){
             div.col-md-12.capt{
-                left: 60%;
+                left: 50%;
                 top: 30%;
             }
 
             .shop{
-                margin-top:-2.5em;
-            }
+                margin-top:-1.7em !important;
+				max-height: 50px;
+				max-width: 420px;
+				font-size: 3.5em !important;
+				padding: 15px 20px 20px 20px !important;
+
+
+			}
+
+			.title{
+				font-size: 5.5em !important;
+			}
         }
+
+		@media screen and (min-width: 768px){
+			div.col-md-12.capt{
+				left: 50%;
+				top: 30%;
+			}
+
+			.shop{
+				margin-top:-2.2em;
+			}
+		}
+
+		@media only screen
+		and (min-device-width: 768px)
+		and (min-device-height: 1024px){
+			div.col-md-12.capt{
+				left: 50%;
+				top: 30%;
+			}
+
+			.shop{
+				margin-top:-1.7em !important;
+				max-height: 50px;
+				max-width: 420px;
+				font-size: 3.5em !important;
+				padding: 15px 20px 20px 20px !important;
+
+
+			}
+
+			.title{
+				font-size: 5.2em !important;
+			}
+		}
 
         @media only screen
         and (min-device-width: 375px)
@@ -65,8 +144,12 @@
                 top: 30%;
             }
 
+			.title{
+				font-size: 2.2em !important;
+			}
+
             .shop{
-                margin-top:-8em;
+                margin-top:-9em;
                 max-height: 30px;
                 max-width: 120px;
                 font-size: 1.5em !important;    
@@ -77,8 +160,6 @@
             .shop i{
                 font-size: 1.3em !important;                
             }
-
-        
         }
 
     </style>
@@ -113,6 +194,11 @@
 	    <div class="collapse navbar-collapse" id="navigation-index">
 	    	<ul class="nav navbar-nav navbar-right">
 				<li>
+					<a href="/search" style="font-size:1.2em;">
+						<i class="material-icons">search</i> Search
+					</a>
+				</li>
+				<li>
 					<a href="/register" style="font-size:1.2em;">
 						<i class="material-icons">store</i> New Shop
 					</a>
@@ -128,7 +214,7 @@
 					</a>
 				</li> -->
 				<li>
-					<a rel="tooltip" title="Like us on Facebook" data-placement="bottom" href="https://www.facebook.com/CreativeTim" target="_blank" class="btn btn-white btn-simple btn-just-icon">
+					<a rel="tooltip" title="Like us on Facebook" data-placement="bottom" href="https://www.facebook.com/LytesApp/" target="_blank" class="btn btn-white btn-simple btn-just-icon">
 						<i class="fa fa-facebook-square"></i>
 					</a>
 				</li>
@@ -166,9 +252,9 @@
                                 <div class="item active">
                                     <img src="{{asset('new-ui/img/shopping-1.jpeg')}}" alt="Awesome Image">
                                     <div class="col-md-12 capt" style="position:absolute; z-index:100 !important; bottom:20px; text-shadow:none;">
-                                        <h2 class="title">Discounted prices you'll trust</h2>
+                                        <h2 class="title" style="overflow: auto !important;">Discounted prices for you</h2>
                                         <a class="btn btn-danger btn-raised btn-lg shop">
-                                            <i class="fa fa-shopping-bag"></i> &nbspSearch Products
+                                            <i class="fa fa-search"></i> &nbspSearch Products
                                         </a>
                                     </div>
                                     <div class="carousel-caption">
@@ -180,7 +266,7 @@
                                     <div class="col-md-12 capt" style="position:absolute; z-index:100 !important; bottom:20px; text-shadow:none;">
                                             <h2 class="title" style="color:white">Find every product you need</h2>
                                             <a class="btn btn-danger btn-raised btn-lg shop">
-                                                <i class="fa fa-shopping-bag"></i> &nbspSearch Products
+                                                <i class="fa fa-search"></i> &nbspSearch Products
                                             </a>
                                     </div>
                                     <div class="carousel-caption">
@@ -193,7 +279,7 @@
                                     <div class="col-md-12 capt" style="position:absolute; z-index:100 !important; bottom:20px; text-shadow:none;">
                                             <h2 class="title" style="color:white">Sellers you can trust!</h2>
                                             <a class="btn btn-danger btn-raised btn-lg shop">
-                                                <i class="fa fa-shopping-bag"></i> &nbspSearch Products
+                                                <i class="fa fa-search"></i> &nbspSearch Products
                                             </a>
                                     </div>
                                     <div class="carousel-caption">
@@ -248,7 +334,7 @@
 	            </ul>
 	        </nav>
 	        <div class="copyright pull-right">
-				&copy; 2018 Lytes.App | Theme <i>by</i> <a href="http://www.creative-tim.com" target="_blank">&nbspCreative Tim</a>
+				&copy; 2018 Lytes.App | Theme <i>by</i> <a href="http://www.creative-tim.com" target="_blank" style="color:rgb(191,13,64) !important;">&nbspCreative Tim</a>
 	        </div>
 	    </div>
 	</footer>
