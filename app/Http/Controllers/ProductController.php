@@ -106,7 +106,7 @@ class ProductController extends Controller
             //return $products;
             $request->session()->keep(['product']);
             //return redirect()->intended('/search')->with('products',$products);
-            return view('search-results',compact('products'));
+            return view('pages.new-ui.app-search',compact('products'));
             //return redirect('/search')->with(compact('products'));
             //return $products;
         }

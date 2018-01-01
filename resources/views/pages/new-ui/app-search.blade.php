@@ -55,6 +55,9 @@
             margin:0;
         }
 
+        .description a{
+            color: rgb(0,32,96)!important;
+        }
         h4.title:hover{
             color:blueviolet;
         }
@@ -253,28 +256,28 @@
                                      <div id="refineClothing" class="panel-collapse collapse in">
                                        <div class="panel-body checkbox">
                                             <label>
-                                                    <input type="checkbox" name="optionsCheckboxes" >Automobile & Parts
+                                                    <input type="checkbox" name="optionsCheckboxes" value="1">Automobile & Parts
                                             </label><br>
                                             <label>
-                                                    <input type="checkbox" name="optionsCheckboxes">Beauty Products
+                                                    <input type="checkbox" name="optionsCheckboxes" value="2">Beauty Products
                                             </label><br>
                                             <label>
-                                                    <input type="checkbox" name="optionsCheckboxes">Books & Stationary
+                                                    <input type="checkbox" name="optionsCheckboxes" value="3">Books & Stationary
                                             </label><br>
                                             <label>
-                                                    <input type="checkbox" name="optionsCheckboxes">Clothing
+                                                    <input type="checkbox" name="optionsCheckboxes" value="4">Clothing
                                             </label><br>
                                             <label>
-                                                    <input type="checkbox" name="optionsCheckboxes">Education
+                                                    <input type="checkbox" name="optionsCheckboxes" value="5">Education
                                             </label><br>
                                             <label>
-                                                    <input type="checkbox" name="optionsCheckboxes">Electronics
+                                                    <input type="checkbox" name="optionsCheckboxes" value="6">Electronics
                                             </label><br>
                                             <label>
-                                                    <input type="checkbox" name="optionsCheckboxes">Entertainment
+                                                    <input type="checkbox" name="optionsCheckboxes" value="7">Entertainment
                                             </label><br>
                                             <label>
-                                                    <input type="checkbox" name="optionsCheckboxes">Food
+                                                    <input type="checkbox" name="optionsCheckboxes" value="8">Food
                                             </label>
                                        </div>
                                      </div>
@@ -295,7 +298,7 @@
                                                    <div class="col-sm-4">
                                                            <div class="form-group label-floating">
                                                                <label class="control-label">Min</label>
-                                                               <input type="text" value="" class="form-control" />
+                                                               <input type="text" value="" class="form-control" name="min" id="min"/>
                                                            </div>
                                                    </div>
                                                </span>
@@ -303,11 +306,11 @@
                                                    <div class="col-sm-4">
                                                            <div class="form-group label-floating">
                                                                <label class="control-label">Max</label>                                                                
-                                                               <input type="text" value=""class="form-control" />
+                                                               <input type="text" value=""class="form-control" name="max" id="max"/>
                                                            </div>
                                                    </div>
                                                    <div class="col-sm-4">
-                                                           <button class="btn btn-primary btn-just-icon">
+                                                           <button class="btn btn-primary btn-just-icon" id="price">
                                                            <i class="fa fa-search"></i>
                                                            </button>
                                                    </div>
@@ -329,88 +332,66 @@
                             <div class="col-md-12">
                                 <div class="row">
                                         <div class="col-sm-10 col-sm-offset-1" id="search-box" style="margin-bottom:1em;">
+                                            <form action="{{url('search')}}" method="GET" id="search-form">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-search"></i>
                                                     </span>
-                                                    <input type="text" class="form-control" placeholder="Enter product to search for...">
+
+                                                    <input type="text" class="form-control" name="product" id="search" placeholder="Enter product to search for...">
+                                                    <input type="hidden" name="category" value="0" id="category">
+                                                    <input type="hidden" name="filter" value="0" id="filter">
+                                                    <input type="hidden" name="min" value="0" id="minP">
+                                                    <input type="hidden" name="max" value="100000000" id="maxP">
+                                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
                                                     <span class="input-group-addon">
-                                                    <button class="btn btn-primary">Search</button>
-                                                    
+                                                        <button class="btn btn-success" type="submit">Search</button>
                                                     </span>
                                                 
                                                 </div>
+                                            </form>
                                         </div>
                                         
                                 </div>
                             </div> 
                             <br>
                             <br>
-                                
-                             <div class="col-md-4">
-                                 <div class="card card-product card-plain">
-                                     <div class="image">
-                                         <a href="#">
-                                             <img src="{{asset('new-ui/img/laptop-1.jpeg')}}" alt="...">
-                                         </a>
-                                     </div>
-                                     <div class="content">
-                                         <a href="#">
-                                             <h4 class="title">iMac Pro 2015</h4>
-                                         </a>
-                                         <p class="description">
-                                            XDoe Electronics
-                                         </p>
-                                         <div class="footer">
-                                             <span class="price"> GHS 3,330</span>
-                                             <span style="float:right" class="location">  <i class="fa fa-map-marker"></i> Adenta</span>
+                             @if(!empty($products))
+                                 @if(count($products)>0)
+                                 @foreach($products as $product)
+                                     <div class="col-md-4">
+                                         <div class="card card-product card-plain">
+                                             <div class="image">
+                                                 <a href="#">
+                                                     <img src="<?php echo asset(str_replace("public","storage",$product->product_images)."/product_1.jpg")?>" alt="...">
+                                                 </a>
+                                             </div>
+                                             <div class="content">
+                                                 <a href="#">
+                                                     <h4 class="title"><a href="/{{$product->business_slug}}/{{$product->product_slug}}">{{$product->product_name}}</a></h4>
+                                                 </a>
+                                                 <p class="description">
+                                                     <a> {{$product->business_name}} </a>
+                                                 </p>
+                                                 <div class="footer">
+                                                     <span class="price"> GHS {{$product->product_price}}</span>
+                                                     <span style="float:right" class="location">  <i class="fa fa-map-marker"></i> {{$product->business_area}}</span>
+                                                 </div>
+                                             </div>
                                          </div>
                                      </div>
-                                 </div> <!-- end card -->
-                              </div>
-                              <div class="col-md-4">
-                                 <div class="card card-product card-plain">
-                                     <div class="image">
-                                         <a href="#">
-                                             <img src="{{asset('new-ui/img/laptop-3.jpeg')}}" alt="...">
-                                         </a>
-                                     </div>
-                                     <div class="content">
-                                         <a href="#">
-                                             <h4 class="title">MacBook Pro</h4>
-                                         </a>
-                                         <p class="description">
-                                            Matt-Maer Co.
-                                         </p>
-                                         <div class="footer">
-                                             <span class="price">GHS 1,930</span>
-                                             <span style="float:right" class="location">  <i class="fa fa-map-marker"></i> Madina</span>                                             
-                                         </div>
-                                     </div>
-                                 </div> <!-- end card -->
-                              </div>
-                               <div class="col-md-4">
-                                 <div class="card card-product card-plain">
-                                     <div class="image">
-                                         <a href="#">
-                                             <img src="{{asset('new-ui/img/laptop-4.jpeg')}}" alt="...">
-                                         </a>
-                                     </div>
-                                     <div class="content">
-                                         <a href="#">
-                                             <h4 class="title">Dell Inspiron</h4>
-                                         </a>
-                                         <p class="description">
-                                            Alhaji Raman & Sons
-                                       </p>
-                                         <div class="footer">
-                                             <span class="price"> GHS 3,330</span>
-                                             <span style="float:right" class="location">  <i class="fa fa-map-marker"></i> Tema</span>
-                                             
-                                         </div>
-                                     </div>
-                                 </div> <!-- end card -->
-                              </div>
+                                 @endforeach
+                                 @endif
+                             @else
+                                 <div class="col-md-12">
+                                     <h5 style="text-align: center; font-size: large;"><i>Sorry, we couldn't find the product you are looking for!</i></h5>
+                                 </div>
+                              @endif
+                         @if(!empty($products))
+                             @if(count($products)>0)
+                                 {{$products->appends($_GET)->links()}}
+                             @endif
+                         @endif
  
                               </div>
                          </div>
@@ -489,4 +470,110 @@
 
 		});
 	</script>
+
+    <script>
+        var categories = [];
+
+        /*https://stackoverflow.com/questions/19491336/get-url-parameter-jquery-or-how-to-get-query-string-values-in-js*/
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
+                }
+            }
+        };
+
+
+        if(getUrlParameter("category").length == 1){
+            $(":checkbox[value="+getUrlParameter("category")+"]").prop("checked","true");
+        }else if(getUrlParameter("category").length > 1){
+            var selectedCategories = getUrlParameter("category").split(',');
+            for(var i=0; i<selectedCategories.length; i++){
+                $(":checkbox[value="+selectedCategories[i]+"]").prop("checked","true");
+            }
+            //console.log("No of categories = " + selectedCategories.length);
+        }
+
+        $(window).load(function(){
+            // alert("Hello");
+            $("#search").val(getUrlParameter("product"));
+            if(getUrlParameter("min")>0){
+                $("#min").val(getUrlParameter("min"));
+            }
+            if(getUrlParameter("max")>0){
+                $("#max").val(getUrlParameter("max"));
+            }
+        });
+
+
+
+        var search_val = "";
+        //$("#search").click(function(event) {
+
+        $('input[type=checkbox]').change(function(){
+            //alert('Value: ' + $(this).val());
+            var category = $(this).val();
+
+            if($(this).is(':checked')){
+                categories.push(category);
+                console.log("Pushed");
+                //alert('Checked');
+
+            }else{
+                var index = categories.indexOf(category);
+                if (index > -1) {
+                    categories.splice(index, 1);
+                }
+                console.log("Popped");
+                //alert('Unchecked');
+            }
+
+            $.each($('input[type=checkbox]:checked'),function(){
+                if(category !== $(this).val()){
+                    categories.push($(this).val());
+                }
+            });
+            $("#search").val(getUrlParameter("product"));
+            $("#category").val(categories);
+            document.getElementById('search-form').submit();
+        });
+
+        $("#price").click(function(){
+            //alert("here");
+            var min = $("#min").val();
+            var max = $("#max").val();
+            $.each($('input[type=checkbox]:checked'),function(){
+                //if(category !== $(this).val()){
+                categories.push($(this).val());
+                //}
+            });
+            $("#search").val(getUrlParameter("product"));
+            $("#category").val(categories);
+            $("#minP").val(min);
+            $("#maxP").val(max);
+            document.getElementById('search-form').submit();
+
+        });
+
+        $("#filterBy").change(function(){
+            //alert("Heya");
+            var filter = $("#filterBy").val();
+            $.each($('input[type=checkbox]:checked'),function(){
+                categories.push($(this).val());
+            });
+
+            $("#search").val(getUrlParameter("product"));
+            $("#category").val(categories);
+            $("#filter").val(filter);
+            document.getElementById('search-form').submit();
+        });
+
+    </script>
 </html>

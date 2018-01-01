@@ -16,14 +16,17 @@ class CreateBusinessesTable extends Migration
         Schema::create('BUSINESSES', function (Blueprint $table) {
             $table->integer('id')->unsigned()->nullable();
             $table->string('business_name')->nullable();
+            $table->string('business_description')->nullable();
+            $table->string('business_tagline')->nullable();
             $table->string('business_slug')->nullable();
             $table->string('business_country')->nullable();
             $table->string('business_region')->nullable();
             $table->string('business_area')->nullable();
             $table->string('business_address')->nullable();
+            $table->string('business_email')->nullable();
             $table->string('business_number')->nullable();
             $table->string('business_number_2')->nullable();
-            $table->string('business_industry')->nullable();
+            $table->string('business_category')->nullable();
             $table->string('business_images')->nullable();
             $table->foreign('id')->references('id')->on('BUSINESS_OWNERS');
             $table->timestamps();

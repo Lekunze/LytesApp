@@ -25,7 +25,7 @@
 
     <style>
         .navbar-color-on-scroll{
-            background-color: rgb(0,32,96);
+            background-color: black;
         }
 
         .imageupload {
@@ -47,7 +47,7 @@
         }
 
         .btn-lg{
-            background-color: rgb(0,32,96) !important;
+            background-color: rgb(191,13,64) !important;
             margin-bottom: 30px !important;
 
         }
@@ -57,7 +57,7 @@
         }
 
         .btn-default{
-            background-color: rgb(191,13,64) !important;
+            background-color: black !important;
         }
 
         div.file-tab.panel-body{
@@ -94,6 +94,14 @@
                             <a href="/{{$business->business_slug}}/shelves">
                                     <i class="material-icons">storage</i> Shelves
                             </a>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products &nbsp<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/{{$business->business_slug}}/new"> <i class="material-icons">shopping_basket</i> &nbspNew Product </a></li>
+                            <li><a href="/{{$business->business_slug}}/products"> <i class="material-icons">edit</i>&nbsp Edit Products </a></li>
+                        </ul>
+
                     </li>
                     <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings &nbsp<b class="caret"></b></a>

@@ -31,6 +31,8 @@ Route::resource('search','ProductController');
 Route::post('login','Controller@login');
 Route::post('/{sme}/shelf', 'DBController@shelf');
 Route::delete('/{sme}/deleteShelf', 'DBController@deleteshelf');
+Route::delete('/{sme}/deleteProduct', 'DBController@deleteProduct');
+Route::get('/success','PagesController@received');
 
 
 
@@ -44,7 +46,6 @@ Route::get('/business/{id}','DBController@smeguest');
 Route::get('/register','PagesController@register');
 //Route::get('/product','PagesController@product');
 Route::get('login','PagesController@login');
-Route::get('/success','PagesController@received');
 Route::get('/signup','PagesController@signup');
 
 
@@ -80,6 +81,7 @@ Route::get('/{sme}/new','DBController@newProduct');
 Route::get('/change','DBController@change');
 Route::get('/{sme}/shelves','DBController@shelves');
 Route::post('/{sme}/shelves/edit','DBController@editShelf');
+Route::post('/{sme}/products/edit','DBController@editProduct');
 Route::get('/{sme}/products', 'DBController@products');
 
 

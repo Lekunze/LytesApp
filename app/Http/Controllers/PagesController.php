@@ -38,7 +38,7 @@ class PagesController extends Controller
     }
 
     public function received(){
-        return view('pages.application-received');
+        return view('pages.new-ui.app');
     }
 
     public function home(){

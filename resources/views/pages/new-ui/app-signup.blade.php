@@ -48,11 +48,40 @@
             background-color: black !important;
         }
 
+        .panel-title{
+            text-align: center !important;
+            padding-top: 0!important;
+        }
 
+
+        div.panel-heading.clearfix{
+            text-align: center !important;
+        }
+        .panel-heading.clearfix{
+            background-color: lightgrey !important;
+            color:black !important;
+        }
+
+        div.file-tab.panel-body{
+            text-align: center !important;
+        }
+
+        .tim-row{
+            padding-top: 10px !important;
+        }
+
+        .imageupload {
+            margin: 20px 0;
+        }
+
+
+        h2{
+            margin-top: -20px !important;
+        }
 
 
         #business-row{
-            margin-top: 220px !important;
+            margin-top: 340px !important;
         }
 
         @media only screen
@@ -71,21 +100,29 @@
                 margin-top: -110px !important;
 
             }
+
+            h2{
+                margin-top: 0px !important;
+            }
         }
 
         @media screen and (min-width: 360px) {
             #business-row{
                 margin-top: -100px !important;
             }
+
+            h2{
+                margin-top: 0px !important;
+            }
         }
 
         @media screen and (min-width: 1440px) {
             #business-row{
-                margin-top: 240px !important;
+                margin-top: 280px !important;
             }
 
             #media-row{
-                margin-top: 500px !important;
+                margin-top: 570px !important;
             }
 
             #register-btn{
@@ -93,9 +130,24 @@
             }
         }
 
-        .imageupload {
-            margin: 20px 0;
+        @media screen and (min-width: 1024px){
+
+            #business-row{
+                margin-top: 280px !important;
+            }
+
+            #media-row{
+                margin-top: 570px !important;
+            }
+
+            #register-btn{
+                margin-top: 1.5em !important;
+            }
+
         }
+
+
+
 
 
     </style>
@@ -194,7 +246,7 @@
             <div class="col-md-8 col-md-offset-1">
                 <div class="tim-container">
 
-            <form class="form" action="{{url('product')}}" method="post" enctype="multipart/form-data">
+            <form class="form" action="{{url('businesses')}}" method="post" enctype="multipart/form-data">
                         
                 <!-- Personal Details -->
                 <div class="tim-row" id="personal-row">
@@ -204,14 +256,14 @@
                             <div class="col-sm-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Surname*</label>
-                                        <input type="text" class="form-control" name="business_owner_last_name">
+                                        <input type="text" class="form-control" name="business_owner_last_name" required>
                                         <small class="text-danger">{{ $errors->first('business_owner_last_name') }}</small>
                                     </div>
                             </div>
                             <div class="col-sm-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Given Names*</label>
-                                        <input type="text" class="form-control" name="business_owner_given_names">
+                                        <input type="text" class="form-control" name="business_owner_given_names" required>
                                         <small class="text-danger">{{ $errors->first('business_owner_given_names') }}</small>
                                     </div>
                             </div>
@@ -242,14 +294,14 @@
                             <div class="col-sm-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">ID Number*</label>
-                                        <input type="text" class="form-control" name="id)number">
+                                        <input type="text" class="form-control" name="id_number" required>
                                         <small class="text-danger">{{ $errors->first('id_number') }}</small>
                                     </div>
                             </div>
                             <div class="col-sm-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Phone Number*</label>
-                                        <input type="text" class="form-control" name="phone_number">
+                                        <input type="text" class="form-control" name="phone_number" required>
                                         <small class="text-danger">{{ $errors->first('phone_number') }}</small>
                                     </div>
                             </div>
@@ -288,18 +340,26 @@
                                                 <input type="text" class="form-control" name="business_tagline">
                                             </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Business Email*</label>
-                                                <input type="text" class="form-control" name="business_owner_given_names">
+                                                <label class="control-label">Business Slug/URL*</label>
+                                                <input type="text" class="form-control" name="business_slug">
                                             </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Business Slug*</label>
-                                                <input type="text" class="form-control" name="business_owner_given_names">
-                                            </div>
-                                    </div>  
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Business Email*</label>
+                                            <input type="text" class="form-control" name="business_email">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating has-validation">
+                                            <label class="control-label">Category*</label>
+                                            <select class="form-control" name="business_category" value="{{old('business_category')}}">
+                                                @include('modules.categories')
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="col-sm-4">
                                         <div class="form-group label-floating has-validation">
                                             <label class="control-label">Country*</label>
@@ -363,12 +423,14 @@
 
                             </div>
                             <div class="file-tab panel-body">
-                                <label class="btn btn-default btn-file">
-                                    <span>Browse</span>
+                                <label class="btn btn-default btn-fab btn-fab-mini btn-round btn-file">
+                                    <i class="material-icons">backup</i>
                                     <!-- The file is stored here. -->
                                     <input type="file" name="business_logo">
                                 </label>
-                                <button type="button" class="btn btn-default">Remove</button>
+                                <button type="button" class="btn btn-default btn-fab btn-fab-mini btn-round">
+                                    <i class="material-icons">cancel</i>
+                                </button>
                             </div>
 
                         </div>
@@ -382,12 +444,14 @@
 
                             </div>
                             <div class="file-tab panel-body">
-                                <label class="btn btn-default btn-file">
-                                    <span>Browse</span>
+                                <label class="btn btn-default btn-fab btn-fab-mini btn-round btn-file">
+                                    <i class="material-icons">backup</i>
                                     <!-- The file is stored here. -->
                                     <input type="file" name="cover_image">
                                 </label>
-                                <button type="button" class="btn btn-default">Remove</button>
+                                <button type="button" class="btn btn-default btn-fab btn-fab-mini btn-round">
+                                    <i class="material-icons">cancel</i>
+                                </button>
                             </div>
 
                         </div>
@@ -397,14 +461,11 @@
 
                 <div class="col-sm-12" style="text-align: center !important;" id="register-btn">
                     <button class="btn btn-primary btn-lg" type="submit">
-                        Register
+                        Join Us
                         <i class="material-icons">favorite</i>
                     </button>
                 </div>
 
-
-
-                
 
             </form>
             

@@ -31,8 +31,13 @@
 			background-color: rgb(0, 32, 96);
 		}
 
-		.row.sharing-area.text-center a,.copyright a{
+		.copyright a{
 			color: rgb(0, 32, 96) !important;
+		}
+
+		.row.sharing-area.text-center a{
+			color: rgb(191,13,64) !important;
+
 		}
 
 
@@ -100,7 +105,7 @@
     </nav>
 
     <div class="wrapper">
-		<div class="header header-filter" style="background-image: url('new-ui/img/storeee.jpeg');"></div>
+		<div class="header header-filter" style="background-image: url(<?php echo asset($business->business_images."/cover_image.jpg")?>);"></div>
 
 		<div class="main main-raised">
 			<div class="profile-content">
@@ -108,7 +113,7 @@
 	                <div class="row">
 	                    <div class="profile">
 	                        <div class="avatar">
-	                            <img src="{{asset('new-ui/img/logo-4.jpg')}}" alt="Circle Image" class="img-circle img-responsive img-raised">
+	                            <img src="<?php echo asset($business->business_images."/logo.jpg")?>" alt="Circle Image" class="img-circle img-responsive img-raised">
 	                        </div>
 	                        <div class="name">
 	                            <h3 class="title">{{$business->business_name}} <span class="label label-success">Open</span> </h3>

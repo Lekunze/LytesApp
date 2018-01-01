@@ -210,13 +210,20 @@
             <form id="edit_product_form" method="POST">
                 <div class="modal-body">
                     <div class="col-md-5 col-md-offset-1">
-                        <input type="text" class="form-control" id="edit_product_name" name="edit_product_name">
+                        <div class="form-group label-floating has-validation">
+                            <label class="control-label">Product Name*</label>
+                            <input type="text" class="form-control" id="edit_product_name" name="edit_product_name" value="NA" required>
+                        </div>
                     </div>
                     <div class="col-md-5 col-md-offset-1">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="edit_product_price" id="edit_product_price">
-                            <span class="input-group-addon">GHS</span>
+                        <div class="form-group label-floating has-validation">
+                            <label class="control-label">Price*</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="edit_product_price" id="edit_product_price" value="0" required>
+                                <span class="input-group-addon">GHS</span>
+                            </div>
                         </div>
+
                     </div>
                     <input type="hidden" name="edit_product_id" value="" id="edit_product_id">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -294,7 +301,7 @@
 
         $.ajax({
             type: 'delete',
-            url: 'deleteShelf',
+            url: 'deleteProduct',
             data: {
                 '_token': token,
                 'id': id

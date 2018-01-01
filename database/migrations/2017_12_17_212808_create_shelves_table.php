@@ -15,9 +15,9 @@ class CreateShelvesTable extends Migration
     {
         Schema::create('SHELVES', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('sid')->unsigned()->nullable();
+            $table->integer('bid')->unsigned()->nullable();
             $table->string('shelf_name')->nullable();
-            $table->foreign('sid')->references('id')->on('BUSINESSES');
+            $table->foreign('bid')->references('id')->on('BUSINESSES');
             $table->timestamps();
         });
     }

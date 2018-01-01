@@ -21,7 +21,7 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{asset('new-ui/css/demo.css')}}" rel="stylesheet" />
-    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+    {{--<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>--}}
 
 	<style>
         .navbar-default{
@@ -36,6 +36,16 @@
         .tab-content img {
             width: 100%;
             height: auto;
+        }
+
+        .description a{
+            color: tomato !important;
+            margin-bottom: 200px !important;
+
+        }
+
+        .price{
+            font-size: 2em;
         }
 
         body{
@@ -190,50 +200,58 @@
                     <div class="col-md-6">
                        <div class="tab-content">
                                     <div class="tab-pane active" id="product-page1">
-                                         <img src="{{asset('new-ui/img/mother-1.jpeg')}}"/>
+                                        <!-- Carousel Card -->
+                                        <div class="card card-raised card-carousel">
+                                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                                <div class="carousel slide" data-ride="carousel">
+
+                                                    <!-- Indicators -->
+                                                    <ol class="carousel-indicators">
+                                                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                                    </ol>
+
+                                                    <!-- Wrapper for slides -->
+                                                    <div class="carousel-inner">
+                                                        <div class="item active">
+                                                            <img src="{{asset(str_replace("public","storage",$productX[0]->product_images)."/product_1.jpg")}}">
+                                                            <div class="carousel-caption">
+                                                                <!-- <h4><i class="material-icons">location_on</i> Yellowstone National Park, United States</h4> -->
+                                                            </div>
+                                                        </div>
+                                                        <div class="item">
+                                                            <img src="{{asset(str_replace("public","storage",$productX[0]->product_images)."/product_2.jpg")}}">
+                                                        </div>
+                                                        <div class="item">
+                                                            <img src="{{asset(str_replace("public","storage",$productX[0]->product_images)."/product_3.jpg")}}">
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Controls -->
+                                                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                                        <i class="material-icons">keyboard_arrow_left</i>
+                                                    </a>
+                                                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                                        <i class="material-icons">keyboard_arrow_right</i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Carousel Card -->
                                       </div>
-                                      <div class="tab-pane" id="product-page2">
-                                          <img src="{{asset('new-ui/img/mother-2.jpg')}}"/>
-                                     </div>
-                                      <div class="tab-pane" id="product-page3">
-                                          <img src="{{asset('new-ui/img/mother-3.jpeg')}}"/>
-                                      </div>
-                                      <div class="tab-pane" id="product-page4">
-                                          <img src="{{asset('new-ui/img/mother-4.jpeg')}}"/>
-                                      </div>
+
                         </div>
-                    
-                        
-                    <div class="nbs-flexisel-container">
-                        <div class="nbs-flexisel-inner">
-                            <ul class="nav nav-text nbs-flexisel-ul" role="tablist" id="flexiselDemo1" style="left:-20px;">
-                                  
-                                <li class="nbs-flexisel-item" style="width: 220px; margin-right:20px">
-                                    <a href="#product-page4" role="tab" data-toggle="tab" aria-expanded="true">
-                                        <img src="{{asset('new-ui/img/mother-1.jpeg')}}" style="max-width:220px; max-height:auto" class="pdt-img-sm">
-                                    </a>
-                                </li>
-                                <li class="nbs-flexisel-item" style="width: 220px;">
-                                    <a href="#product-page2" role="tab" data-toggle="tab" aria-expanded="false">
-                                        <img src="{{asset('new-ui/img/mother-2.jpg')}}" style="max-width:220px; max-height:auto" class="pdt-img-sm">
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                    </div>
                         <div class="clearout"></div>
                     </div>
                     <div class="col-md-6">
                         <div class="product-details">
-                          <a href="#">
-                              <h3 class="title">ATX3 Motherboard</h3>
-                          </a>
+                              <h3 class="title">{{$productX[0]->product_name}}</h3>
                           <p class="description">
-                            Brown single-breasted brushed-wool checked blazer
-                          </p>
+                              <a href="/{{$sme}}">{{$business_name}}</a>
+                          </p><br>
         
-                          <span class="price">€ 1,930</span>
+                          <span class="price">GHS {{$productX[0]->product_price}}</span>
                         </div>
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                           <div class="panel panel-default">
@@ -304,7 +322,7 @@
                                   <button class="btn btn-danger btn-simple btn-hover" rel="tooltip" title="" data-placement="left" data-original-title="Like">
                                             <i class="fa fa-heart-o"></i>
                                   </button>
-                                  <a type="button" class="btn btn-info" href="app-store.blade.php">Visit Store</a>
+                                  <a type="button" class="btn btn-success" href="/{{$sme}}"r>Visit Store</a>
                                 </div>
                         </div>
                     </div>

@@ -62,7 +62,7 @@ class DBController extends Controller
             //return redirect('/login');
             $business= Business::where('business_slug','=',$sme)->get();
             $products = Product::where('bid','=',$business[0]->id)->orderBy('product_shelf', 'asc')->get();
-            $shelves = Shelf::distinct()->select('shelf_name')->where('sid','=',$business[0]->id)->get();
+            $shelves = Shelf::distinct()->select('shelf_name')->where('bid','=',$business[0]->id)->get();
             return view('pages.new-ui.app-store',compact('products','shelves','business'));
 
         }
@@ -70,7 +70,7 @@ class DBController extends Controller
         /*$products = DB::table('products')->where('business_id','=',$username)->orderBy('product_shelf', 'asc')->get();
         $shelves = DB::table('products')->distinct()->select('product_shelf')->where('business_id','=',$username)->get();*/
 
-        $shelves = Shelf::where('sid','=',Auth::id())->get();
+        $shelves = Shelf::where('bid','=',Auth::id())->get();
         $products = Product::where('bid','=',Auth::id())->get();
         $business = Business::find(Auth::id());
 
@@ -117,20 +117,22 @@ class DBController extends Controller
     }
 
     //Add new Shelf
-    public function shelf(Request $request){
+    public function shelf(){
+
+        //return "Hello";
 
         $no_of_shelves = Shelf::where('sid','=',Auth::id())->count();
 
-        if($no_of_shelves > 4){
-            return "{'Response':'Maximum number of shelves reached already'}";
-        }
         $shelf = new Shelf();
         $shelf->sid = Auth::id();
         $shelf->shelf_name = Input::get('shelf');
         $shelf->save();
 
-        $addedShelf = Shelf::find($shelf->id);
-        return \Response::json($addedShelf);
+        //$addedShelf = Shelf::find($shelf->id);
+        //return \Response::json($addedShelf);
+
+        $business= Business::where('id','=',Auth::id())->get();
+        return redirect($business[0]->business_slug.'/shelves')->with('no_of_shelves',$no_of_shelves);
 
     }
 
@@ -139,6 +141,26 @@ class DBController extends Controller
         $id = Input::get('id');
         $shelf = Shelf::destroy($id);
         return \Response::json($id);
+    }
+
+    //Delete Product
+    public function deleteProduct(Request $request){
+        $id = Input::get('id');
+        $product = Product::destroy($id);
+        return \Response::json($id);
+    }
+
+    //Edit Product
+    public function editProduct(Request $request)
+    {
+        $name = Input::get('edit_product_name');;
+        $price = Input::get('edit_product_price');;
+        $id = Input::get('edit_product_id');;
+
+        Product::where('id',$id)->update(['product_name'=>$name,'product_price'=>$price]);
+
+        $business= Business::where('id','=',Auth::id())->get();
+        return redirect($business[0]->business_slug.'/products');
     }
 
     //Edit Shelf

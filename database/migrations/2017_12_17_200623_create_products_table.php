@@ -17,10 +17,12 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->integer('bid')->unsigned()->nullable();
             $table->foreign('bid')->references('id')->on('BUSINESSES');
+            $table->integer('sid')->unsigned()->nullable();
+            $table->foreign('sid')->references('id')->on('BUSINESSES');
             $table->string('product_name')->nullable();
+            $table->string('product_description')->nullable();
             $table->string('product_price')->nullable();
             $table->string('product_category')->nullable();
-            $table->string('product_shelf')->nullable();
             $table->string('product_slug')->nullable();
             $table->string('product_images')->nullable();
             $table->string('product_ratings')->nullable();

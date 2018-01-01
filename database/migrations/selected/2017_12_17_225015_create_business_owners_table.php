@@ -23,8 +23,6 @@ class CreateBusinessOwnersTable extends Migration
             $table->string('business_owner_id_number')->nullable();
             $table->string('business_owner_phone')->nullable();
             $table->string('business_owner_phone_2')->nullable();
-            $table->string('business_owner_email')->nullable();
-            $table->unique('business_owner_email');
             $table->timestamps();
         });
     }

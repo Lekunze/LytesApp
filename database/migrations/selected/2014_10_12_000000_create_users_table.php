@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->enum('active',['yes','no']);
             $table->unique('email');
             $table->foreign('id')->references('id')->on('BUSINESS_OWNERS');
-            $table->foreign('email')->references('business_owner_email')->on('BUSINESS_OWNERS');
+            $table->foreign('email')->references('business_email')->on('BUSINESSES');
             $table->rememberToken();
             $table->timestamps();
         });
