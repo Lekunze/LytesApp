@@ -65,9 +65,12 @@
                             </a>
     				</li>
     				<li>
-                            <a href="/{{$business->business_slug}}/new">
-                                    <i class="material-icons">shopping_basket</i> New Product
-                            </a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Products &nbsp<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="/{{$business->business_slug}}/new"> <i class="material-icons">shopping_basket</i> &nbspNew Product </a></li>
+							<li><a href="/{{$business->business_slug}}/products"> <i class="material-icons">edit</i>&nbsp Edit Products </a></li>
+						</ul>
+
                     </li>
                     <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings &nbsp<b class="caret"></b></a>

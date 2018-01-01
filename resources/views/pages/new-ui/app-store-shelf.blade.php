@@ -19,6 +19,17 @@
     <link href="{{asset('new-ui/css/bootstrap.min.css')}}" rel="stylesheet" />
     <link href="{{asset('new-ui/css/material-kit.css')}}" rel="stylesheet"/>
 
+    <style>
+        .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+            vertical-align: inherit !important;
+
+        }
+
+        td.td-actions.text-right{
+            /*vertical-align: baseline !important;*/
+        }
+    </style>
+
 </head>
 
 <body class="profile-page">
@@ -61,16 +72,6 @@
                                     <i class="material-icons">exit_to_app</i> Logout
                             </a>
                     </li>
-		            <!-- <li>
-		                <a href="https://www.facebook.com/CreativeTim" target="_blank" class="btn btn-simple btn-white btn-just-icon">
-							<i class="fa fa-facebook-square"></i>
-						</a>
-		            </li>
-					<li>
-		                <a href="https://www.instagram.com/CreativeTimOfficial" target="_blank" class="btn btn-simple btn-white btn-just-icon">
-							<i class="fa fa-instagram"></i>
-						</a>
-		            </li> -->
         		</ul>
         	</div>
     	</div>
@@ -133,7 +134,7 @@
                                                     <td class="text-center">{{$shelf->id}}</td>
                                                     <td> {{$shelf->shelf_name}}</td>
                                                     <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="Edit Shelf" class="btn btn-success btn-simple btn-xs edit" value="{{$shelf->id}}" data-token="{{csrf_token()}}">
+                                                        <button data-toggle="modal" data-target="#myModal" type="button" rel="tooltip" title="Edit Shelf" class="btn btn-success btn-simple btn-xs edit" value="{{$shelf->id}}" data-token="{{csrf_token()}}">
                                                             <i class="fa fa-edit"></i>
                                                         </button>
                                                         <button value="{{$shelf->id}}" data-token="{{ csrf_token() }}" type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs delete">
@@ -143,42 +144,6 @@
                                                 </tr>
                                             @endforeach
                                         @endif
-                                            <!--<tr>
-                                                <td class="text-center">1</td>
-                                                <td>Desktop</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Shelf" class="btn btn-success btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">2</td>
-                                                <td>Laptop</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Shelf" class="btn btn-success btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">3</td>
-                                                <td>Motherboard</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Shelf" class="btn btn-success btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>-->
                                         </tbody>
                                     </table>
                                             
@@ -229,12 +194,40 @@
         </div>
     </footer>
 
-
-</body>
     <!--   Core JS Files   -->
     <script src="{{asset('new-ui/js/jquery.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('new-ui/js/bootstrap.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('new-ui/js/material.min.js')}}"></script>
+
+    <!-- Modal Core -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Shelf Name</h4>
+                </div>
+                <form id="edit_shelf_form" method="POST">
+                    <div class="modal-body">
+                        <div class="col-md-10 col-md-offset-1">
+                            <input type="text" class="form-control" placeholder="Enter new shelf name" id="edit_shelf_name" name="edit_shelf_name">
+                        </div>
+                        <input type="hidden" name="edit_shelf_id" value="" id="edit_shelf_id">
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-info btn-simple">Modify</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
 
     <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
     <script src="{{asset('new-ui/js/nouislider.min.js')}}"type="text/javascript"></script>
@@ -250,6 +243,15 @@
     </script>
 
     <script>
+
+        $(".edit").click(function (event) {
+            event.preventDefault();
+            // $("#edit_shelf_name").val($(this).val());
+            $("#edit_shelf_id").val($(this).val());
+            var url_form = 'shelves/edit';
+            var actions = {1: url_form};
+            $("#edit_shelf_form").attr('action',actions[1]);
+        });
 
         $("#addShelf").click(function(event) {
             event.preventDefault();
@@ -272,6 +274,9 @@
             });
             console.log('Form Submitted');
         })
+
+        //Delete shelf Using AJAX
+
         $(".delete").click(function(event) {
             event.preventDefault();
 
@@ -296,5 +301,7 @@
         })
 
     </script>
+
+
 
 </html>

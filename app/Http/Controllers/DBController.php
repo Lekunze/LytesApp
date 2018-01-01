@@ -90,6 +90,18 @@ class DBController extends Controller
         //return $shelves;
         return view('pages.new-ui.app-store-product',compact('business','shelves'));
     }
+    //Open Page with Products
+    public function products(){
+        if(!Auth::check()){
+            return redirect('/login');
+        }
+
+        $business = Business::find(Auth::id());
+        $shelves = Shelf::where('sid','=',Auth::id())->get();
+        $products = Product::where('bid','=',Auth::id())->get();
+        //return $shelves;
+        return view('pages.new-ui.app-store-product-edit',compact('business','shelves','products'));
+    }
 
     //Open Page with Shelves
     public function shelves(){
@@ -127,6 +139,18 @@ class DBController extends Controller
         $id = Input::get('id');
         $shelf = Shelf::destroy($id);
         return \Response::json($id);
+    }
+
+    //Edit Shelf
+    public function editShelf(Request $request)
+    {
+        $name = Input::get('edit_shelf_name');;
+        $id = Input::get('edit_shelf_id');;
+
+        Shelf::where('id',$id)->update(['shelf_name'=>$name]);
+
+        $business= Business::where('id','=',Auth::id())->get();
+        return redirect($business[0]->business_slug.'/shelves');
     }
 
     public function manageProducts(){

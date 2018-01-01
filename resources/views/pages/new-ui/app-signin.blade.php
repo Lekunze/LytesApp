@@ -27,6 +27,18 @@
 			font-size: 1em !important;
 			color:firebrick;
 		}
+
+		.card-signup.header{
+			padding: 0 !important;
+		}
+
+		.card .header-primary {
+			background: linear-gradient(60deg,#ff447a, rgb(191,13,64)) !important;
+		}
+
+		.btn-lg{
+			color:rgb(191,13,64) !important;
+		}
 	</style>
 
 </head>

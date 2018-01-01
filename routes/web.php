@@ -79,7 +79,8 @@ Route::get('/sme/manage','PagesController@sme');
 Route::get('/{sme}/new','DBController@newProduct');
 Route::get('/change','DBController@change');
 Route::get('/{sme}/shelves','DBController@shelves');
-Route::get('/{sme}/products', 'DBController@manageProducts');
+Route::post('/{sme}/shelves/edit','DBController@editShelf');
+Route::get('/{sme}/products', 'DBController@products');
 
 
 Route::get('/retrieve', 'DBController@retrieve');

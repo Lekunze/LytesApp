@@ -24,6 +24,9 @@
     <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 
 	<style>
+        .navbar-default{
+            background-color: rgb(0,32,96) !important;
+        }
 		.section {
             padding: 30px 0;
             position: relative;
@@ -242,8 +245,11 @@
                               </h4>
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                              <div class="panel-body">
-                                Immaculately crafted in England using wool from esteemed British cloth house Dormeuile, this Kingsman blazer typifies the line's uncompromising luxury. The dashing check, high armholes and trim silhouette exudes timeless elegance. Keep your look modern by wearing it over a cashmere cardigan and add a little flair with a silk pocket square. This item is small to size, take the next size up. Shown here with a Kingman shirt, cardigan, trousers, tie, pocket square, cufflinks and shoes. Designer exclusively for MR PORTER
+                              <div class="panel-body" style="text-align: justify">
+                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis velit mi. Nam ullamcorper augue ultricies,
+                                  facilisis leo sit amet, dictum quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                                  Aenean pellentesque pharetra eros non iaculis. Mauris sit amet velit vestibulum, feugiat purus quis, faucibus ante.
+                                  Curabitur at nulla ut mi fermentum molestie eu eget lectus. Pellentesque et bibendum ipsum. Proin venenatis lacus quis ullamcorper lacinia.
                               </div>
                             </div>
                           </div>

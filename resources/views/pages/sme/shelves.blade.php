@@ -36,7 +36,7 @@
                         <p> {{$error}}</p>
                     @endif
                     <form id="search-form">
-                        @if($count_shelves == 4)
+                        @if($count_shelves == 5)
                             <a style="float:right; text-transform: none" id="search-special" class="btn waves-effect waves-light disabled">Add Shelf</a>
                         @else
                             <a style="float:right; text-transform: none" id="search-special" class="btn waves-effect waves-light">Add Shelf</a>
@@ -89,7 +89,7 @@
                             'shelf': $('#shelf').val()
                         },
                         success: function(data) {
-                            var shelf = '<tr id="shelf' + data.id + '"> <td>'+ data.shelf_name+' </td>';
+                            var shelf = '<tr id="task' + data.id + '"> <td>'+ data.shelf_name+' </td>';
                             shelf += '<td>' + '<button value= "' + data.id + '" class ="btn-small yellow" data-token="{{csrf_token()}}"> Edit </button>';
                             shelf += '<button value="' + data.id + '" class ="btn-small red delete" data-token="{{csrf_token()}}"> Delete </button> </td> </tr>';
                             $('#shelf-list').append(shelf);
@@ -98,7 +98,8 @@
                         }
                     });
                     console.log('Form Submitted');
-                })
+                });
+
                 $(".delete").click(function(event) {
                     event.preventDefault();
 
