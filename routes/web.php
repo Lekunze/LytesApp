@@ -27,6 +27,7 @@ Route::get('/hello', function () {
 
 Route::resource('businesses','SMEController');
 Route::resource('search','ProductController');
+Route::resource('/{sme}/search','ProductController');
 
 Route::post('login','Controller@login');
 Route::post('/{sme}/shelf', 'DBController@shelf');

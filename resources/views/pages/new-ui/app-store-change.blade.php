@@ -25,7 +25,20 @@
     <style>
         .wizard-card .tab-content {
             min-height: 40px;
-        }   
+        }
+
+        div.moving-tab{
+            background-color: rgb(0, 32, 96) !important;;
+        }
+
+        .btn-info{
+            background-color: rgb(0, 32, 96) !important;
+            border-color:rgb(0, 32, 96) !important;
+        }
+
+        .copyright a{
+            color: rgb(191,13,64) !important;
+        }
     </style>
 
 </head>
@@ -53,7 +66,7 @@
             <!--      Wizard container        -->
             <div class="wizard-container">
                 <div class="card wizard-card" data-color="azzure" id="wizard">
-                    <form action="" method="">
+                    <form action="{{url('changePassword')}}" method="post">
                 <!--        You can switch ' data-color="azzure" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
 
                     	<div class="wizard-header">
@@ -64,63 +77,52 @@
                     	</div>
 						<div class="wizard-navigation">
 							<ul>
-	                            <li><a href="#details" data-toggle="tab">Credentials</a></li>
+	                            <li><a href="#details" data-toggle="tab">Enter Your Credentials</a></li>
 	                        </ul>
 						</div>
                         <div class="tab-content">
                             <div class="tab-pane" id="details">
                               <div class="row">
+
+                                  <p style="text-align: center; font-size: 1em; font-weight: 400; color:firebrick">
+                                      @if(!empty($message))
+                                          {{$message}}
+                                      @endif
+
+                                  </p>
+                                  <div class="col-sm-9 col-sm-offset-2">
+                                      <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="text" class="form-control" id="user-email" name="user_email">
+                                      </div>
+                                  </div>
                                   <div class="col-sm-9 col-sm-offset-2">
                                       <div class="form-group">
                                         <label>Current Password</label>
-                                        <input type="password" class="form-control" id="current-password">
+                                        <input type="password" class="form-control" id="current-password" name="old_password">
                                       </div>
                                   </div>
                                   <div class="col-sm-9 col-sm-offset-2">
                                         <div class="form-group">
                                           <label>New Password</label>
-                                          <input type="password" class="form-control" id="new-password">
+                                          <input type="password" class="form-control" id="new-password" name="password"  aria-required="true">
                                         </div>
                                    </div>
                                    <div class="col-sm-9 col-sm-offset-2">
                                         <div class="form-group">
                                           <label>Confirm Password</label>
-                                          <input type="password" class="form-control" id="confirm-password">
+                                          <input type="password" class="form-control" id="confirm-password" onchange="comparePasswords()" required>
                                         </div>
-                                    </div>
-                                  
-                                  <!--<div class="col-sm-5 col-sm-offset-1">
-                                      <div class="form-group">
-                                          <label>Year Manufacture</label>
-                                          <select class="form-control">
-                                            <option disabled="" selected="">- year -</option>
-                                            <option>2008</option>
-                                            <option>2009</option>
-                                            <option>2010</option>
-                                            <option>2011</option>
-                                            <option>2012</option>
-                                            <option>2013</option>
-                                            <option>2014</option>
-                                          </select>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-5">
-                                      <div class="form-group">
-                                          <label>Daily Price</label>
-                                          <div class="input-group">
-                                              <input type="text" class="form-control">
-                                              <span class="input-group-addon">$</span>
-                                          </div>
-                                      </div>
-                                  </div>-->
+                                       <div id="alert-msg" style="color:firebrick; font-weight: 400; margin-left: 0.3em"> </div>
+                                   </div>
                               </div>
                             </div>
-                            
-                            
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+
                         </div>
                         <div class="wizard-footer">
                             	<div class="pull-right">
-                                    <input type='button' class='btn btn-finish btn-fill btn-info btn-wd btn-sm' name='finish' value='Change Password' />
+                                    <input type='submit' id="change" class='btn btn-finish btn-fill btn-info btn-wd btn-sm' name='finish' value='Change Password' />
                                 </div>
                                 
                                 <div class="clearfix"></div>
@@ -134,7 +136,7 @@
 
     <div class="footer">
         <div class="container">
-                &copy; 2018 Lytes.App | Theme <i>by</i> <a href="http://www.creative-tim.com" target="_blank">Creative Tim</a>                
+                &copy; 2018 Lytes.App | Theme <i>by</i> <a href="http://www.creative-tim.com" target="_blank" style="color:silver!important;">Creative Tim</a>
         </div>
     </div>
 
@@ -153,5 +155,26 @@
 
 	<!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
 	<script src="{{asset('new-ui/wizard/js/jquery.validate.min.js')}}"></script>
+
+    <script>
+
+        function comparePasswords(){
+            var password = $('#new-password').val();
+            var confirm = $('#confirm-password').val();
+
+            if(password!==confirm){
+                $('#alert-msg').html('Passwords do not match');
+                $('#change').prop('disabled',true);
+            }else{
+                $('#alert-msg').hide();
+                $('#change').prop('disabled',false);
+            }
+        }
+
+        $(document).ready(function(){
+            $('#confirm-password').keyup(comparePasswords);
+        });
+
+    </script>
 
 </html>

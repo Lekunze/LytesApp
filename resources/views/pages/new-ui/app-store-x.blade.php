@@ -6,7 +6,7 @@
 	<link rel="icon" type="image/png" href="{{asset('new-ui/img/favicon.png')}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>{{$business->business_name}} - Lytes.App</title>
+	<title>{{$business->business_name}}</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
@@ -185,10 +185,10 @@
 													<div class="row">
 
 													@foreach($products as $product)
-														@if($product->product_shelf == $shelf->shelf_name)
+														@if($product->sid == $shelf->id)
 																	<div class="col-md-6">
 																		<a href="/{{$business->business_slug}}/{{$product->product_slug}}">
-																			<img src="<?php echo asset(str_replace("public","storage",$product->product_images)."/product_1.jpg")?>" class="img-rounded" />
+																			<img src="<?php echo asset($product->product_images."/product_1.jpg")?>" class="img-rounded" />
 																		</a>
 																	</div>
 

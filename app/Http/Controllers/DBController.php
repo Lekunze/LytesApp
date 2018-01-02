@@ -27,29 +27,6 @@ class DBController extends Controller
         return view('/');
     }
 
-    public function viewProduct(Request $request){
-        return view('product-view');
-    }
-
-    public function viewSME(Request $request){
-        $username = "hudson.lekunze@ashesi.edu.gh";
-        $business = DB::table('businesses')->where('email','=',$username)->get();
-        $products = DB::table('products')->where('business_id','=',$username)->orderBy('product_shelf', 'asc')->get();
-        $shelves = DB::table('products')->distinct()->select('product_shelf')->where('business_id','=',$username)->get();
-
-        return view('sme-view',compact('products','shelves','business'));
-    }
-
-    public function smeguest($id){
-        $business = DB::table('businesses')->where('id','=',$id)->get();
-        $business = json_decode($business);
-        $username = ((array) $business[0])['email'];
-
-        $products = DB::table('products')->where('business_id','=',$username)->orderBy('product_shelf', 'asc')->get();
-        $shelves = DB::table('products')->distinct()->select('product_shelf')->where('business_id','=',$username)->get();
-
-        return view('pages.sme-guest',compact('products','shelves','business'));
-    }
 
     //------------------------VERIFIED BUSINESSESS FUNCTIONS----------------------------
 
@@ -85,7 +62,7 @@ class DBController extends Controller
 
         $business = Business::find(Auth::id());
         //$shelves = DB::table('products')->distinct()->select('product_shelf')->where('business_id','=',$username)->get();
-        $shelves = Shelf::where('sid','=',Auth::id())->get();
+        $shelves = Shelf::where('bid','=',Auth::id())->get();
 
         //return $shelves;
         return view('pages.new-ui.app-store-product',compact('business','shelves'));
@@ -97,7 +74,7 @@ class DBController extends Controller
         }
 
         $business = Business::find(Auth::id());
-        $shelves = Shelf::where('sid','=',Auth::id())->get();
+        $shelves = Shelf::where('bid','=',Auth::id())->get();
         $products = Product::where('bid','=',Auth::id())->get();
         //return $shelves;
         return view('pages.new-ui.app-store-product-edit',compact('business','shelves','products'));
@@ -110,8 +87,8 @@ class DBController extends Controller
         }
 
         $business = Business::find(Auth::id());
-        $count_shelves = Shelf::where('sid','=',Auth::id())->count();
-        $shelves = Shelf::where('sid','=',Auth::id())->get();
+        $count_shelves = Shelf::where('bid','=',Auth::id())->count();
+        $shelves = Shelf::where('bid','=',Auth::id())->get();
         //return $shelves;
         return view('pages.new-ui.app-store-shelf',compact('business','shelves','count_shelves'));
     }
@@ -121,10 +98,10 @@ class DBController extends Controller
 
         //return "Hello";
 
-        $no_of_shelves = Shelf::where('sid','=',Auth::id())->count();
+        $no_of_shelves = Shelf::where('bid','=',Auth::id())->count();
 
         $shelf = new Shelf();
-        $shelf->sid = Auth::id();
+        $shelf->bid = Auth::id();
         $shelf->shelf_name = Input::get('shelf');
         $shelf->save();
 
@@ -193,17 +170,23 @@ class DBController extends Controller
     }
 
     public function changePassword(Request $request){
-        if(!Auth::check()){
-            return redirect('/login');
-        }
 
         $message = "";
+        $businessEmail = Input::get('user_email');
         $oldPassword = Input::get('old_password');
         $newPassword = Input::get('password');
 
         $current_password = Auth::user()->getAuthPassword();
 
-        $business = Business::find(Auth::id());
+        $business= Business::where('business_email','=',$businessEmail)->get();
+
+        if(sizeof($business)==0){
+//            return "Here";
+            $message = "User doesn't exist";
+            return view('pages.new-ui.app-store-change',compact('message'));
+            //return redirect('/change')->with('message',$message);
+        }
+
 
         if(Hash::check($oldPassword,$current_password)){
             $id = Auth::id();
@@ -212,11 +195,10 @@ class DBController extends Controller
             $user->save();
 
             $message = "Password successfully changed";
-            return view('pages.sme.change-password',compact('business','message'));
-
+            return view('pages.new-ui.app-store-change',compact('message'));
         }else{
             $message = "Failed to change password";
-            return view('pages.sme.change-password',compact('business','message'));
+            return view('pages.new-ui.app-store-change',compact('message'));
         }
 
 
@@ -245,11 +227,11 @@ class DBController extends Controller
         //$username = DB::table('businesses')->distinct()->select('email','business_name')->where('business_slug','=',$sme)->get();
         $business= Business::where('business_slug','=',$sme)->get();
         $productX= Product::where('product_slug','=',$product)->where('bid','=',$business[0]->id)->get();
-        $business_name = $business[0]->business_name;
+        //$business_name = $business[0]->business_name;
         //return "Business: " . $business_name . "\nProduct: " . $product[0]->product_name;
         //return ((array) $products[0])['product_image_1'];
         //return view('product',compact('productX','sme','business_name'));
-        return view('pages.new-ui.app-product',compact('productX','sme','business_name'));
+        return view('pages.new-ui.app-product',compact('productX','sme','business'));
     }
 
 

@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="{{asset('new-ui/img/favicon.png')}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Product - Lytes.App</title>
+	<title>New Product - {{$business->business_name}}</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
@@ -115,23 +115,13 @@
                                     <i class="material-icons">exit_to_app</i> Logout
                             </a>
                     </li>
-		            <!-- <li>
-		                <a href="https://www.facebook.com/CreativeTim" target="_blank" class="btn btn-simple btn-white btn-just-icon">
-							<i class="fa fa-facebook-square"></i>
-						</a>
-		            </li>
-					<li>
-		                <a href="https://www.instagram.com/CreativeTimOfficial" target="_blank" class="btn btn-simple btn-white btn-just-icon">
-							<i class="fa fa-instagram"></i>
-						</a>
-		            </li> -->
         		</ul>
         	</div>
     	</div>
     </nav>
 
     <div class="wrapper">
-        <div class="header header-filter" style="background-image: url('../new-ui/img/storeee.jpeg');">
+        <div class="header header-filter" style="background-image: url(<?php echo asset($business->business_images."/cover_image.jpg")?>);">
             <div class="container">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
@@ -150,7 +140,7 @@
                        <br>
 						<div class="col-md-8 col-md-offset-2">
                                 
-                            <form class="form" action="{{url('product')}}" method="post" enctype="multipart/form-data">
+                            <form class="form" action="{{url($business->business_slug.'/search')}}" method="post" enctype="multipart/form-data">
 
                                     <h3>Product Details</h3>
                                     <legend></legend>
@@ -173,7 +163,7 @@
                                                                 <option value="X" selected>Choose your option</option>
                                                                 @if(!empty($shelves))
                                                                     @foreach($shelves as $shelf)
-                                                                        <option value="{{$shelf->shelf_name}}"> {{$shelf->shelf_name}}</option>
+                                                                        <option value="{{$shelf->id}}"> {{$shelf->shelf_name}}</option>
                                                                     @endforeach
                                                                 @endif
                                                         </select>
@@ -280,7 +270,7 @@
                                 <div class="col-sm-12" style="text-align: center !important;" id="register-btn">
                                     @if($shelves=="[]")
 
-                                    <button class="btn btn-info btn-lg disabled" type="submit">
+                                    <button class="btn btn-info btn-lg disabled" data-toggle="tooltip" data-placement="right" title="Add a shelf to add a product">
                                         Add Product
                                         <i class="material-icons">add</i>
                                     </button>

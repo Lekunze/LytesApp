@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="{{asset('new-ui/img/favicon.png')}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Product - Lytes.App</title>
+	<title>{{$productX[0]->product_name}} - {{$business[0]->business_name}}</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
@@ -24,6 +24,10 @@
     {{--<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>--}}
 
 	<style>
+        .btn-success{
+            background-color: rgb(191,13,64) !important;
+        }
+
         .navbar-default{
             background-color: rgb(0,32,96) !important;
         }
@@ -42,6 +46,10 @@
             color: tomato !important;
             margin-bottom: 200px !important;
 
+        }
+
+        .copyright a{
+            color: rgb(191,13,64) !important;
         }
 
         .price{
@@ -248,7 +256,7 @@
                         <div class="product-details">
                               <h3 class="title">{{$productX[0]->product_name}}</h3>
                           <p class="description">
-                              <a href="/{{$sme}}">{{$business_name}}</a>
+                              <a href="/{{$sme}}">{{$business[0]->business_name}}</a>
                           </p><br>
         
                           <span class="price">GHS {{$productX[0]->product_price}}</span>
@@ -264,10 +272,7 @@
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                               <div class="panel-body" style="text-align: justify">
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis velit mi. Nam ullamcorper augue ultricies,
-                                  facilisis leo sit amet, dictum quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                                  Aenean pellentesque pharetra eros non iaculis. Mauris sit amet velit vestibulum, feugiat purus quis, faucibus ante.
-                                  Curabitur at nulla ut mi fermentum molestie eu eget lectus. Pellentesque et bibendum ipsum. Proin venenatis lacus quis ullamcorper lacinia.
+                                  {{$productX[0]->product_description}}
                               </div>
                             </div>
                           </div>
@@ -284,15 +289,15 @@
                                 <ol style="padding-left: 20px;">
                                     <li style="list-style-position: outside; list-style-type:none">
                                             <i class="fa fa-phone-square"></i>
-                                            0302-444222
+                                        {{$business[0]->business_number}}
                                     </li>
                                     <li style="list-style-position: outside;list-style-type:none"> 
                                             <i class="fa fa-envelope"></i>
-                                            info@business.com
+                                        {{$business[0]->business_email}}
                                     </li>
                                     <li style="list-style-position: outside;list-style-type:none"> 
                                             <i class="fa fa-map-marker"></i>
-                                            Adenta
+                                        {{$business[0]->business_area}}
                                     </li>
         
                                 </ol>

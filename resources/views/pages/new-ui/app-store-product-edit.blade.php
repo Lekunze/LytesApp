@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="{{asset('new-ui/img/favicon.png')}}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>Product List - Lytes.App</title>
+    <title>Product List - {{$business->business_name}}</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
@@ -87,7 +87,7 @@
 </nav>
 
 <div class="wrapper">
-    <div class="header header-filter" style="background-image: url('../new-ui/img/storeee.jpeg');">
+    <div class="header header-filter" style="background-image: url(<?php echo asset($business->business_images."/cover_image.jpg")?>);">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">

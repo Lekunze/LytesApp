@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="{{asset('new-ui/img/favicon.png')}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Shelf - Lytes.App</title>
+	<title>Shelf - {{$business->business_name}}</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
@@ -81,7 +81,7 @@
     </nav>
 
     <div class="wrapper">
-        <div class="header header-filter" style="background-image: url('../new-ui/img/storeee.jpeg');">
+        <div class="header header-filter" style="background-image: url(<?php echo asset($business->business_images."/cover_image.jpg")?>);">
             <div class="container">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
@@ -110,7 +110,7 @@
 					<div class="row">
                         <div class="col-md-5 col-md-offset-4" style="margin-top:-30px; margin-bottom:20px;">
                                 <div class="col-sm-12">
-                                    <form method="POST" action="{{url($business->business_slug.'/shelf')}}" class="form">
+                                    <form method="POST" action="{{url($business->business_slug.'/shelf')}}">
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Name of Shelf" id="shelf" name="shelf">
                                             <input type="hidden" name="_token" value="{{csrf_token()}}">

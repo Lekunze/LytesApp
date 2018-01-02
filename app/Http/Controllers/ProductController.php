@@ -159,8 +159,9 @@ class ProductController extends Controller
         $product->bid = Auth::id();
         $product->product_name = $request->product_name;
         $product->product_price = $request->product_price;
+        $product->product_description = $request->product_description;
         $product->product_category = $request->product_category;
-        $product->product_shelf = $request->product_shelf;
+        $product->sid = $request->product_shelf;
         $product->product_slug = $product_slug;
         $product->product_images = $images_path;
         $product->save();
@@ -171,7 +172,7 @@ class ProductController extends Controller
             $product_no++;
             $product_lbl = "product_" . strval($product_no) . ".jpg"; //create dynamic labels (1-3) for cover images
             $product->storeAs(
-                $images_path,$product_lbl
+                str_replace("storage","public",$images_path),$product_lbl
             );
         }
 
