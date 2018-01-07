@@ -1,0 +1,86 @@
+.pull-right{
+    margin-top: 10px !important;
+}
+
+.pull-left{
+    margin-top: 10px !important;
+}
+
+.pull-right a{
+    color:black !important;
+    text-decoration: none;
+}
+.pull-right a:hover{
+    color:rgb(191,13,64) !important;
+}
+
+.pull-left ul li a:hover{
+    color:rgb(191,13,64) !important;
+
+}
+
+.open a:hover{
+    background-color: rgb(191,13,64) !important;
+}
+
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 667px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: portrait) {
+
+
+    footer ul li a {
+        padding: 10px;
+    }
+
+    nav.pull-left{
+        margin-left:3em;
+    }
+
+
+}
+
+@media screen and (min-width: 360px) {
+
+    footer ul li a {
+        padding: 5px;
+        font-size: 0.8em;
+    }
+
+    .pull-right{
+        font-size: 0.9em;
+    }
+
+    nav.pull-left{
+        margin-left:3em;
+    }
+
+    h6{
+        font-size: 0.8em;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    footer ul li a {
+        padding: 15px;
+        font-size: 12px;
+    }
+
+    #links{
+        font-size: 14px;
+    }
+
+}
+
+@media screen and (min-width: 1440px) {
+
+    footer ul li a {
+        padding: 15px;
+        font-size: 12px;
+    }
+
+    #links{
+        font-size: 14px;
+    }
+}

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('new-ui/img/apple-icon.png')}}">
-    <link rel="icon" type="image/png" href="{{asset('img/logo-x.png')}}">
+    <link rel="icon" type="image/png" href="{{asset('img/shopping-cart.png')}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>Search - Lytes.App</title>
@@ -21,6 +21,7 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{asset('new-ui/css/demo.css')}}" rel="stylesheet" />
+    <link href="{{asset('new-ui/css/extras.css')}}" rel="stylesheet" />
 
     <style>
         body{
@@ -230,7 +231,14 @@
             padding-top: 35px !important;
         }
 
-        
+
+        .logo-container .logo {
+            border: 0 !important;
+            border-radius: 0 !important;
+        }
+
+
+
     </style>
     
     
@@ -252,7 +260,7 @@
             <a href="/">
                 <div class="logo-container">
                     <div class="logo">
-                        <img src="{{asset('img/logo-x.png')}}" alt="Creative Tim Logo" rel="tooltip" title="<b>Lytes.App</b> Is Ghana's premier shopping catalog. Search for anything you need." data-placement="bottom" data-html="true">
+                        <img src="{{asset('img/shopping-cart.png')}}" alt="Lytes.App" rel="tooltip" title="<b>Lytes.App</b> Is Ghana's premier shopping catalog. Search for anything you need." data-placement="bottom" data-html="true">
                         {{--<img src="{{asset('new-ui/img/logo.png')}}" alt="Creative Tim Logo" rel="tooltip" title="<b>Material Kit</b> was Designed & Coded with care by the staff from <b>Creative Tim</b>" data-placement="bottom" data-html="true">--}}
                     </div>
                     <div class="brand" style="font-size:1.5em;margin-top:0.4em; width:300px">
@@ -493,47 +501,11 @@
                          </div>
                      </div>
                 </div>
-            </div>
-
-
 
 </div>
 
-<footer class="footer footer-transparent">
-        <div class="container">
-            <nav class="pull-left">
-                <ul>
-					<li>
-						<a href="/">
-							Lytes.App
-						</a>
-					</li>
-					<li>
-						<a href="/about">
-						   About Us
-						</a>
-					</li>
-					<li>
-						<a href="/register">
-							Join Us
-						</a>
-                    </li>
 
-                    <li>
-
-                    </li>
-                    
-                </ul>
-            </nav>
-            
-            <div class="copyright" style="text-align:right">
-                    <span>
-					&copy; 2018 Lytes.App | info@lytesapp.com
-				</span>&nbsp <i class="fa fa-envelope" aria-hidden="true"></i>
-            </div>
-        </div>
-    </footer>
-</div>
+@include('modules.footers.main-footer')
 
 
 </body>

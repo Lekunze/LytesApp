@@ -68,6 +68,28 @@ class DBController extends Controller
     //------------------------VERIFIED BUSINESSESS FUNCTIONS----------------------------
 
 
+    //Product View
+    public function product(Request $request, $sme, $product){
+        //$username = DB::table('businesses')->distinct()->select('email','business_name')->where('business_slug','=',$sme)->get();
+        $business= Business::where('business_slug','=',$sme)->get();
+        if(!sizeof($business)>0){
+            return view('errors.503');
+        }
+
+        $product= Product::where('product_slug','=',$product)->get();
+        if(!sizeof($product)>0){
+            return view('errors.504');
+        }
+
+
+        $business= Business::where('business_slug','=',$sme)->get();
+        $productX= Product::where('product_slug','=',$product)->where('bid','=',$business[0]->id)->get();
+        //$business_name = $business[0]->business_name;
+        //return "Business: " . $business_name . "\nProduct: " . $product[0]->product_name;
+        //return ((array) $products[0])['product_image_1'];
+        //return view('product',compact('productX','sme','business_name'));
+        return view('pages.new-ui.app-product',compact('productX','sme','business'));
+    }
 
     public function sme(Request $request, $sme){
 
@@ -227,11 +249,11 @@ class DBController extends Controller
         $oldPassword = Input::get('old_password');
         $newPassword = Input::get('password');
 
-        $current_password = Auth::user()->getAuthPassword();
+        //$current_password = Auth::user()->getAuthPassword();
 
-        $business= Business::where('business_email','=',$businessEmail)->get();
+        $user= User::where('email','=',$businessEmail)->get();
 
-        if(sizeof($business)==0){
+        if(sizeof($user)==0){
 //            return "Here";
             $message = "User doesn't exist";
             return view('pages.new-ui.app-store-change',compact('message'));
@@ -239,7 +261,7 @@ class DBController extends Controller
         }
 
 
-        if(Hash::check($oldPassword,$current_password)){
+        if(Hash::check($oldPassword,$user[0]->password)){
             $id = Auth::id();
             $user = User::find($id);
             $user->password = Hash::make($newPassword);
@@ -274,16 +296,7 @@ class DBController extends Controller
         return view('shop',compact('products','shelves','business'));
     }
 
-    public function product(Request $request, $sme, $product){
-        //$username = DB::table('businesses')->distinct()->select('email','business_name')->where('business_slug','=',$sme)->get();
-        $business= Business::where('business_slug','=',$sme)->get();
-        $productX= Product::where('product_slug','=',$product)->where('bid','=',$business[0]->id)->get();
-        //$business_name = $business[0]->business_name;
-        //return "Business: " . $business_name . "\nProduct: " . $product[0]->product_name;
-        //return ((array) $products[0])['product_image_1'];
-        //return view('product',compact('productX','sme','business_name'));
-        return view('pages.new-ui.app-product',compact('productX','sme','business'));
-    }
+
 
 
 

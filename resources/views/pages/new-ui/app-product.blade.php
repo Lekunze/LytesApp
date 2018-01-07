@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('new-ui/img/apple-icon.png')}}">
-    <link rel="icon" type="image/png" href="{{asset('img/logo-x.png')}}">
+    <link rel="icon" type="image/png" href="{{asset('img/shopping-cart.png')}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>{{$productX[0]->product_name}} - {{$business[0]->business_name}}</title>
@@ -172,7 +172,7 @@
       <a href="http://www.creative-tim.com">
            <div class="logo-container">
                 <div class="logo">
-                    <img src="{{asset('new-ui/img/logo.png')}}" alt="Creative Tim Logo">
+                    <img src="{{asset('img/shopping-cart.png')}}" alt="LytesApp">
                 </div>
                 <div class="brand" style="font-size:1.5em;margin-top:0.4em; width:100px; color:white">
 	                    Lytes.App <br><span style="font-size:0.5em; font-weight:200">Shop anywhere</span>

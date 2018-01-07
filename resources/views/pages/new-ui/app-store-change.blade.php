@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('new-ui/img/apple-icon.png')}}">
-    <link rel="icon" type="image/png" href="{{asset('img/logo-x.png')}}">
+    <link rel="icon" type="image/png" href="{{asset('img/shopping-cart.png')}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<title>Change Password | Lytes.App</title>
 
@@ -23,6 +23,14 @@
     <link href="{{asset('new-ui/wizard/css/demo.css')}}" rel="stylesheet" />
     
     <style>
+        #error-msg{
+            text-align: center !important;
+            margin-top: 5px !important;
+            margin-bottom: 10px !important;
+            font-size: 1em !important;
+            color:firebrick;
+        }
+
         .wizard-card .tab-content {
             min-height: 40px;
         }
@@ -39,6 +47,16 @@
         .copyright a{
             color: rgb(191,13,64) !important;
         }
+
+        img{
+            max-width: 60px !important;
+            max-height: 60px !important;
+        }
+
+        .logo-container .logo{
+            border-radius: 0 !important;
+            border: 0 !important;
+        }
     </style>
 
 </head>
@@ -49,10 +67,10 @@
     <a href="/">
         <div class="logo-container">
            <div class="logo">
-               <img src="{{asset('new-ui/wizard/img/new_logo.png')}}">
+               <img src="{{asset('img/shopping-cart.png')}}">
            </div>
-           <div class="brand" style="width:100px; font-size:1.5em;margin-top:0.4em; ">
-               Lytes.App <br><span style="font-size:0.6em; font-weight:400">Shop anywhere</span>
+           <div class="brand" style="width:300px; font-size:1.5em;margin-top:0.4em; ">
+               Lytes.App <br><span style="font-size:0.6em; font-weight:400">Join the rest of the world. Let's get online</span>
            </div>
        </div>
    </a>
@@ -84,11 +102,10 @@
                             <div class="tab-pane" id="details">
                               <div class="row">
 
-                                  <p style="text-align: center; font-size: 1em; font-weight: 400; color:firebrick">
-                                      @if(!empty($message))
-                                          {{$message}}
+                                  <p id="error-msg">
+                                      @if(isset($message))
+                                          <span class="label label-danger">{{$message}}</span>
                                       @endif
-
                                   </p>
                                   <div class="col-sm-9 col-sm-offset-2">
                                       <div class="form-group">
@@ -136,7 +153,8 @@
 
     <div class="footer">
         <div class="container">
-                &copy; 2018 Lytes.App | Theme <i>by</i> <a href="http://www.creative-tim.com" target="_blank" style="color:silver!important;">Creative Tim</a>
+                &copy; 2018 Lytes.App | <a href="mailto:info@lytesapp.com"> info@lytesapp.com
+                <i class="fa fa-envelope" aria-hidden="true"></i> </a>
         </div>
     </div>
 

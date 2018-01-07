@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<link rel="apple-touch-icon" sizes="76x76" href="{{asset('new-ui/img/apple-icon.png')}}">
-	<link rel="icon" type="image/png" href="{{asset('img/logo-x.png')}}">
+	<link rel="icon" type="image/png" href="{{asset('img/shopping-cart.png')}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>Home - Lytes.App</title>
@@ -38,6 +38,11 @@
 			font-size: 12px !important;
 			text-transform: uppercase;
 			border-radius: 3px;
+		}
+
+		.logo-container .logo {
+			border: 0 !important;
+			border-radius: 0 !important;
 		}
 
 		.shop{
@@ -246,9 +251,9 @@
 	    	</button>
 	    	<a href="/">
 	        	<div class="logo-container">
-	                {{--<div class="logo">--}}
-	                    {{--<img src="{{asset('img/logo-x.png')}}" alt="Creative Tim Logo" rel="tooltip" title="<b>Lytes.App</b> Is Ghana's premier shopping catalog. Search for anything you need." data-placement="bottom" data-html="true">--}}
-	                {{--</div>--}}
+	                <div class="logo">
+	                    <img src="{{asset('img/shopping-cart.png')}}" alt="Creative Tim Logo" rel="tooltip" title="<b>Lytes.App</b> Is Ghana's premier shopping catalog. Search for anything you need." data-placement="bottom" data-html="true">
+	                </div>
 	                <div class="brand" style="font-size:1.5em;margin-top:0.4em; width:300px">
 	                    <span id="title-lbl">LytesApp </span><br><span style="font-size:0.5em; font-weight:200">Join the rest of the world. Let's get online.</span>
 	                </div>

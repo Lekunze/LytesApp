@@ -108,10 +108,11 @@ class SMEController extends Controller
         $business->save();
 
         //Create new user
+        $random_password = str_random(8);
         $user->id = $BO_ID;
         $user->username = $request->business_slug;
         $user->email = $request->business_email;
-        $user->password = bcrypt($request->business_slug);
+        $user->password = bcrypt($random_password);
         $user->active = "no";
         $user->save();
 

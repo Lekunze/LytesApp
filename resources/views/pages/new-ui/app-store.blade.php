@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<link rel="apple-touch-icon" sizes="76x76" href="{{asset('new-ui/img/apple-icon.png')}}">
-	<link rel="icon" type="image/png" href="{{asset('img/logo-x.png')}}">
+	<link rel="icon" type="image/png" href="{{asset('img/shopping-cart.png')}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>{{$business[0]->business_name}}</title>
@@ -18,6 +18,7 @@
 	<!-- CSS Files -->
 	<link href="{{asset('new-ui/css/bootstrap.min.css')}}" rel="stylesheet" />
 	<link href="{{asset('new-ui/css/material-kit.css')}}" rel="stylesheet"/>
+	<link href="{{asset('new-ui/css/extras.css')}}" rel="stylesheet"/>
 
 	<style>
 
@@ -29,22 +30,13 @@
 			background-color: rgb(0, 32, 96);
 		}
 
-		.copyright a{
-			color: rgb(0, 32, 96) !important;
-		}
 
 		.row.sharing-area.text-center a{
 			color: rgb(191,13,64) !important;
 
 		}
 
-		.pull-right{
-			margin-top: -10px !important;
-		}
 
-		.pull-left{
-			margin-top: 10px !important;
-		}
 	</style>
 
 
@@ -183,40 +175,7 @@
     </div>
 
     
-    <footer class="footer">
-        <div class="container">
-                <nav class="pull-left">
-                        <ul>
-                            <li>
-                                <a href="/">
-                                    Lytes.App
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/about">
-                                   About Us
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/search">
-                                   Search
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/register">
-                                    Join Us
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-            <div class="copyright pull-right">
-                &copy; 2018 Lytes.App | Theme <i>by </i> <a href="http://www.creative-tim.com" target="_blank"> &nbspCreative Tim</a>
-				<a class="btn btn-social btn-facebook btn-simple" href="https://www.facebook.com/LytesApp/">
-					<i class="fa fa-facebook-square"></i>
-				</a>
-            </div>
-        </div>
-    </footer>
+    @include('modules.footers.main-footer')
 
 
 </body>
