@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<link rel="apple-touch-icon" sizes="76x76" href="{{asset('new-ui/img/apple-icon.png')}}">
-	<link rel="icon" type="image/png" href="{{asset('new-ui/img/favicon.png')}}">
+	<link rel="icon" type="image/png" href="{{asset('img/logo-x.png')}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>Home - Lytes.App</title>
@@ -12,6 +12,7 @@
 
 	<!--     Fonts and icons     -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+	<link href="https://fonts.googleapis.com/css?family=Patrick+Hand" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 
@@ -39,11 +40,47 @@
 			border-radius: 3px;
 		}
 
+		.shop{
+			background-color: rgb(0,32,96) !important;
+			font-size: 1.5em !important;
+
+		}
+
+		#title-lbl{
+			/*font-family: 'Patrick Hand', cursive !important;*/
+			font-weight: 400 !important;
+
+		}
+
+
+
 		footer{
 			color:white !important;
 		}
 
+		.pull-right a{
+			color:white !important;
+			text-decoration: none;
+		}
+		.pull-right a:hover{
+			color:rgb(191,13,64) !important;
+		}
+
+        .pull-left ul li a:hover{
+            color:rgb(191,13,64) !important;
+
+        }
+
+        .btn-simple{
+            color:white !important;
+        }
+
+
+
 		@media screen and (min-width: 360px){
+			.brand{
+				width:200px !important;
+			}
 			div.col-md-12.capt{
 				font-size: 0.4em;
 				left: 50%;
@@ -72,6 +109,11 @@
 				text-align: center !important;
 
 			}
+			.pull-right{
+				float: none !important;
+				text-align: center !important;
+
+			}
 			footer ul li a {
 				padding:10px !important;
 			}
@@ -88,7 +130,7 @@
                 margin-top:-1.7em !important;
 				max-height: 50px;
 				max-width: 420px;
-				font-size: 3.5em !important;
+				font-size: 2.5em !important;
 				padding: 15px 20px 20px 20px !important;
 
 
@@ -96,6 +138,22 @@
 
 			.title{
 				font-size: 5.5em !important;
+			}
+			.pull-left{
+				text-align: left !important;
+			}
+
+			.pull-right{
+				margin-top: 0px !important;
+				float: right !important;
+			}
+
+			div.copyright{
+				text-align: center !important;
+			}
+
+			footer.copyright{
+				/*padding: 15px 0;*/
 			}
         }
 
@@ -138,6 +196,10 @@
         and (max-device-width: 667px)
         and (-webkit-min-device-pixel-ratio: 2)
         and (orientation: portrait) {
+
+			.brand{
+				width:200px !important;
+			}
             div.col-md-12.capt{
                 font-size: 0.4em;
                 left: 50%;
@@ -160,6 +222,11 @@
             .shop i{
                 font-size: 1.3em !important;                
             }
+			.pull-left{
+				float: none !important;
+				text-align: center !important;
+
+			}
         }
 
     </style>
@@ -179,13 +246,12 @@
 	    	</button>
 	    	<a href="/">
 	        	<div class="logo-container">
-	                <div class="logo">
-	                    <img src="{{asset('new-ui/img/logo.png')}}" alt="Creative Tim Logo" rel="tooltip" title="<b>Material Kit</b> was Designed & Coded with care by the staff from <b>Creative Tim</b>" data-placement="bottom" data-html="true">
+	                {{--<div class="logo">--}}
+	                    {{--<img src="{{asset('img/logo-x.png')}}" alt="Creative Tim Logo" rel="tooltip" title="<b>Lytes.App</b> Is Ghana's premier shopping catalog. Search for anything you need." data-placement="bottom" data-html="true">--}}
+	                {{--</div>--}}
+	                <div class="brand" style="font-size:1.5em;margin-top:0.4em; width:300px">
+	                    <span id="title-lbl">LytesApp </span><br><span style="font-size:0.5em; font-weight:200">Join the rest of the world. Let's get online.</span>
 	                </div>
-	                <div class="brand" style="font-size:1.5em;margin-top:0.4em; width:100px">
-	                    Lytes.App <br><span style="font-size:0.5em; font-weight:200">Shop anywhere</span>
-	                </div>
-
 
 				</div>
 	      	</a>
@@ -253,7 +319,7 @@
                                     <img src="{{asset('new-ui/img/shopping-1.jpeg')}}" alt="Awesome Image">
                                     <div class="col-md-12 capt" style="position:absolute; z-index:100 !important; bottom:20px; text-shadow:none;">
                                         <h2 class="title" style="overflow: auto !important;">Discounted prices for you</h2>
-                                        <a class="btn btn-danger btn-raised btn-lg shop">
+                                        <a class="btn btn-danger btn-raised btn-lg shop" href="/search">
                                             <i class="fa fa-search"></i> &nbspSearch Products
                                         </a>
                                     </div>
@@ -265,7 +331,7 @@
                                     <img src="{{asset('new-ui/img/shopping-2.jpeg')}}" alt="Awesome Image">
                                     <div class="col-md-12 capt" style="position:absolute; z-index:100 !important; bottom:20px; text-shadow:none;">
                                             <h2 class="title" style="color:white">Find every product you need</h2>
-                                            <a class="btn btn-danger btn-raised btn-lg shop">
+                                            <a class="btn btn-danger btn-raised btn-lg shop" href="/search">
                                                 <i class="fa fa-search"></i> &nbspSearch Products
                                             </a>
                                     </div>
@@ -278,7 +344,7 @@
                                     <img src="{{asset('new-ui/img/shopping-4.jpeg')}}" alt="Awesome Image">
                                     <div class="col-md-12 capt" style="position:absolute; z-index:100 !important; bottom:20px; text-shadow:none;">
                                             <h2 class="title" style="color:white">Sellers you can trust!</h2>
-                                            <a class="btn btn-danger btn-raised btn-lg shop">
+                                            <a class="btn btn-danger btn-raised btn-lg shop" href="/search">
                                                 <i class="fa fa-search"></i> &nbspSearch Products
                                             </a>
                                     </div>
@@ -289,12 +355,12 @@
                             </div>
 
                             <!-- Controls -->
-                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                            <!--<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                                 <i class="material-icons">keyboard_arrow_left</i>
                             </a>
                             <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
                                 <i class="material-icons">keyboard_arrow_right</i>
-                            </a>
+                            </a>-->
                         </div>
                     </div>
                 </div>
@@ -305,25 +371,23 @@
     </div>
 </div>
 
-
-
-    <footer class="footer">
-	    <div class="container">
-	        <nav class="pull-left">
-	            <ul>
+	<footer class="footer footer-transparent">
+		<div class="container">
+			<nav class="pull-left" style="display: inline-block !important;">
+				<ul>
 					<li>
 						<a href="/">
 							Lytes.App
 						</a>
 					</li>
 					<li>
-						<a href="http://presentation.creative-tim.com">
-						   About Us
+						<a href="/about">
+							About Us
 						</a>
 					</li>
 					<li>
 						<a href="/search">
-						   Search
+							Search
 						</a>
 					</li>
 					<li>
@@ -331,12 +395,18 @@
 							Join Us
 						</a>
 					</li>
-	            </ul>
-	        </nav>
-	        <div class="copyright pull-right">
-				&copy; 2018 Lytes.App | Theme <i>by</i> <a href="http://www.creative-tim.com" target="_blank" style="color:rgb(191,13,64) !important;">&nbspCreative Tim</a>
-	        </div>
-	    </div>
+				</ul>
+			</nav>
+			<div class="social-area pull-right">
+
+				<span>
+					&copy; 2018 Lytes.App | <a href="mailto:info@lytesapp.com"> info@lytesapp.com
+				<i class="fa fa-envelope" aria-hidden="true"></i> </a>
+				</span>
+
+			</div>
+
+		</div>
 	</footer>
 </div>
 
@@ -369,6 +439,12 @@
 				$(window).on('scroll', materialKitDemo.checkScrollForParallax);
 			}
 
+			$(".slide").slider({
+				animationDuration:100
+			});
+
 		});
+
+
 	</script>
 </html>

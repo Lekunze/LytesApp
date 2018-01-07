@@ -20,7 +20,7 @@
                 width: 100%;
                 color: #B0BEC5;
                 display: table;
-                font-weight: 300;
+                font-weight: 100;
                 font-family: 'Lato';
             }
 
@@ -36,7 +36,7 @@
             }
 
             .title {
-                font-size: 72px;
+                font-size: 65px;
                 margin-bottom: 40px;
             }
 
@@ -62,20 +62,22 @@
                 }
 
             }
+
+
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Store Doesn't Exist Yet. <a href="/register"> Add one </a></div>
-                <p style="text-align: center" class="message"> Or, You will be directed to the homepage!</p>
+                <div class="title">Account Successfully Created. Check Email for credentials.</div>
+                <p style="text-align: center" class="message"> You will be directed to the Login Page!</p>
             </div>
         </div>
     </body>
 
     <script>
         window.setTimeout(function () {
-            window.location.href = "/";
+            window.location.href = "/login";
         },5000);
 
     </script>

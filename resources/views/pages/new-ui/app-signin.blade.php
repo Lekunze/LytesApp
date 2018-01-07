@@ -3,7 +3,8 @@
 <head>
 	<meta charset="utf-8" />
 	<link rel="apple-touch-icon" sizes="76x76" href="{{asset('new-ui/img/apple-icon.png')}}">
-	<link rel="icon" type="image/png" href="{{asset('new-ui/img/favicon.png')}}">
+	<link rel="icon" type="image/png" href="{{asset('img/logo-x.png')}}">
+	{{--<link rel="icon" type="image/png" href="{{asset('new-ui/img/favicon.png')}}">--}}
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>Sign-In - Lytes.App</title>
@@ -38,6 +39,23 @@
 
 		.btn-lg{
 			color:rgb(191,13,64) !important;
+		}
+
+		.form-control{
+			background-image: linear-gradient(#4caf50, #4caf50), linear-gradient(#D2D2D2, #D2D2D2) !important;
+		}
+
+		.pull-right a{
+			color:white !important;
+			text-decoration: none;
+		}
+		.pull-right a:hover{
+			color:rgb(191,13,64) !important;
+		}
+
+		.pull-left ul li a:hover{
+			color:rgb(191,13,64) !important;
+
 		}
 	</style>
 
@@ -97,7 +115,7 @@
     </nav>
 
     <div class="wrapper">
-		<div class="header header-filter" style="background-image: url('new-ui/img/city.jpg'); background-size: cover; background-position: top center;">
+		<div class="header header-filter" style="background-image: url('img/fruits.jpeg'); background-size: cover; background-position: top center;">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
@@ -168,7 +186,7 @@
 								</a>
 							</li>
 							<li>
-								<a href="">
+								<a href="/about">
 								   About Us
 								</a>
 							</li>
@@ -185,7 +203,10 @@
 						</ul>
 		            </nav>
 		            <div class="copyright pull-right">
-		                &copy; 2018 Lytes.App | Theme <i>by</i> <a href="http://www.creative-tim.com" target="_blank"> &nbspCreative Tim</a>
+		                <span>
+					&copy; 2018 Lytes.App | <a href="mailto:info@lytesapp.com"> info@lytesapp.com
+				<i class="fa fa-envelope" aria-hidden="true"></i> </a>
+				</span>
 		            </div>
 		        </div>
 		    </footer>

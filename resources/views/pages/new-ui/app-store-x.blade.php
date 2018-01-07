@@ -3,7 +3,8 @@
 <head>
 	<meta charset="utf-8" />
 	<link rel="apple-touch-icon" sizes="76x76" href="{{asset('new-ui/img/apple-icon.png')}}">
-	<link rel="icon" type="image/png" href="{{asset('new-ui/img/favicon.png')}}">
+{{--	<link rel="icon" type="image/png" href="{{asset('new-ui/img/favicon.png')}}">--}}
+	<link rel="icon" type="image/png" href="{{asset('img/logo-x.png')}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>{{$business->business_name}}</title>
@@ -89,16 +90,6 @@
                                     <i class="material-icons">exit_to_app</i> Logout
                             </a>
                     </li>
-		            <!-- <li>
-		                <a href="https://www.facebook.com/CreativeTim" target="_blank" class="btn btn-simple btn-white btn-just-icon">
-							<i class="fa fa-facebook-square"></i>
-						</a>
-		            </li>
-					<li>
-		                <a href="https://www.instagram.com/CreativeTimOfficial" target="_blank" class="btn btn-simple btn-white btn-just-icon">
-							<i class="fa fa-instagram"></i>
-						</a>
-		            </li> -->
         		</ul>
         	</div>
     	</div>
@@ -125,20 +116,20 @@
                                         </a>
                                         <a style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12">
                                             <i class="fa fa-envelope"></i>
-                                            info@business.com
+											{{$business->business_email}}
                                         </a>
                                         <a style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12">
                                             <i class="fa fa-map-marker"></i>
-                                            Adenta
+											{{$business->business_area}}
                                         </a>
                                 </div>
 	                        </div>
 	                    </div>
 	                </div>
 	                <div class="description text-center">
-                        <p>Donec eget dolor maximus, imperdiet lectus ullamcorper, finibus augue. Donec suscipit pellentesque luctus. Integer a blandit nibh. 
-                                Cras vitae eleifend velit.
-                        </p>
+						<p>
+							{{$business->business_description}}
+						</p>
 	                </div>
 
 					<div class="row">
@@ -266,7 +257,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="">
+                                <a href="/about">
                                    About Us
                                 </a>
                             </li>

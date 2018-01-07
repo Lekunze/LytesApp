@@ -3,8 +3,9 @@
 <head>
 	<meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('new-ui/img/apple-icon.png')}}">
-    <link rel="icon" type="image/png" href="{{asset('new-ui/img/favicon.png')}}">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="icon" type="image/png" href="{{asset('img/logo-x.png')}}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+{{--    <meta name="csrf-token" content="{{ csrf_token() }}">--}}
 
 	<title>New Shop - Lytes.App</title>
 
@@ -23,12 +24,21 @@
     <link href="{{asset('new-ui/css/demo.css')}}" rel="stylesheet" />
     <link href="{{asset('dist/bootstrap-imageupload.css')}}" rel="stylesheet">
 
+    <!--   Core JS Files   -->
+    <script src="{{asset('new-ui/js/jquery.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('new-ui/js/bootstrap.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('new-ui/js/material.min.js')}}"></script>
+
+    <!-- Plugin for form validation, full documentation here: http://1000hz.github.io/bootstrap-validator/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+
 
     {{--<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>--}}
 
 	<style>
+
         .navbar-color-on-scroll{
-            background-color: rgb(0,32,96);
+            background-color: black;
         }
 
         .navbar .navbar-nav > li > a {
@@ -42,6 +52,19 @@
         .panel-heading.clearfix,.btn-lg{
             background-color: rgb(191,13,64) !important;
             color:white !important;
+        }
+
+        .pull-left a:hover,.pull-right a:hover{
+            color:rgb(191,13,64) !important;
+            text-decoration: none;
+        }
+
+        .pull-right a{
+            color:black!important;
+        }
+
+        .pull-right{
+            margin-top: 10px !important;
         }
 
         .btn-default{
@@ -74,6 +97,9 @@
             margin: 20px 0;
         }
 
+        img.thumbnail{
+            max-width: 100% !important;
+        }
 
         h2{
             margin-top: -20px !important;
@@ -114,6 +140,10 @@
             h2{
                 margin-top: 0px !important;
             }
+
+            .brand {
+                width: 200px !important;
+            }
         }
 
         @media screen and (min-width: 1440px) {
@@ -146,9 +176,18 @@
 
         }
 
-
-
-
+        .feedback {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 2;
+            display: block;
+            width: 34px;
+            height: 34px;
+            line-height: 34px;
+            text-align: center;
+            pointer-events: none;
+        }
 
     </style>
 </head>
@@ -168,10 +207,10 @@
           <a href="/">
               <div class="logo-container">
                   <div class="logo">
-                      <img src="{{asset('new-ui/img/logo.png')}}" alt="Creative Tim Logo" rel="tooltip" title="<b>Material Kit</b> was Designed & Coded with care by the staff from <b>Creative Tim</b>" data-placement="bottom" data-html="true">
+                      <img src="{{asset('img/logo-x.png')}}" alt="Creative Tim Logo" rel="tooltip" title="<b>Lytes.App</b> Is Ghana's premier shopping catalog. Search for anything you need." data-placement="bottom" data-html="true">
                   </div>
-                  <div class="brand" style="font-size:1.5em;margin-top:0.4em; width:100px">
-                      Lytes.App <br><span style="font-size:0.5em; font-weight:200">Shop anywhere</span>
+                  <div class="brand" style="font-size:1.5em;margin-top:0.4em; width:300px">
+                      Lytes.App <br><span style="font-size:0.5em; font-weight:200">Join the rest of the world. Let's get online.</span>
                   </div>
 
 
@@ -182,7 +221,7 @@
       <div class="collapse navbar-collapse" id="navigation-index">
           <ul class="nav navbar-nav navbar-right">
               <li>
-                  <a href="/register" style="font-size:1.2em;">
+                  <a href="/" style="font-size:1.2em;">
                       <i class="material-icons">home</i> Home
                   </a>
               </li>
@@ -214,6 +253,7 @@
 
           </ul>
       </div>
+  </div>
 </nav>
 
 <div class="wrapper">
@@ -246,31 +286,36 @@
             <div class="col-md-8 col-md-offset-1">
                 <div class="tim-container">
 
-            <form class="form" action="{{url('businesses')}}" method="post" enctype="multipart/form-data">
+            <form class="form" action="{{url('businesses')}}" method="post" enctype="multipart/form-data" data-toggle="validator" role="form">
                         
                 <!-- Personal Details -->
                 <div class="tim-row" id="personal-row">
 
                     <h2>Personal Details</h2>
                     <legend></legend>
+                    <p id="error-msg">
+                        @if(isset($errorM))
+                            <span class="label label-danger">{{$errorM}}</span>
+                        @endif
+                    </p>
                             <div class="col-sm-6">
                                     <div class="form-group label-floating">
-                                        <label class="control-label">Surname*</label>
-                                        <input type="text" class="form-control" name="business_owner_last_name" required>
-                                        <small class="text-danger">{{ $errors->first('business_owner_last_name') }}</small>
+                                        <label class="control-label" for="last-name">Surname*</label>
+                                        <input type="text" class="form-control" name="business_owner_last_name" id="last-name" required>
+                                        {{--<small class="text-danger">{{ $errors->first('business_owner_last_name') }}</small>--}}
                                     </div>
                             </div>
                             <div class="col-sm-6">
                                     <div class="form-group label-floating">
-                                        <label class="control-label">Given Names*</label>
-                                        <input type="text" class="form-control" name="business_owner_given_names" required>
+                                        <label class="control-label" for="given-names">Given Names*</label>
+                                        <input type="text" class="form-control" name="business_owner_given_names" id="given-names" required>
                                         <small class="text-danger">{{ $errors->first('business_owner_given_names') }}</small>
                                     </div>
                             </div>
-                            <div class="col-md-6">
-                                    <div class="form-group label-floating">
+                            <div class="col-sm-6">
+                                    <div class="form-group label-floating has-validation">
                                             <label class="control-label">Date of Birth*</label>
-                                            <input class="datepicker form-control" type="text" name="date_of_birth"/>
+                                            <input class="datepicker form-control" type="text" name="date_of_birth" id="dob" value="mm/dd/yyyy"/>
                                     </div>
                                     <!-- <label class="control-label">Date of Birth</label>-->
                             </div>
@@ -301,15 +346,15 @@
                             <div class="col-sm-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Phone Number*</label>
-                                        <input type="text" class="form-control" name="phone_number" required>
-                                        <small class="text-danger">{{ $errors->first('phone_number') }}</small>
+                                        <input type="tel" class="form-control" name="phone_number" maxlength="10"  required>
+                                        <div class="help-block with-errors">Enter a Valid Ghanaian Number</div>
                                     </div>
                             </div>
                             <div class="col-sm-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Other Phone</label>
-                                        <input type="text" class="form-control" name="phone_number_2">
-                                        <small class="text-danger">{{ $errors->first('phone_number_2') }}</small>
+                                        <input type="tel" class="form-control" name="phone_number_2" maxlength="10">
+                                        <div class="help-block with-errors">Enter a Valid Ghanaian Number</div>
                                     </div>
                             </div>     
                 </div>
@@ -323,33 +368,45 @@
                                     <div class="col-sm-12">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Name of Business*</label>
-                                                <input type="text" class="form-control" name="business_name">
-                                                <small class="text-danger">{{ $errors->first('business_name') }}</small>
+                                                <input type="text" class="form-control" name="business_name" maxlength="30" required>
+                                                <div class="help-block with-errors">Business name should be max 30 letters</div>
                                             </div>
                                     </div>
                                     <div class="col-sm-12">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Describe your business*</label>
-                                                <textarea class="form-control" placeholder="" rows="3" name="business_description"></textarea>
+                                                <textarea class="form-control" placeholder="" rows="3" name="business_description" maxlength="2000" required></textarea>
+                                                <div class="help-block with-errors">Max 200 words </div>
                                             </div>
                                     </div>
                                     
                                     <div class="col-sm-12">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">What's your tagline/motto?*</label>
-                                                <input type="text" class="form-control" name="business_tagline">
+                                                <input type="text" class="form-control" name="business_tagline" required>
                                             </div>
                                     </div>
                                     <div class="col-sm-4">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Business Slug/URL*</label>
-                                                <input type="text" class="form-control" name="business_slug">
+                                                <label class="control-label" id="slug-label">Business Slug (10 letters)*</label>
+                                                <input type="text" class="form-control" name="business_slug" id="slug" onblur="slugAvailability()" maxlength="10" minlength="3" required>
+                                                <span class="feedback">
+                                                    <i class="material-icons" style="color:#4caf50; display: none" id="available">done</i>
+                                                    <i class="material-icons" style="color:#f44336;display: none" id="unavailable">clear</i>
+                                                </span>
+                                                <div  class="help-block with-errors" style="display: none" id="slug-error-msg"></div>
                                             </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">Business Email*</label>
-                                            <input type="text" class="form-control" name="business_email">
+                                            <label class="control-label" id="user-label">Business Email*</label>
+                                            <input type="email" class="form-control" id="user" name="business_email" data-error="Enter a valid email" onblur="userAvailability()" required>
+                                            <span class="feedback">
+                                                    <i class="material-icons" style="color:#4caf50; display: none" id="user-available">done</i>
+                                                    <i class="material-icons" style="color:#f44336;display: none" id="user-unavailable">clear</i>
+                                                </span>
+                                            <div  class="help-block with-errors" style="display: none; padding-bottom: 10px !important;" id="user-error-msg"></div>
+                                            <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -359,7 +416,9 @@
                                                 @include('modules.categories')
                                             </select>
                                         </div>
+                                        <br>
                                     </div>
+
                                     <div class="col-sm-4">
                                         <div class="form-group label-floating has-validation">
                                             <label class="control-label">Country*</label>
@@ -379,37 +438,36 @@
                                     <div class="col-sm-4">
                                         <div class="form-group label-floating has-validation">
                                             <label class="control-label">Area or Location*</label>
-                                            <select class="form-control" name="area" value="{{old('area')}}">
-                                                @include('modules.area')
-                                            </select>
+                                            <input type="text" class="form-control" name="area" value="{{old('area')}}" required>
+                                            {{--<select class="form-control" name="area" value="{{old('area')}}">--}}
+                                                {{--@include('modules.area')--}}
+                                            {{--</select>--}}
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                             <div class="form-group label-floating">
                                                     <label class="control-label">Address*</label>
-                                                    <input class="form-control" type="text" value="" name="address"/>
+                                                    <input class="form-control" type="text" value="" name="address" required/>
                                                     <small class="text-danger">{{ $errors->first('address') }}</small>
                                             </div>
                                     </div>
                                     <div class="col-sm-6">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Business Contact*</label>
-                                                <input type="text" class="form-control" name="business_number">
-                                                <small class="text-danger">{{ $errors->first('business_number') }}</small>
+                                                <input type="tel" class="form-control" name="business_number" maxlength="10" required>
+                                                <div class="help-block with-errors">Enter a Valid Ghanaian Number</div>
                                             </div>
                                     </div>
                                     <div class="col-sm-6">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Other Business Contact</label>
-                                                <input type="text" class="form-control" name="business_number_2">
-                                                <small class="text-danger">{{ $errors->first('business_number_2') }}</small>
+                                                <input type="tel" class="form-control" name="business_number_2" maxlength="10">
+                                                <div class="help-block with-errors">Enter a Valid Ghanaian Number</div>
                                             </div>
                                     </div>     
                 </div>
                 <!--  end row -->
-
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
-
 
                 <!-- Media -->
                 <div class="tim-row" id="media-row">
@@ -468,10 +526,6 @@
 
 
             </form>
-            
-
-	    
-
 
 
 
@@ -494,7 +548,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="">
+						<a href="/about">
 						   About Us
 						</a>
 					</li>
@@ -511,19 +565,12 @@
                 </ul>
             </nav>
             <div class="social-area pull-right">
-                <!-- <a class="btn btn-social btn-twitter btn-simple" href="https://twitter.com/CreativeTim">
-                    <i class="fa fa-twitter"></i>
-                </a> -->
-                <a class="btn btn-social btn-facebook btn-simple" href="https://www.facebook.com/CreativeTim">
-                    <i class="fa fa-facebook-square"></i>
-                </a>
-                <!-- <a class="btn btn-social btn-google btn-simple" href="https://plus.google.com/+CreativetimPage">
-                    <i class="fa fa-google-plus"></i>
-                </a> -->
+                <span>
+					&copy; 2018 Lytes.App | <a href="mailto:info@lytesapp.com"> info@lytesapp.com
+				<i class="fa fa-envelope" aria-hidden="true"></i> </a>
+				</span>
             </div>
-            <div class="copyright" style="text-align: center">
-                    &copy; 2018 Lytes.App | Theme <i>by </i> <a href="http://www.creative-tim.com" target="_blank"> &nbspCreative Tim</a>
-            </div>
+
         </div>
     </footer>
 
@@ -531,13 +578,10 @@
 
 
 </body>
-    <!--   Core JS Files   -->
-    <script src="{{asset('new-ui/js/jquery.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('new-ui/js/bootstrap.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('new-ui/js/material.min.js')}}"></script>
+
 
     <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-    <script src="{{asset('new-ui/js/nouislider.min.js')}}"type="text/javascript"></script>
+    {{--<script src="{{asset('new-ui/js/nouislider.min.js')}}"type="text/javascript"></script>--}}
 
     <!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
     <script src="{{asset('new-ui/js/bootstrap-datepicker.js')}}" type="text/javascript"></script>
@@ -547,28 +591,128 @@
 
     <script src="{{asset('dist/bootstrap-imageupload.js')}}"></script>
 
+<script>
 
+    function slugAvailability(){
+        $.ajax({
+            type: 'post',
+            url: 'slugCheck',
+            data: {
+                '_token': $('input[name=_token]').val(),
+                'business': $('#slug').val()
+            },
+            success: function(data) {
+                // $('#task' + data).remove();
+                if(data["message"]==="Available"){
+                    // console.log("Okay");
+                    $("#slug-label").css('color','#4caf50');
+                    $("#slug-error-msg").css('color','#4caf50');
+                    if($("#unavailable").is(':visible')){
+                        $("#unavailable").hide();
+                    }
+                    $("#available").show();
+                    $("#slug-error-msg").html("Slug is available for use").append("<br>");
+                }else if(data["message"]==="Negative"){
+                    $("#slug-label").css('color','#f44336');
+                    $("#slug-error-msg").css('color','#f44336');
+                    if($("#available").is(':visible')){
+                        $("#available").hide();
+                    }
+                    $("#unavailable").show();
+                    $("#slug-error-msg").html("Slug has already been taken");
+                }
+                $("#slug-error-msg").show(data["message"]);
+                console.log(data["message"]);
+            }, error: function (data) {
+                console.log('Error:' + data);
 
+            }
+        });
+    }
+
+    function userAvailability(){
+        $.ajax({
+            type: 'post',
+            url: 'userCheck',
+            data: {
+                '_token': $('input[name=_token]').val(),
+                'user': $('#user').val()
+            },
+            success: function(data) {
+                // $('#task' + data).remove();
+                if(data["message"]==="Available"){
+                    // console.log("Okay");
+                    $("#user-label").css('color','#4caf50');
+                    $("#user-error-msg").css('color','#4caf50');
+                    if($("#user-unavailable").is(':visible')){
+                        $("#user-unavailable").hide();
+                    }
+                    $("#user-available").show();
+                    $("#user-error-msg").html("User available");
+                }else if(data["message"]==="Negative"){
+                    $("#user-label").css('color','#f44336');
+                    $("#user-error-msg").css('color','#f44336');
+                    if($("#user-available").is(':visible')){
+                        $("#user-available").hide();
+                    }
+                    $("#user-unavailable").show();
+                    $("#user-error-msg").html("User already exists");
+                }else if(data["message"]==="Error"){
+                    $("#user-label").css('color','#f44336');
+                    $("#user-error-msg").css('color','#f44336');
+                    if($("#user-available").is(':visible')){
+                        $("#user-available").hide();
+                    }
+                    if($("#user-unavailable").is(':visible')){
+                        $("#user-unavailable").hide();
+                    }
+
+                }
+                $("#user-error-msg").show();
+            }, error: function (data) {
+                console.log('Error:' + data);
+
+            }
+        });
+    }
+</script>
 
 <script>
     var $imageupload = $('.imageupload');
     $imageupload.imageupload();
-
     $('#imageupload-disable').on('click', function() {
         $imageupload.imageupload('disable');
         $(this).blur();
     })
-
     $('#imageupload-enable').on('click', function() {
         $imageupload.imageupload('enable');
         $(this).blur();
     })
-
     $('#imageupload-reset').on('click', function() {
         $imageupload.imageupload('reset');
         $(this).blur();
     });
 </script>
+
+<script>
+    $(document).ready(function(){
+
+        var checkout = $('#dob').datepicker({
+                format: "dd/mm/yyyy",
+            onRender: function(date) {
+                    return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+                }
+            }).on('changeDate', function(ev) {
+                checkout.hide();
+            }).data('datepicker');
+    });
+
+
+
+</script>
+
+
+
 
 
 

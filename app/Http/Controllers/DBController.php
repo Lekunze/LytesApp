@@ -13,7 +13,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cookie;
-use Request;
+use Illuminate\Http\Request;
 
 use Validator;
 
@@ -27,6 +27,43 @@ class DBController extends Controller
         return view('/');
     }
 
+    public function slugCheck(Request $request){
+        $slug = Input::get('business');
+
+        if(strlen($slug)>=3){
+            $business= Business::where('business_slug','=',$slug)->get();
+
+            if(!sizeof($business)>0){
+                return \Response::json(['message'=>'Available']);
+            }else{
+                return \Response::json(['message'=>'Negative']);
+            }
+        }
+
+
+
+    }
+
+    public function userCheck(Request $request){
+        $email = Input::get('user');
+
+        if(filter_var($email,FILTER_VALIDATE_EMAIL)) {
+
+            $user = User::where('email', '=', $email)->get();
+
+            if (!sizeof($user) > 0) {
+                return \Response::json(['message' => 'Available']);
+            } else {
+                return \Response::json(['message' => 'Negative']);
+            }
+        }else{
+            return \Response::json(['message'=>'Error']);
+
+        }
+
+
+    }
+
 
     //------------------------VERIFIED BUSINESSESS FUNCTIONS----------------------------
 
@@ -34,11 +71,13 @@ class DBController extends Controller
 
     public function sme(Request $request, $sme){
 
+        //Guest View
         if(!Auth::check()){
             //return $sme;
             //return redirect('/login');
             $business= Business::where('business_slug','=',$sme)->get();
-            $products = Product::where('bid','=',$business[0]->id)->orderBy('product_shelf', 'asc')->get();
+
+            $products = Product::where('bid','=',$business[0]->id)->orderBy('bid', 'asc')->get();
             $shelves = Shelf::distinct()->select('shelf_name')->where('bid','=',$business[0]->id)->get();
             return view('pages.new-ui.app-store',compact('products','shelves','business'));
 
@@ -47,6 +86,21 @@ class DBController extends Controller
         /*$products = DB::table('products')->where('business_id','=',$username)->orderBy('product_shelf', 'asc')->get();
         $shelves = DB::table('products')->distinct()->select('product_shelf')->where('business_id','=',$username)->get();*/
 
+        //SME View, other SME
+        $business= Business::where('business_slug','=',$sme)->get();
+        if(!sizeof($business)>0){
+            return view('errors.503');
+        }
+
+
+        if($business[0]->id != Auth::id()){
+            $products = Product::where('bid','=',$business[0]->id)->orderBy('bid', 'asc')->get();
+            $shelves = Shelf::distinct()->select('shelf_name')->where('bid','=',$business[0]->id)->get();
+            return view('pages.new-ui.app-store',compact('products','shelves','business'));
+        }
+
+
+        //SME View, same SME
         $shelves = Shelf::where('bid','=',Auth::id())->get();
         $products = Product::where('bid','=',Auth::id())->get();
         $business = Business::find(Auth::id());
@@ -104,9 +158,6 @@ class DBController extends Controller
         $shelf->bid = Auth::id();
         $shelf->shelf_name = Input::get('shelf');
         $shelf->save();
-
-        //$addedShelf = Shelf::find($shelf->id);
-        //return \Response::json($addedShelf);
 
         $business= Business::where('id','=',Auth::id())->get();
         return redirect($business[0]->business_slug.'/shelves')->with('no_of_shelves',$no_of_shelves);

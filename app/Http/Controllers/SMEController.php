@@ -7,6 +7,8 @@ use App\Business;
 use App\BusinessOwner;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+
 
 class SMEController extends Controller
 {
@@ -38,6 +40,11 @@ class SMEController extends Controller
      */
     public function store(Request $request)
     {
+
+        if (User::where('email', '=', Input::get('business_email'))->exists()) {
+            // user found
+            return redirect()->back()->with('errorM', "User already exists")->withInput();
+        }
 
         //Error messages for New Business Form
         $messages =  [
@@ -130,7 +137,7 @@ class SMEController extends Controller
 
         //!!!SEND USER VERIFICATION EMAIL FUNCTION HERE !!!
 
-        return redirect()->intended('/success');
+        return view('messages.success');
 
     }
 

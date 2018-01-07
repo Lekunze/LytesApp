@@ -30,6 +30,8 @@ Route::resource('search','ProductController');
 Route::resource('/{sme}/search','ProductController');
 
 Route::post('login','Controller@login');
+Route::post('slugCheck','DBController@slugCheck');
+Route::post('userCheck','DBController@userCheck');
 Route::post('/{sme}/shelf', 'DBController@shelf');
 Route::delete('/{sme}/deleteShelf', 'DBController@deleteshelf');
 Route::delete('/{sme}/deleteProduct', 'DBController@deleteProduct');

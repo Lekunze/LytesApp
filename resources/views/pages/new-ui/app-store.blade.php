@@ -3,10 +3,10 @@
 <head>
 	<meta charset="utf-8" />
 	<link rel="apple-touch-icon" sizes="76x76" href="{{asset('new-ui/img/apple-icon.png')}}">
-	<link rel="icon" type="image/png" href="{{asset('new-ui/img/favicon.png')}}">
+	<link rel="icon" type="image/png" href="{{asset('img/logo-x.png')}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Shop - Lytes.App</title>
+	<title>{{$business[0]->business_name}}</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
@@ -18,6 +18,34 @@
 	<!-- CSS Files -->
 	<link href="{{asset('new-ui/css/bootstrap.min.css')}}" rel="stylesheet" />
 	<link href="{{asset('new-ui/css/material-kit.css')}}" rel="stylesheet"/>
+
+	<style>
+
+		.navbar-color-on-scroll{
+			background-color: rgb(0,32,96);
+		}
+
+		.nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+			background-color: rgb(0, 32, 96);
+		}
+
+		.copyright a{
+			color: rgb(0, 32, 96) !important;
+		}
+
+		.row.sharing-area.text-center a{
+			color: rgb(191,13,64) !important;
+
+		}
+
+		.pull-right{
+			margin-top: -10px !important;
+		}
+
+		.pull-left{
+			margin-top: 10px !important;
+		}
+	</style>
 
 
 </head>
@@ -33,7 +61,7 @@
 		            <span class="icon-bar"></span>
 		            <span class="icon-bar"></span>
         		</button>
-        		<a class="navbar-brand" href="app.blade.php" style="line-height:15px!important;">Lytes.App<br>
+        		<a class="navbar-brand" href="/" style="line-height:15px!important;">Lytes.App<br>
                     <span style="font-size:0.5em; font-weight:200; margin-bottom:-8em !important;">Shop anywhere</span>
                 </a>
         	</div>
@@ -51,20 +79,10 @@
                             </a>
                         </li>
 		            <li>
-		                <a data-toggle="tooltip" data-placement="bottom" title="Receive deals and new products notifications from Shop" class="btn btn-simple btn-white btn-just-icon">
+		                <a data-toggle="tooltip" data-placement="bottom" title="Receive deals and new products notifications from Shop. COMING SOON!" class="btn btn-simple btn-white btn-just-icon">
 							<i class="fa fa-bell"></i>
 						</a>
 		            </li>
-		            <!-- <li>
-		                <a href="https://www.facebook.com/CreativeTim" target="_blank" class="btn btn-simple btn-white btn-just-icon">
-							<i class="fa fa-facebook-square"></i>
-						</a>
-		            </li>
-					<li>
-		                <a href="https://www.instagram.com/CreativeTimOfficial" target="_blank" class="btn btn-simple btn-white btn-just-icon">
-							<i class="fa fa-instagram"></i>
-						</a>
-		            </li> -->
         		</ul>
         	</div>
     	</div>
@@ -79,32 +97,32 @@
 	                <div class="row">
 	                    <div class="profile">
 	                        <div class="avatar">
-	                            <img src="{{asset('new-ui/img/logo-4.jpg')}}" alt="Circle Image" class="img-circle img-responsive img-raised">
+	                            <img src="<?php echo asset($business[0]->business_images."/logo.jpg")?>" alt="Circle Image" class="img-circle img-responsive img-raised">
 	                        </div>
 	                        <div class="name">
-	                            <h3 class="title">God Dey Electrical Shop <span class="label label-success">Open</span> </h3>
+	                            <h3 class="title">{{$business[0]->business_name}} <span class="label label-success">Open</span> </h3>
                                 <!-- <h6>Electronics</h6> -->
                                 <div class="row sharing-area text-center">
                                         <a href="#" style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12">
                                             <i class="fa fa-phone-square"></i>
-                                            0302-444222
+											{{$business[0]->business_number}}
                                         </a>
                                         <a href="#" style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12">
                                             <i class="fa fa-envelope"></i>
-                                            info@business.com
+											{{$business[0]->business_email}}
                                         </a>
                                         <a href="#" style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12">
                                             <i class="fa fa-map-marker"></i>
-                                            Adenta
+											{{$business[0]->business_area}}
                                         </a>
                                 </div>
 	                        </div>
 	                    </div>
 	                </div>
 	                <div class="description text-center">
-                        <p>Donec eget dolor maximus, imperdiet lectus ullamcorper, finibus augue. Donec suscipit pellentesque luctus. Integer a blandit nibh. 
-                                Cras vitae eleifend velit.
-                        </p>
+                        <p>
+							{{$business[0]->business_description}}
+						</p>
 	                </div>
 
 					<div class="row">
@@ -112,65 +130,40 @@
 							<div class="profile-tabs">
 			                    <div class="nav-align-center">
 									<ul class="nav nav-pills" role="tablist">
-										<li class="active">
-											<a href="#studio" role="tab" data-toggle="tab">
-												<i class="material-icons">camera</i>
-												Desktop
-											</a>
-										</li>
-										<li>
-				                            <a href="#work" role="tab" data-toggle="tab">
-												<i class="material-icons">palette</i>
-												Laptop
-				                            </a>
-				                        </li>
-				                        <li>
-				                            <a href="#shows" role="tab" data-toggle="tab">
-												<i class="material-icons">favorite</i>
-				                                Motherboard
-				                            </a>
-				                        </li>
+										@if(!empty($shelves))
+											@foreach($shelves as $shelf)
+												<li>
+													<a href="#{{$shelf->shelf_name}}" role="tab" data-toggle="tab">
+														<i class="material-icons">camera</i>
+														{{$shelf->shelf_name}}
+													</a>
+												</li>
+											@endforeach
+										@endif
 				                    </ul>
 
 				                    <div class="tab-content gallery">
-										<div class="tab-pane active" id="studio">
-				                            <div class="row">
-												<div class="col-md-6">
-													<img src="{{asset('new-ui/img/laptop-1.jpeg')}}" class="img-rounded" />
-													<img src="{{asset('new-ui/img/laptop-1.jpeg')}}" class="img-rounded" />
+										@if(!empty($shelves) && !empty($products))
+											@foreach($shelves as $shelf)
+												<div class="tab-pane active" id="{{$shelf->shelf_name}}">
+													<div class="row">
+
+														@foreach($products as $product)
+															@if($product->sid == $shelf->id)
+																<div class="col-md-6">
+																	<a href="/{{$business->business_slug}}/{{$product->product_slug}}">
+																		<img src="<?php echo asset($product->product_images."/product_1.jpg")?>" class="img-rounded" />
+																	</a>
+																</div>
+
+															@endif
+														@endforeach
+
+													</div>
 												</div>
-												<div class="col-md-6">
-													<img src="{{asset('new-ui/img/laptop-1.jpeg')}}" class="img-rounded" />
-													<img src="{{asset('new-ui/img/laptop-1.jpeg')}}" class="img-rounded" />
-                                                </div>
-                                                
-                                            </div>
-				                        </div>
-				                        <div class="tab-pane text-center" id="work">
-											<div class="row">
-												<div class="col-md-6">
-													<img src="{{asset('new-ui/img/laptop-3.jpeg')}}" class="img-rounded" />
-													<img src="{{asset('new-ui/img/laptop-4.jpeg')}}" class="img-rounded" />
-													<img src="{{asset('new-ui/img/laptop-3.jpeg')}}" class="img-rounded" />
-												</div>
-												<div class="col-md-6">
-													<img src="{{asset('new-ui/img/laptop-3.jpeg')}}" class="img-rounded" />
-													<img src="{{asset('new-ui/img/laptop-4.jpeg')}}" class="img-rounded" />
-												</div>
-											</div>
-				                        </div>
-										<div class="tab-pane text-center" id="shows">
-											<div class="row">
-												<div class="col-md-6">
-													<img src="{{asset('new-ui/img/mother-1.jpeg')}}" class="img-rounded" />
-													<img src="{{asset('new-ui/img/mother-2.jpg')}}" class="img-rounded" />
-												</div>
-												<div class="col-md-6">
-													<img src="{{asset('new-ui/img/mother-1.jpeg')}}" class="img-rounded" />
-													<img src="{{asset('new-ui/img/mother-2.jpg')}}" class="img-rounded" />
-												</div>
-											</div>
-				                        </div>
+
+											@endforeach
+										@endif
 
 				                    </div>
 								</div>
@@ -200,7 +193,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="">
+                                <a href="/about">
                                    About Us
                                 </a>
                             </li>
@@ -217,7 +210,10 @@
                         </ul>
                     </nav>
             <div class="copyright pull-right">
-                &copy; 2018 Lytes.App | Theme <i>by </i> <a href="http://www.creative-tim.com" target="_blank"> &nbspCreative Tim</a>    
+                &copy; 2018 Lytes.App | Theme <i>by </i> <a href="http://www.creative-tim.com" target="_blank"> &nbspCreative Tim</a>
+				<a class="btn btn-social btn-facebook btn-simple" href="https://www.facebook.com/LytesApp/">
+					<i class="fa fa-facebook-square"></i>
+				</a>
             </div>
         </div>
     </footer>

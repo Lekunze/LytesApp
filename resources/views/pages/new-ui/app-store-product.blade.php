@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('new-ui/img/apple-icon.png')}}">
-    <link rel="icon" type="image/png" href="{{asset('new-ui/img/favicon.png')}}">
+    <link rel="icon" type="image/png" href="{{asset('img/logo-x.png')}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>New Product - {{$business->business_name}}</title>
@@ -78,7 +78,7 @@
 		            <span class="icon-bar"></span>
 		            <span class="icon-bar"></span>
         		</button>
-        		<a class="navbar-brand" href="app.blade.php" style="line-height:15px!important;">Lytes.App<br>
+        		<a class="navbar-brand" href="/" style="line-height:15px!important;">Lytes.App<br>
                     <span style="font-size:0.5em; font-weight:200; margin-bottom:-8em !important;">Shop anywhere</span>
                 </a>
         	</div>
@@ -312,7 +312,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="">
+                                <a href="/about">
                                    About Us
                                 </a>
                             </li>

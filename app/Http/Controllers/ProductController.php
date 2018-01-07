@@ -17,7 +17,6 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         //
-        //return "Hello";
 
         if(!$request->has('product')){
             return view('pages.new-ui.app-search');
@@ -32,12 +31,13 @@ class ProductController extends Controller
         //return \Response::json($maxPrice);
         //$maxPrice = 10000000000;
 
+
         //return $category;
         if (empty($category) || $category==0){
 
-            $products = Product::query();
-            $products = $products->where('product_name','like',"$product%");
-            $products->whereBetween('product_price',[$minPrice,$maxPrice]);
+            //$products = Product::query();
+            $products = Product::where('product_name','like',"%$product%");
+//            $products->whereBetween('product_price',[$minPrice,$maxPrice]);
             $products = $products->join('BUSINESSES','BUSINESSES.id','=','PRODUCTS.bid')
                 ->select('PRODUCTS.product_name','PRODUCTS.product_price','PRODUCTS.product_slug','PRODUCTS.product_images',
                     'BUSINESSES.business_slug','BUSINESSES.business_name', 'BUSINESSES.business_area', 'BUSINESSES.business_number');
@@ -57,7 +57,9 @@ class ProductController extends Controller
 
             }
 
-            $products = $products->paginate(6);
+            //$products->get();
+
+            $products = $products->paginate(9);
             //$products->appends(['product' => $product]);
 
 
@@ -66,7 +68,7 @@ class ProductController extends Controller
 
             //Search product
             $products = Product::query();
-            $products = $products->where('product_name','like',"$product%");
+            $products = $products->where('product_name','like',"%$product%");
             $products->whereBetween('product_price',[$minPrice,$maxPrice]);
 
             if(sizeof($categories)>1){
@@ -95,7 +97,9 @@ class ProductController extends Controller
 
             }
 
-            $products = $products->paginate(6);
+            //return $products;
+
+            $products = $products->paginate(9);
 
             //$products = $products->get();
         }
