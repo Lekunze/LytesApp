@@ -23,18 +23,27 @@ var navbar_initialized = false;
 
 $(document).ready(function(){
 
+    console.log("Here Dateee");
+
     // Init Material scripts for buttons ripples, inputs animations etc, more info on the next link https://github.com/FezVrasta/bootstrap-material-design#materialjs
     $.material.init();
 
     //  Activate the Tooltips
     $('[data-toggle="tooltip"], [rel="tooltip"]').tooltip();
 
+
     // Activate Datepicker
     if($('.datepicker').length != 0){
+        alert("Hello");
         $('.datepicker').datepicker({
              weekStart:1
         });
     }
+
+    $('#dob').datepicker({
+        useCurrent:false,
+        format: 'YYYY-MM-DD'
+    });
 
     // Check if we have the class "navbar-color-on-scroll" then add the function to remove the class "navbar-transparent" so it will transform to a plain color.
     if($('.navbar-color-on-scroll').length != 0){
@@ -46,7 +55,7 @@ $(document).ready(function(){
 
     // Active Carousel
 	$('.carousel').carousel({
-      interval: 400000
+      interval: 3000
     });
 
 });

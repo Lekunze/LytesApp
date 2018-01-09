@@ -32,6 +32,17 @@
     <!-- Plugin for form validation, full documentation here: http://1000hz.github.io/bootstrap-validator/ -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
 
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    {{--<script src="{{asset('new-ui/js/nouislider.min.js')}}"type="text/javascript"></script>--}}
+
+    <!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
+    {{--<script src="{{asset('new-ui/js/material-kit.js')}}" type="text/javascript"></script>--}}
+
+    <!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
+    <script src="{{asset('new-ui/js/bootstrap-datepicker.js')}}" type="text/javascript"></script>
+
+    <script src="{{asset('dist/bootstrap-imageupload.js')}}"></script>
+
 
     {{--<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>--}}
 
@@ -322,7 +333,7 @@
                             <div class="col-sm-6">
                                     <div class="form-group label-floating has-validation">
                                             <label class="control-label">Date of Birth*</label>
-                                            <input class="datepicker form-control" type="text" name="date_of_birth" id="dob" value="mm/dd/yyyy"/>
+                                            <input class="datepicker form-control" type="date" name="date_of_birth" id="dob" value="yyyy-MM-dd"/>
                                     </div>
                                     <!-- <label class="control-label">Date of Birth</label>-->
                             </div>
@@ -587,16 +598,7 @@
 </body>
 
 
-    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-    {{--<script src="{{asset('new-ui/js/nouislider.min.js')}}"type="text/javascript"></script>--}}
 
-    <!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
-    <script src="{{asset('new-ui/js/bootstrap-datepicker.js')}}" type="text/javascript"></script>
-
-    <!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
-    <script src="{{asset('new-ui/js/material-kit.js')}}" type="text/javascript"></script>
-
-    <script src="{{asset('dist/bootstrap-imageupload.js')}}"></script>
 
 <script>
 
@@ -704,14 +706,19 @@
 <script>
     $(document).ready(function(){
 
-        var checkout = $('#dob').datepicker({
-                format: "dd/mm/yyyy",
+        $("#dob").datepicker({
+            useCurrent: false,
+            format: 'L',
+            format: 'yyyy-mm-dd',
+            // format: 'dd/mm/YYYY'
+        });
+        /*var checkout = $('#dob').datepicker({
             onRender: function(date) {
                     return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
                 }
             }).on('changeDate', function(ev) {
                 checkout.hide();
-            }).data('datepicker');
+            }).data('datepicker');*/
     });
 
 

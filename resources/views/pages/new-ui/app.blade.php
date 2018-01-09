@@ -22,7 +22,9 @@
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{asset('new-ui/css/demo.css')}}" rel="stylesheet" />
-    
+    <link href="{{asset('new-ui/css/extras.css')}}" rel="stylesheet"/>
+
+
     <style>
         body{
             background-color: black;
@@ -47,7 +49,7 @@
 
 		.shop{
 			background-color: rgb(0,32,96) !important;
-			font-size: 1.5em !important;
+			font-size: 1.5em;
 
 		}
 
@@ -57,24 +59,11 @@
 
 		}
 
-
-
-		footer{
-			color:white !important;
-		}
-
-		.pull-right a{
-			color:white !important;
-			text-decoration: none;
-		}
-		.pull-right a:hover{
-			color:rgb(191,13,64) !important;
-		}
-
-        .pull-left ul li a:hover{
-            color:rgb(191,13,64) !important;
-
+        footer, #links a{
+            color:white !important;
         }
+
+
 
         .btn-simple{
             color:white !important;
@@ -93,7 +82,7 @@
 			}
 
 			.title{
-				font-size: 2.2em !important;
+				font-size: 2.2em;
 			}
 
 			.shop{
@@ -109,19 +98,28 @@
 				font-size: 1.3em !important;
 			}
 
-			.pull-left{
-				float: none !important;
-				text-align: center !important;
+            #slider-5 .shop, #slider-3 .shop, #slider-2 .shop {
+                margin-top: -5em;
+            }
 
-			}
-			.pull-right{
-				float: none !important;
-				text-align: center !important;
+            .carousel-indicators{
+                width:70%;
+                left:45%;
+            }
 
-			}
-			footer ul li a {
-				padding:10px !important;
-			}
+            .carousel .carousel-indicators{
+                bottom:-10px;
+            }
+
+            #slider-2 .capt {
+                /*left: 20%;*/
+            }
+
+
+            #slider-3 h2.title{
+                color:black;
+            }
+
 		}
 
 
@@ -142,23 +140,7 @@
 			}
 
 			.title{
-				font-size: 5.5em !important;
-			}
-			.pull-left{
-				text-align: left !important;
-			}
-
-			.pull-right{
-				margin-top: 0px !important;
-				float: right !important;
-			}
-
-			div.copyright{
-				text-align: center !important;
-			}
-
-			footer.copyright{
-				/*padding: 15px 0;*/
+				font-size: 5.5em;
 			}
         }
 
@@ -181,18 +163,19 @@
 				top: 30%;
 			}
 
+
 			.shop{
-				margin-top:-1.7em !important;
+				margin-top:-1.7em;
 				max-height: 50px;
 				max-width: 420px;
 				font-size: 3.5em !important;
 				padding: 15px 20px 20px 20px !important;
-
-
 			}
 
+
+
 			.title{
-				font-size: 5.2em !important;
+				font-size: 5.2em;
 			}
 		}
 
@@ -202,36 +185,49 @@
         and (-webkit-min-device-pixel-ratio: 2)
         and (orientation: portrait) {
 
-			.brand{
-				width:200px !important;
-			}
-            div.col-md-12.capt{
+            .brand {
+                width: 200px !important;
+            }
+
+            div.col-md-12.capt {
                 font-size: 0.4em;
                 left: 50%;
                 top: 30%;
             }
 
-			.title{
-				font-size: 2.2em !important;
-			}
+            .title {
+                font-size: 2.7em;
+            }
 
-            .shop{
-                margin-top:-9em;
+            .shop {
+                margin-top: -8em;
                 max-height: 30px;
                 max-width: 120px;
-                font-size: 1.5em !important;    
+                font-size: 1.5em !important;
                 /* padding: 0;     */
-                padding: 5px 5px 5px 5px !important;    
-                
-            }
-            .shop i{
-                font-size: 1.3em !important;                
-            }
-			.pull-left{
-				float: none !important;
-				text-align: center !important;
+                padding: 5px 5px 5px 5px !important;
 
-			}
+            }
+
+            .shop i {
+                font-size: 1.7em;
+            }
+
+            #slider-5 .shop, #slider-3 .shop, #slider-2 .shop {
+                margin-top: -5em;
+            }
+
+            #slider-5 .capt {
+                top: 20%;
+            }
+
+            #slider-4 .shop i{
+                font-size: 1em ;
+            }
+
+            #slider-3 h2.title{
+                color:black;
+            }
         }
 
     </style>
@@ -316,6 +312,9 @@
                                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                                 <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                                 <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="5"></li>
                             </ol>
 
                             <!-- Wrapper for slides -->
@@ -323,7 +322,7 @@
                                 <div class="item active">
                                     <img src="{{asset('new-ui/img/shopping-1.jpeg')}}" alt="Awesome Image">
                                     <div class="col-md-12 capt" style="position:absolute; z-index:100 !important; bottom:20px; text-shadow:none;">
-                                        <h2 class="title" style="overflow: auto !important;">Discounted prices for you</h2>
+                                        <h2 class="title" style="overflow: auto !important;">Low prices for you</h2>
                                         <a class="btn btn-danger btn-raised btn-lg shop" href="/search">
                                             <i class="fa fa-search"></i> &nbspSearch Products
                                         </a>
@@ -332,10 +331,10 @@
                                         <!-- <h4><i class="material-icons">location_on</i> Yellowstone National Park, United States</h4> -->
                                     </div>
                                 </div>
-                                <div class="item">
+                                <div class="item" id="slider-2">
                                     <img src="{{asset('new-ui/img/shopping-2.jpeg')}}" alt="Awesome Image">
                                     <div class="col-md-12 capt" style="position:absolute; z-index:100 !important; bottom:20px; text-shadow:none;">
-                                            <h2 class="title" style="color:white">Find every product you need</h2>
+                                            <h2 class="title" style="color:white">Search products from many shops</h2>
                                             <a class="btn btn-danger btn-raised btn-lg shop" href="/search">
                                                 <i class="fa fa-search"></i> &nbspSearch Products
                                             </a>
@@ -343,14 +342,50 @@
                                     <div class="carousel-caption">
                                         <!-- <h4><i class="material-icons">location_on</i> Somewhere Beyond, United States</h4> -->
                                     </div>
-                                    
+
                                 </div>
-                                <div class="item">
-                                    <img src="{{asset('new-ui/img/shopping-4.jpeg')}}" alt="Awesome Image">
+                                <div class="item" id="slider-3">
+                                    <img src="{{asset('img/slider-8.jpeg')}}" alt="Awesome Image">
                                     <div class="col-md-12 capt" style="position:absolute; z-index:100 !important; bottom:20px; text-shadow:none;">
-                                            <h2 class="title" style="color:white">Sellers you can trust!</h2>
+                                            <h2 class="title" style="color:white">Manage your shop to your preference</h2>
+                                            <a class="btn btn-danger btn-raised btn-lg shop" href="/register">
+                                                <i class="fa fa-home"></i> &nbspAdd Store
+                                            </a>
+                                    </div>
+                                    <div class="carousel-caption">
+                                        <!-- <h4><i class="material-icons">location_on</i> Yellowstone National Park, United States</h4> -->
+                                    </div>
+                                </div>
+                                <div class="item" id="slider-4">
+                                    <img src="{{asset('img/slider-7.jpeg')}}" alt="Awesome Image">
+                                    <div class="col-md-12 capt" style="position:absolute; z-index:100 !important; bottom:20px; text-shadow:none;">
+                                            <h2 class="title" style="color:white">Sellers you can trust</h2>
                                             <a class="btn btn-danger btn-raised btn-lg shop" href="/search">
                                                 <i class="fa fa-search"></i> &nbspSearch Products
+                                            </a>
+                                    </div>
+                                    <div class="carousel-caption">
+                                        <!-- <h4><i class="material-icons">location_on</i> Yellowstone National Park, United States</h4> -->
+                                    </div>
+                                </div>
+                                <div class="item" id="slider-5">
+                                    <img src="{{asset('img/slider-5.jpeg')}}" alt="Awesome Image">
+                                    <div class="col-md-12 capt" style="position:absolute; z-index:100 !important; bottom:20px; text-shadow:none;">
+                                            <h2 class="title" style="color:white">Tell the world when you are opened</h2>
+                                            <a class="btn btn-danger btn-raised btn-lg shop" href="/register">
+                                                <i class="fa fa-home"></i> &nbspAdd Store
+                                            </a>
+                                    </div>
+                                    <div class="carousel-caption">
+                                        <!-- <h4><i class="material-icons">location_on</i> Yellowstone National Park, United States</h4> -->
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <img src="{{asset('img/slider-9.jpg')}}" alt="Awesome Image">
+                                    <div class="col-md-12 capt" style="position:absolute; z-index:100 !important; bottom:20px; text-shadow:none; left:10% !important;">
+                                        <h2 class="title" style="color:white">Move from <span style="color:rgb(0,32,96)">local</span> to <span style="color:rgb(191,13,64)">global</span></h2>
+                                            <a class="btn btn-danger btn-raised btn-lg shop" href="/register">
+                                                <i class="fa fa-home"></i> &nbspAdd Store
                                             </a>
                                     </div>
                                     <div class="carousel-caption">
@@ -376,43 +411,7 @@
     </div>
 </div>
 
-	<footer class="footer footer-transparent">
-		<div class="container">
-			<nav class="pull-left" style="display: inline-block !important;">
-				<ul>
-					<li>
-						<a href="/">
-							Lytes.App
-						</a>
-					</li>
-					<li>
-						<a href="/about">
-							About Us
-						</a>
-					</li>
-					<li>
-						<a href="/search">
-							Search
-						</a>
-					</li>
-					<li>
-						<a href="/register">
-							Join Us
-						</a>
-					</li>
-				</ul>
-			</nav>
-			<div class="social-area pull-right">
-
-				<span>
-					&copy; 2018 Lytes.App | <a href="mailto:info@lytesapp.com"> info@lytesapp.com
-				<i class="fa fa-envelope" aria-hidden="true"></i> </a>
-				</span>
-
-			</div>
-
-		</div>
-	</footer>
+	@include('modules.footers.main-footer')
 </div>
 
 
@@ -435,6 +434,7 @@
 
 		$().ready(function(){
 			// the body of this function is in assets/material-kit.js
+
 			materialKit.initSliders();
             window_width = $(window).width();
 
@@ -444,9 +444,7 @@
 				$(window).on('scroll', materialKitDemo.checkScrollForParallax);
 			}
 
-			$(".slide").slider({
-				animationDuration:100
-			});
+
 
 		});
 
