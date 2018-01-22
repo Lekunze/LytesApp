@@ -6,7 +6,7 @@
 	<link rel="icon" type="image/png" href="{{asset('img/shopping-cart.png')}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Home - Lytes.App</title>
+	<title>Home - LytesApp</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
@@ -69,6 +69,9 @@
             color:white !important;
         }
 
+        #slider-5 .capt{
+            left: 30%;
+        }
 
 
 		@media screen and (min-width: 360px){
@@ -118,6 +121,14 @@
 
             #slider-3 h2.title{
                 color:black;
+            }
+
+            #slider-5 .capt{
+                left: 30%;
+            }
+
+            #slider-5 .capt{
+                left: 70%;
             }
 
 		}
@@ -185,6 +196,10 @@
         and (-webkit-min-device-pixel-ratio: 2)
         and (orientation: portrait) {
 
+            #slider-5 .capt{
+                left: 30%;
+            }
+
             .brand {
                 width: 200px !important;
             }
@@ -221,6 +236,14 @@
                 top: 20%;
             }
 
+            #slider-1 .capt {
+                top: 20%;
+            }
+
+            #slider-1 .shop{
+                margin-top: -5em;
+            }
+
             #slider-4 .shop i{
                 font-size: 1em ;
             }
@@ -251,7 +274,7 @@
 	                    <img src="{{asset('img/shopping-cart.png')}}" alt="Creative Tim Logo" rel="tooltip" title="<b>Lytes.App</b> Is Ghana's premier shopping catalog. Search for anything you need." data-placement="bottom" data-html="true">
 	                </div>
 	                <div class="brand" style="font-size:1.5em;margin-top:0.4em; width:300px">
-	                    <span id="title-lbl">LytesApp </span><br><span style="font-size:0.5em; font-weight:200">Join the rest of the world. Let's get online.</span>
+	                    <span id="title-lbl">LytesApp </span><br><span style="font-size:0.5em; font-weight:400 !important;">Join the rest of the world. Let's get online.</span>
 	                </div>
 
 				</div>
@@ -319,10 +342,10 @@
 
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
-                                <div class="item active">
+                                <div class="item active" id="slider-1">
                                     <img src="{{asset('new-ui/img/shopping-1.jpeg')}}" alt="Awesome Image">
                                     <div class="col-md-12 capt" style="position:absolute; z-index:100 !important; bottom:20px; text-shadow:none;">
-                                        <h2 class="title" style="overflow: auto !important;">Low prices for you</h2>
+                                        <h2 class="title" style="overflow: auto !important;">Compare prices from many shops</h2>
                                         <a class="btn btn-danger btn-raised btn-lg shop" href="/search">
                                             <i class="fa fa-search"></i> &nbspSearch Products
                                         </a>
@@ -332,7 +355,7 @@
                                     </div>
                                 </div>
                                 <div class="item" id="slider-2">
-                                    <img src="{{asset('new-ui/img/shopping-2.jpeg')}}" alt="Awesome Image">
+                                    <img src="{{asset('img/slider-2.jpeg')}}" alt="Awesome Image">
                                     <div class="col-md-12 capt" style="position:absolute; z-index:100 !important; bottom:20px; text-shadow:none;">
                                             <h2 class="title" style="color:white">Search products from many shops</h2>
                                             <a class="btn btn-danger btn-raised btn-lg shop" href="/search">
@@ -347,8 +370,8 @@
                                 <div class="item" id="slider-3">
                                     <img src="{{asset('img/slider-8.jpeg')}}" alt="Awesome Image">
                                     <div class="col-md-12 capt" style="position:absolute; z-index:100 !important; bottom:20px; text-shadow:none;">
-                                            <h2 class="title" style="color:white">Manage your shop to your preference</h2>
-                                            <a class="btn btn-danger btn-raised btn-lg shop" href="/register">
+                                            <h2 class="title" style="color:white">Manage your shop to your <br>preference</h2>
+                                            <a class="btn btn-danger btn-raised btn-lg shop" href="/register" style="background-color: rgb(191,13,64) !important;">
                                                 <i class="fa fa-home"></i> &nbspAdd Store
                                             </a>
                                     </div>
@@ -357,7 +380,7 @@
                                     </div>
                                 </div>
                                 <div class="item" id="slider-4">
-                                    <img src="{{asset('img/slider-7.jpeg')}}" alt="Awesome Image">
+                                    <img src="{{asset('img/slider-10.jpeg')}}" alt="Awesome Image">
                                     <div class="col-md-12 capt" style="position:absolute; z-index:100 !important; bottom:20px; text-shadow:none;">
                                             <h2 class="title" style="color:white">Sellers you can trust</h2>
                                             <a class="btn btn-danger btn-raised btn-lg shop" href="/search">
@@ -369,10 +392,10 @@
                                     </div>
                                 </div>
                                 <div class="item" id="slider-5">
-                                    <img src="{{asset('img/slider-5.jpeg')}}" alt="Awesome Image">
+                                    <img src="{{asset('img/slider-5.jpg')}}" alt="Awesome Image">
                                     <div class="col-md-12 capt" style="position:absolute; z-index:100 !important; bottom:20px; text-shadow:none;">
-                                            <h2 class="title" style="color:white">Tell the world when you are opened</h2>
-                                            <a class="btn btn-danger btn-raised btn-lg shop" href="/register">
+                                            <h2 class="title" style="color:white;">Tell the world when <br> you are opened</h2>
+                                            <a class="btn btn-danger btn-raised btn-lg shop" href="/register" style="background-color: rgb(0,32,96)!important;">
                                                 <i class="fa fa-home"></i> &nbspAdd Store
                                             </a>
                                     </div>
@@ -381,10 +404,10 @@
                                     </div>
                                 </div>
                                 <div class="item">
-                                    <img src="{{asset('img/slider-9.jpg')}}" alt="Awesome Image">
+                                    <img src="{{asset('img/slider-9.jpeg')}}" alt="Awesome Image">
                                     <div class="col-md-12 capt" style="position:absolute; z-index:100 !important; bottom:20px; text-shadow:none; left:10% !important;">
-                                        <h2 class="title" style="color:white">Move from <span style="color:rgb(0,32,96)">local</span> to <span style="color:rgb(191,13,64)">global</span></h2>
-                                            <a class="btn btn-danger btn-raised btn-lg shop" href="/register">
+                                        <h2 class="title" style="color:white">Move from local to global </h2>
+                                            <a class="btn btn-danger btn-raised btn-lg shop" href="/register" style="background-color: rgb(191,13,64) !important;">
                                                 <i class="fa fa-home"></i> &nbspAdd Store
                                             </a>
                                     </div>

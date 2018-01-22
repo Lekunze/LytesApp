@@ -4,7 +4,7 @@
             <ul>
                 <li>
                     <a href="/">
-                        Lytes.App
+                        LytesApp
                     </a>
                 </li>
                 <li>
@@ -26,7 +26,7 @@
         </nav>
         <div class="copyright pull-right">
                <span id="links">
-					&copy; 2018 Lytes.App | <a href="mailto:info@lytesapp.com"> info@lytesapp.com
+					&copy; 2018 LytesApp | <a href="mailto:info@lytesapp.com"> info@lytesapp.com
 				<i class="fa fa-envelope" aria-hidden="true"></i> </a>
 				</span>
 

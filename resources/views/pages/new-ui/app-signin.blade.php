@@ -7,7 +7,7 @@
 	{{--<link rel="icon" type="image/png" href="{{asset('new-ui/img/favicon.png')}}">--}}
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Sign-In - Lytes.App</title>
+	<title>Sign-In - LytesApp</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
@@ -72,9 +72,9 @@
 		            <span class="icon-bar"></span>
 		            <span class="icon-bar"></span>
         		</button>
-                <a class="navbar-brand" href="app.blade.php" style="line-height:15px!important;">Lytes.App<br>
-                    <span style="font-size:0.5em; font-weight:200; margin-bottom:-8em !important;">Shop anywhere</span>
-                </a>
+				<a class="navbar-brand" href="/" style="line-height:15px!important;">LytesApp<br>
+					<span style="font-size:0.5em; font-weight:200; margin-bottom:-8em !important;">Join the rest of the world. Let's get online.</span>
+				</a>
         	</div>
 
         	<div class="collapse navbar-collapse" id="navigation-example">

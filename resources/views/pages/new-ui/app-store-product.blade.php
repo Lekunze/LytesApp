@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('new-ui/img/apple-icon.png')}}">
-    <link rel="icon" type="image/png" href="{{asset('img/reunion.png')}}">
+    <link rel="icon" type="image/png" href="{{asset('img/shopping-cart.png')}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>New Product - {{$business->business_name}}</title>
@@ -19,6 +19,8 @@
     <link href="{{asset('new-ui/css/bootstrap.min.css')}}" rel="stylesheet" />
     <link href="{{asset('new-ui/css/material-kit.css')}}" rel="stylesheet"/>
     <link href="{{asset('new-ui/css/extras.css')}}" rel="stylesheet"/>
+    <link href="{{asset('new-ui/css/shops.css')}}" rel="stylesheet"/>
+
 
 
     <!-- Image Upload CSS -->
@@ -70,57 +72,7 @@
 </head>
 
 <body class="profile-page">
-	<nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll">
-    	<div class="container">
-        	<!-- Brand and toggle get grouped for better mobile display -->
-        	<div class="navbar-header">
-        		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example">
-            		<span class="sr-only">Toggle navigation</span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-        		</button>
-        		<a class="navbar-brand" href="/" style="line-height:15px!important;">Lytes.App<br>
-                    <span style="font-size:0.5em; font-weight:200; margin-bottom:-8em !important;">Shop anywhere</span>
-                </a>
-        	</div>
-
-        	<div class="collapse navbar-collapse" id="navigation-example">
-        		<ul class="nav navbar-nav navbar-right">
-					<li>
-                            <a href="/{{$business->business_slug}}">
-                                    <i class="material-icons">store</i> Store
-                            </a>
-    				</li>
-    				<li>
-                            <a href="/{{$business->business_slug}}/shelves">
-                                    <i class="material-icons">storage</i> Shelves
-                            </a>
-                    </li>
-                    <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products &nbsp<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/{{$business->business_slug}}/new"> <i class="material-icons">shopping_basket</i> &nbspNew Product </a></li>
-                            <li><a href="/{{$business->business_slug}}/products"> <i class="material-icons">edit</i>&nbsp Edit Products </a></li>
-                        </ul>
-
-                    </li>
-                    <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings &nbsp<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                              <li><a href="/change">Change Password</a></li>
-                              <li><a href="#">Edit Profile</a></li>
-                            </ul>
-                    </li>
-		            <li>
-                            <a href="/logout">
-                                    <i class="material-icons">exit_to_app</i> Logout
-                            </a>
-                    </li>
-        		</ul>
-        	</div>
-    	</div>
-    </nav>
+	@include('modules.headers.shop-headers')
 
     <div class="wrapper">
         <div class="header header-filter" style="background-image: url(<?php echo asset($business->business_images."/cover_image.jpg")?>);">

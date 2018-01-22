@@ -15,14 +15,14 @@ class CreateBusinessOwnersTable extends Migration
     {
         Schema::create('BUSINESS_OWNERS', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('business_owner_last_name')->nullable();
-            $table->string('business_owner_given_names')->nullable();
-            $table->string('business_owner_dob')->nullable();
-            $table->string('business_owner_nationality')->nullable();
-            $table->string('business_owner_id_type')->nullable();
-            $table->string('business_owner_id_number')->nullable();
-            $table->string('business_owner_phone')->nullable();
-            $table->string('business_owner_phone_2')->nullable();
+            $table->string('business_owner_last_name',20)->nullable();
+            $table->string('business_owner_given_names',50)->nullable();
+            $table->date('business_owner_dob')->nullable();
+            $table->string('business_owner_nationality',30)->nullable();
+            $table->string('business_owner_id_type',2)->nullable();
+            $table->string('business_owner_id_number',10)->nullable();
+            $table->string('business_owner_phone',10)->nullable();
+            $table->string('business_owner_phone_2',10)->nullable();
             $table->timestamps();
         });
     }

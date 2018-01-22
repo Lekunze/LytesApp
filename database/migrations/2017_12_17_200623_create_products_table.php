@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->integer('bid')->unsigned()->nullable();
             $table->foreign('bid')->references('id')->on('BUSINESSES');
             $table->integer('sid')->unsigned()->nullable();
-            $table->foreign('sid')->references('id')->on('BUSINESSES');
+            $table->foreign('sid')->references('id')->on('SHELVES');
             $table->string('product_name')->nullable();
             $table->string('product_description')->nullable();
             $table->string('product_price')->nullable();

@@ -19,11 +19,13 @@
 	<link href="{{asset('new-ui/css/bootstrap.min.css')}}" rel="stylesheet" />
 	<link href="{{asset('new-ui/css/material-kit.css')}}" rel="stylesheet"/>
 	<link href="{{asset('new-ui/css/extras.css')}}" rel="stylesheet"/>
+	<link href="{{asset('new-ui/css/shops.css')}}" rel="stylesheet"/>
+
 
 	<style>
 
 		.navbar-color-on-scroll{
-			background-color: rgb(0,32,96);
+			background-color: black;
 		}
 
 		.nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
@@ -32,7 +34,8 @@
 
 
 		.row.sharing-area.text-center a{
-			color: rgb(191,13,64) !important;
+			color: #03a9f4 !important;
+			font-weight: 400;
 
 		}
 
@@ -53,9 +56,9 @@
 		            <span class="icon-bar"></span>
 		            <span class="icon-bar"></span>
         		</button>
-        		<a class="navbar-brand" href="/" style="line-height:15px!important;">Lytes.App<br>
-                    <span style="font-size:0.5em; font-weight:200; margin-bottom:-8em !important;">Shop anywhere</span>
-                </a>
+				<a class="navbar-brand" href="/" style="line-height:15px!important;">LytesApp<br>
+					<span style="font-size:0.5em; font-weight:200; margin-bottom:-8em !important;">Join the rest of the world. Let's get online.</span>
+				</a>
         	</div>
 
         	<div class="collapse navbar-collapse" id="navigation-example">
@@ -91,24 +94,40 @@
 	                        <div class="avatar">
 	                            <img src="<?php echo asset($business[0]->business_images."/logo.jpg")?>" alt="Circle Image" class="img-circle img-responsive img-raised">
 	                        </div>
-	                        <div class="name">
-	                            <h3 class="title">{{$business[0]->business_name}} <span class="label label-success">Open</span> </h3>
-                                <!-- <h6>Electronics</h6> -->
-                                <div class="row sharing-area text-center">
-                                        <a href="#" style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12">
-                                            <i class="fa fa-phone-square"></i>
-											{{$business[0]->business_number}}
-                                        </a>
-                                        <a href="#" style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12">
-                                            <i class="fa fa-envelope"></i>
-											{{$business[0]->business_email}}
-                                        </a>
-                                        <a href="#" style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12">
-                                            <i class="fa fa-map-marker"></i>
-											{{$business[0]->business_area}}
-                                        </a>
-                                </div>
-	                        </div>
+							<div class="name">
+								<h3 class="title">{{$business[0]->business_name}}
+									@if((intval($business[0]->business_open) <= date('H')) && (intval($business[0]->business_close) >= date("H")))
+										@if(in_array(date('l'),explode(',',$business[0]->business_days)))
+											<span class="label label-success">
+												Open
+											</span>
+										@else
+											<span class="label label-danger">
+											Closed
+										</span>
+										@endif
+									@else
+										<span class="label label-danger">
+											Closed
+										</span>
+									@endif
+								</h3>
+								<!-- <h6>Electronics</h6> -->
+								<div class="row sharing-area text-center">
+									<a style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12" href="tel:{{$business[0]->business_number}}">
+										<i class="fa fa-phone-square"></i>
+										{{$business[0]->business_number}}
+									</a>
+									<a style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12" href="mailto:{{$business[0]->business_email}}">
+										<i class="fa fa-envelope"></i>
+										{{$business[0]->business_email}}
+									</a>
+									<a style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12" href="http://maps.google.com/?q={{$business[0]->business_area}}" target="_blank">
+										<i class="fa fa-map-marker"></i>
+										{{$business[0]->business_area}}
+									</a>
+								</div>
+							</div>
 	                    </div>
 	                </div>
 	                <div class="description text-center">
@@ -143,7 +162,7 @@
 														@foreach($products as $product)
 															@if($product->sid == $shelf->id)
 																<div class="col-md-6">
-																	<a href="/{{$business->business_slug}}/{{$product->product_slug}}">
+																	<a href="/{{$business[0]->business_slug}}/{{$product->product_slug}}">
 																		<img src="<?php echo asset($product->product_images."/product_1.jpg")?>" class="img-rounded" />
 																	</a>
 																</div>

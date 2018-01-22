@@ -5,7 +5,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('new-ui/img/apple-icon.png')}}">
     <link rel="icon" type="image/png" href="{{asset('img/shopping-cart.png')}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>Change Password | Lytes.App</title>
+	<title>Change Password | LytesApp</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -69,9 +69,9 @@
            <div class="logo">
                <img src="{{asset('img/shopping-cart.png')}}">
            </div>
-           <div class="brand" style="width:300px; font-size:1.5em;margin-top:0.4em; ">
-               Lytes.App <br><span style="font-size:0.6em; font-weight:400">Join the rest of the world. Let's get online</span>
-           </div>
+            <a class="navbar-brand" href="/" style="line-height:15px!important;">LytesApp<br>
+                <span style="font-size:0.5em; font-weight:200; margin-bottom:-8em !important;">Join the rest of the world. Let's get online.</span>
+            </a>
        </div>
    </a>
     

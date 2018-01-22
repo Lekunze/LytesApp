@@ -1,4 +1,4 @@
-<option value="0" selected>Choose your option</option>
+<option value="0">Choose your option</option>
 <option value="1">Driver's License</option>
 <option value="2">National ID</option>
 <option value="3">Non-citizen ID</option>

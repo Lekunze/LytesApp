@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="{{asset('img/shopping-cart.png')}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Search - Lytes.App</title>
+	<title>Search - LytesApp</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
@@ -264,7 +264,7 @@
                         {{--<img src="{{asset('new-ui/img/logo.png')}}" alt="Creative Tim Logo" rel="tooltip" title="<b>Material Kit</b> was Designed & Coded with care by the staff from <b>Creative Tim</b>" data-placement="bottom" data-html="true">--}}
                     </div>
                     <div class="brand" style="font-size:1.5em;margin-top:0.4em; width:300px">
-                        Lytes.App <br><span style="font-size:0.5em; font-weight:200">Join the rest of the world. Let's get online.</span>
+                        LytesApp <br><span style="font-size:0.5em; font-weight:200">Join the rest of the world. Let's get online.</span>
                     </div>
 
 
@@ -471,7 +471,7 @@
                                                      <h4 class="title"><a href="/{{$product->business_slug}}/{{$product->product_slug}}">{{$product->product_name}}</a></h4>
                                                  </a>
                                                  <p class="description">
-                                                     <a> {{$product->business_name}} </a>
+                                                     <a href="/{{$product->business_slug}}"> {{$product->business_name}} </a>
                                                  </p>
                                                  <div class="footer">
                                                      <span class="price" style="font-weight: 400 !important;"> GHS {{$product->product_price}}</span>

@@ -56,14 +56,14 @@ class SMEController extends Controller
         Validator::make($request->all(),[
             'business_owner_last_name' => 'required|regex:/^[a-zA-Z. -]+$/u',
             'business_owner_given_names' => 'string',
-            'business_name' => 'string',
-            'email' => 'email',
-            'region' => 'string',
-            'id_number' => 'string',
-            'address' => 'string',
-            'area' => 'string',
+            //'business_name' => 'string',
+            //'email' => 'email',
+            //'region' => 'string',
+            //'id_number' => 'string',
+            //'address' => 'string',
+            //'area' => 'string',
             'phone_number' => 'digits_between:10,10',
-            'business_number' => 'digits_between:10,10',
+            //'business_number' => 'digits_between:10,10',
         ], $messages)->validate();
 
 
@@ -89,9 +89,12 @@ class SMEController extends Controller
         $BO_ID = $business_owner->id;
         //return $BO_ID;
 
-        //Create new business
+        //Create new business*/
         $business->business_name = $request->business_name;
-        $business->id = $BO_ID;
+        $business->oid = $BO_ID;
+        $business->business_days = implode(",",$request->days);
+        $business->business_open = $request->open;
+        $business->business_close = $request->close;
         $business->business_slug = $request->business_slug;
         $business->business_description = $request->business_description;
         $business->business_tagline = $request->business_tagline;
@@ -108,8 +111,9 @@ class SMEController extends Controller
         $business->save();
 
         //Create new user
-        $random_password = str_random(8);
-        $user->id = $BO_ID;
+        //$random_password = str_random(8);
+        $random_password = "test";
+        $user->oid = $BO_ID;
         $user->username = $request->business_slug;
         $user->email = $request->business_email;
         $user->password = bcrypt($random_password);

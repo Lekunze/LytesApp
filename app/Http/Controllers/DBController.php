@@ -69,26 +69,29 @@ class DBController extends Controller
 
 
     //Product View
-    public function product(Request $request, $sme, $product){
+    public function product(Request $request, $business_slug, $product_slug){
         //$username = DB::table('businesses')->distinct()->select('email','business_name')->where('business_slug','=',$sme)->get();
-        $business= Business::where('business_slug','=',$sme)->get();
+        $business= Business::where('business_slug','=',$business_slug)->get();
         if(!sizeof($business)>0){
             return view('errors.503');
         }
 
-        $product= Product::where('product_slug','=',$product)->get();
+        $product= Product::where('product_slug','=',$product_slug)->get();
         if(!sizeof($product)>0){
             return view('errors.504');
         }
 
 
-        $business= Business::where('business_slug','=',$sme)->get();
-        $productX= Product::where('product_slug','=',$product)->where('bid','=',$business[0]->id)->get();
+
+        //$business= Business::where('business_slug','=',$business_slug)->get();
+        $productX= Product::where('product_slug','=',$product_slug)->where('bid','=',$business[0]->id)->get();
+        //return $business_slug;
+
         //$business_name = $business[0]->business_name;
         //return "Business: " . $business_name . "\nProduct: " . $product[0]->product_name;
         //return ((array) $products[0])['product_image_1'];
         //return view('product',compact('productX','sme','business_name'));
-        return view('pages.new-ui.app-product',compact('productX','sme','business'));
+        return view('pages.new-ui.app-product',compact('productX','business_slug','business'));
     }
 
     public function sme(Request $request, $sme){
@@ -100,7 +103,8 @@ class DBController extends Controller
             $business= Business::where('business_slug','=',$sme)->get();
 
             $products = Product::where('bid','=',$business[0]->id)->orderBy('bid', 'asc')->get();
-            $shelves = Shelf::distinct()->select('shelf_name')->where('bid','=',$business[0]->id)->get();
+            $shelves = Shelf::distinct()->select('id','shelf_name')->where('bid','=',$business[0]->id)->get();
+            //return $shelves;
             return view('pages.new-ui.app-store',compact('products','shelves','business'));
 
         }

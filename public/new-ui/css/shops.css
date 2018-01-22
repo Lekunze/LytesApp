@@ -1,0 +1,19 @@
+.img-circle{
+    border: 5px solid white;
+}
+
+.img-raised{
+    box-shadow: none;
+}
+
+.profile-page .profile img{
+    width: 180px !important;
+    max-width: 180px !important;
+
+}
+
+.navbar .dropdown-menu li > a:hover, .navbar .dropdown-menu li > a:focus, .navbar.navbar-default .dropdown-menu li > a:hover, .navbar.navbar-default .dropdown-menu li > a:focus {
+    color: #FFFFFF;
+    background-color: rgb(191,13,64) !important;
+
+}

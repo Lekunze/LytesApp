@@ -29,8 +29,9 @@
         }
 
         .navbar-default{
-            background-color: rgb(0,32,96) !important;
+            background-color: black !important;
         }
+
 		.section {
             padding: 30px 0;
             position: relative;
@@ -43,13 +44,26 @@
         }
 
         .description a{
-            color: tomato !important;
+            color: rgb(0,32,96) !important;
             margin-bottom: 200px !important;
 
         }
 
         .copyright a{
+            color: black;
+        }
+
+        footer a:hover, a:focus, a:hover{
             color: rgb(191,13,64) !important;
+        }
+
+        a.btn-success:hover, #navigation-doc a:hover{
+            color:white !important;
+        }
+
+        .carousel-indicators li{
+            background-color: black !important;
+            border-color: black !important;
         }
 
         .price{
@@ -74,32 +88,44 @@
             background-color: white !important;
         }
 
-        .nbs-flexisel-inner {
-            overflow: hidden;
-            float: left;
-            width: 100%;
+        .card-raised{
+            box-shadow: none;
         }
 
-        .nbs-flexisel-container {
-            position: relative;
-            min-width: 100%;
-        }
- 
-        .nbs-flexisel-ul {
-            position: relative;
-            width: 9999px;
-            padding: 0px;
-            list-style-type: none;
+        .card{
+            box-shadow: none;
         }
 
-        .nbs-flexisel-item {
-            float: left;
-            margin: 0px;
-            padding: 0px;
-            cursor: pointer;
-            line-height: 0px;
-            position: relative;
+        .carousel-inner>.item>img{
+            padding:50px;
         }
+
+        /*.nbs-flexisel-inner {*/
+            /*overflow: hidden;*/
+            /*float: left;*/
+            /*width: 100%;*/
+        /*}*/
+
+        /*.nbs-flexisel-container {*/
+            /*position: relative;*/
+            /*min-width: 100%;*/
+        /*}*/
+
+        /*.nbs-flexisel-ul {*/
+            /*position: relative;*/
+            /*width: 9999px;*/
+            /*padding: 0px;*/
+            /*list-style-type: none;*/
+        /*}*/
+
+        /*.nbs-flexisel-item {*/
+            /*float: left;*/
+            /*margin: 0px;*/
+            /*padding: 0px;*/
+            /*cursor: pointer;*/
+            /*line-height: 0px;*/
+            /*position: relative;*/
+        /*}*/
 
         .panel-group .panel {
             border: 0;
@@ -169,13 +195,13 @@
         <span class="icon-bar bar2"></span>
         <span class="icon-bar bar3"></span>
       </button>
-      <a href="http://www.creative-tim.com">
+      <a href="/">
            <div class="logo-container">
                 <div class="logo">
                     <img src="{{asset('img/shopping-cart.png')}}" alt="LytesApp">
                 </div>
-                <div class="brand" style="font-size:1.5em;margin-top:0.4em; width:100px; color:white">
-	                    Lytes.App <br><span style="font-size:0.5em; font-weight:200">Shop anywhere</span>
+                <div class="brand" style="font-size:1.5em;margin-top:0.4em; width:300px; color:white">
+	                    LytesApp <br><span style="font-size:0.5em; font-weight:200">Join the rest of the world. Let's get online</span>
 	                </div>
             </div>
       </a>
@@ -191,9 +217,9 @@
                 <a href="/login"><i class="material-icons">input</i>Sign In</a>
             </li>
 			<li>
-                    <a href="https://www.facebook.com/CreativeTim" target="_blank" class="btn btn-simple btn-white btn-just-icon" style="color:white">
-                        <i class="fa fa-facebook-square"></i>
-                    </a>
+                <a rel="tooltip" title="Like us on Facebook" data-placement="bottom" href="https://www.facebook.com/LytesApp/" target="_blank" class="btn btn-white btn-simple btn-just-icon" style="color:white">
+                    <i class="fa fa-facebook-square"></i>
+                </a>
                 </li>
     	</ul>
 
@@ -256,7 +282,7 @@
                         <div class="product-details">
                               <h3 class="title">{{$productX[0]->product_name}}</h3>
                           <p class="description">
-                              <a href="/{{$sme}}">{{$business[0]->business_name}}</a>
+                              <a href="/{{$business_slug}}">{{$business[0]->business_name}}</a>
                           </p><br>
         
                           <span class="price">GHS {{$productX[0]->product_price}}</span>
@@ -324,10 +350,10 @@
                                   
                                 </div>
                                 <div class="pull-right">
-                                  <button class="btn btn-danger btn-simple btn-hover" rel="tooltip" title="" data-placement="left" data-original-title="Like">
+                                  <!--<button class="btn btn-danger btn-simple btn-hover" rel="tooltip" title="" data-placement="left" data-original-title="Like">
                                             <i class="fa fa-heart-o"></i>
-                                  </button>
-                                  <a type="button" class="btn btn-success" href="/{{$sme}}"r>Visit Store</a>
+                                  </button>-->
+                                  <a type="button" class="btn btn-success" href="/{{$business_slug}}">Visit Store</a>
                                 </div>
                         </div>
                     </div>
@@ -366,18 +392,11 @@
                 </ul>
             </nav>
             <div class="social-area pull-right">
-                <!-- <a class="btn btn-social btn-twitter btn-simple" href="https://twitter.com/CreativeTim">
-                    <i class="fa fa-twitter"></i>
-                </a> -->
-                <a class="btn btn-social btn-facebook btn-simple" href="https://www.facebook.com/CreativeTim">
-                    <i class="fa fa-facebook-square"></i>
-                </a>
-                <!-- <a class="btn btn-social btn-google btn-simple" href="https://plus.google.com/+CreativetimPage">
-                    <i class="fa fa-google-plus"></i>
-                </a> -->
+
             </div>
             <div class="copyright" style="text-align: right">
-                    &copy; 2018 Lytes.App | Theme <i>by </i> <a href="http://www.creative-tim.com" target="_blank"> &nbspCreative Tim</a>
+                    &copy; 2018 Lytes.App | <a href="mailto:info@lytesapp.com"> info@lytesapp.com
+                    <i class="fa fa-envelope" aria-hidden="true"></i> </a>
             </div>
         </div>
     </footer>

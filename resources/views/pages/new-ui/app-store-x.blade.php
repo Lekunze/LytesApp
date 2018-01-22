@@ -6,6 +6,7 @@
 {{--	<link rel="icon" type="image/png" href="{{asset('new-ui/img/favicon.png')}}">--}}
 	<link rel="icon" type="image/png" href="{{asset('img/shopping-cart.png')}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="format-detection" content="telephone=no">
 
 	<title>{{$business->business_name}}</title>
 
@@ -19,6 +20,7 @@
 	<!-- CSS Files -->
 	<link href="{{asset('new-ui/css/bootstrap.min.css')}}" rel="stylesheet" />
 	<link href="{{asset('new-ui/css/material-kit.css')}}" rel="stylesheet"/>
+	<link href="{{asset('new-ui/css/shops.css')}}" rel="stylesheet"/>
 
 	<style>
 		.navbar-color-on-scroll{
@@ -37,7 +39,8 @@
 		}
 
 		.row.sharing-area.text-center a{
-			color: rgb(191,13,64) !important;
+			color: #03a9f4 !important;
+			font-weight: 400;
 
 		}
 
@@ -57,52 +60,7 @@
 </head>
 
 <body class="profile-page">
-	<nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll">
-    	<div class="container">
-        	<!-- Brand and toggle get grouped for better mobile display -->
-        	<div class="navbar-header">
-        		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example">
-            		<span class="sr-only">Toggle navigation</span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-        		</button>
-        		<a class="navbar-brand" href="app.blade.php" style="line-height:15px!important;">Lytes.App<br>
-                    <span style="font-size:0.5em; font-weight:200; margin-bottom:-8em !important;">Shop anywhere</span>
-                </a>
-        	</div>
-
-        	<div class="collapse navbar-collapse" id="navigation-example">
-        		<ul class="nav navbar-nav navbar-right">
-					<li>
-                            <a href="/{{$business->business_slug}}/shelves">
-                                    <i class="material-icons">storage</i> Shelves
-                            </a>
-    				</li>
-    				<li>
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Products &nbsp<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="/{{$business->business_slug}}/new"> <i class="material-icons">shopping_basket</i> &nbspNew Product </a></li>
-							<li><a href="/{{$business->business_slug}}/products"> <i class="material-icons">edit</i>&nbsp Edit Products </a></li>
-						</ul>
-
-                    </li>
-                    <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings &nbsp<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                              <li><a href="/change">Change Password</a></li>
-                              <li><a href="#">Edit Profile</a></li>
-                            </ul>
-                    </li>
-		            <li>
-                            <a href="/logout">
-                                    <i class="material-icons">exit_to_app</i> Logout
-                            </a>
-                    </li>
-        		</ul>
-        	</div>
-    	</div>
-    </nav>
+	@include('modules.headers.shop-headers')
 
     <div class="wrapper">
 		<div class="header header-filter" style="background-image: url(<?php echo asset($business->business_images."/cover_image.jpg")?>);"></div>
@@ -116,18 +74,34 @@
 	                            <img src="<?php echo asset($business->business_images."/logo.jpg")?>" alt="Circle Image" class="img-circle img-responsive img-raised">
 	                        </div>
 	                        <div class="name">
-	                            <h3 class="title">{{$business->business_name}} <span class="label label-success">Open</span> </h3>
+	                            <h3 class="title">{{$business->business_name}}
+									@if((intval($business->business_open) <= date('H')) && (intval($business->business_close) >= date("H")))
+										@if(in_array(date('l'),explode(',',$business->business_days)))
+											<span class="label label-success">
+												Open
+											</span>
+										@else
+											<span class="label label-danger">
+											Closed
+										</span>
+										@endif
+									@else
+										<span class="label label-danger">
+											Closed
+										</span>
+									@endif
+								</h3>
                                 <!-- <h6>Electronics</h6> -->
                                 <div class="row sharing-area text-center">
-                                        <a style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12">
+                                        <a style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12" href="tel:{{$business->business_number}}">
                                             <i class="fa fa-phone-square"></i>
 											{{$business->business_number}}
                                         </a>
-                                        <a style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12">
+                                        <a style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12" href="mailto:{{$business->business_email}}">
                                             <i class="fa fa-envelope"></i>
 											{{$business->business_email}}
                                         </a>
-                                        <a style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12">
+                                        <a style="margin-left:0.25em; margin-right:0.25em" class="col-xs-12" href="http://maps.google.com/?q={{$business->business_area}}" target="_blank">
                                             <i class="fa fa-map-marker"></i>
 											{{$business->business_area}}
                                         </a>
@@ -139,12 +113,18 @@
 						<p>
 							{{$business->business_description}}
 						</p>
-	                </div>
+						@if(sizeof($shelves)<1)
+							<br>
+							<button type="button" class="btn btn-info" data-toggle="popover" data-placement="bottom" title="Welcome to your New Shop" data-content="Add shelves and products to start connecting with your customers today!">Get Started &nbsp <i class="fa fa-bell"></i>
+							</button>
+						@endif
+					</div>
 
 					<div class="row">
 						<div class="col-md-7 col-md-offset-2">
 							<div class="profile-tabs">
 								<div class="nav-align-center">
+
 									<ul class="nav nav-pills" role="tablist">
 
 										@if(!empty($shelves))

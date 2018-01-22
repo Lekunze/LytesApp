@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 {{--    <meta name="csrf-token" content="{{ csrf_token() }}">--}}
 
-	<title>New Shop - Lytes.App</title>
+	<title>New Shop - LytesApp</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
@@ -36,7 +36,7 @@
     {{--<script src="{{asset('new-ui/js/nouislider.min.js')}}"type="text/javascript"></script>--}}
 
     <!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
-    {{--<script src="{{asset('new-ui/js/material-kit.js')}}" type="text/javascript"></script>--}}
+    <script src="{{asset('new-ui/js/material-kit.js')}}" type="text/javascript"></script>
 
     <!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
     <script src="{{asset('new-ui/js/bootstrap-datepicker.js')}}" type="text/javascript"></script>
@@ -45,6 +45,7 @@
 
 
     {{--<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>--}}
+
 
 	<style>
 
@@ -141,6 +142,10 @@
             h2{
                 margin-top: 0px !important;
             }
+
+            #open-days{
+                margin-bottom: 60px;
+            }
         }
 
         @media screen and (min-width: 360px) {
@@ -154,6 +159,10 @@
 
             .brand {
                 width: 200px !important;
+            }
+
+            #open-days{
+                margin-bottom: 60px;
             }
         }
 
@@ -169,6 +178,10 @@
             #register-btn{
                 margin-top: 1.5em !important;
             }
+
+            #open-days{
+                margin-bottom: 0px;
+            }
         }
 
         @media screen and (min-width: 1024px){
@@ -183,6 +196,10 @@
 
             #register-btn{
                 margin-top: 1.5em !important;
+            }
+
+            #open-days{
+                margin-bottom: 0px;
             }
 
         }
@@ -206,6 +223,72 @@
             border-radius: 0 !important;
         }
 
+        label#dob-lbl{
+            top: -28px;
+            left: 0;
+            font-size: 11px;
+            line-height: 1.07143;
+        }
+
+        #dropdownMenuButton{
+            color:black;
+            background-color: transparent;
+            padding-down: 12px;
+            padding-bottom: 12px;
+            padding-right: 0;
+            padding-left: -2px;
+            height:36px;
+            width:100%;
+            text-transform: none;
+            margin:0px;
+            font-size: 14px;
+            float:left;
+            color: #555;
+
+        }
+        .btn{
+            padding-left:0px;
+        }
+
+        .dropdown{
+            background-image: linear-gradient(#9c27b0, #9c27b0), linear-gradient(#D2D2D2, #D2D2D2);
+            background-size: 0 2px, 100% 1px;
+            background-repeat: no-repeat;
+            background-position: center bottom, center calc(100% - 1px);
+            background-color: transparent;
+        }
+
+        .dropdown-menu li{
+            font-size: 13px;
+            padding: 10px 20px;
+            margin: 0;
+            border-radius: 2px;
+            transition: all 150ms linear;
+        }
+        .dropdown-menu>li{
+            display: block;
+            padding: 3px 20px;
+            clear: both;
+            font-weight: normal;
+            line-height: 1.42857143;
+            color: #333;
+            white-space: nowrap;
+        }
+
+        ul.dropdown-menu{
+            width:100%;
+        }
+
+        hr{
+            margin:0;
+            padding:0;
+            color:black;
+        }
+
+        div.fixed-section.affix-top{
+            overflow-y: auto;
+            overflow-x: auto;
+        }
 
     </style>
 </head>
@@ -228,7 +311,7 @@
                       <img src="{{asset('img/shopping-cart.png')}}" alt="Lytes.App" rel="tooltip" title="<b>Lytes.App</b> Is Ghana's premier shopping catalog. Search for anything you need." data-placement="bottom" data-html="true">
                   </div>
                   <div class="brand" style="font-size:1.5em;margin-top:0.4em; width:300px">
-                      Lytes.App <br><span style="font-size:0.5em; font-weight:200">Join the rest of the world. Let's get online.</span>
+                      LytesApp <br><span style="font-size:0.5em; font-weight:200">Join the rest of the world. Let's get online.</span>
                   </div>
 
 
@@ -253,21 +336,11 @@
                       <i class="material-icons">search</i> Search
                   </a>
               </li>
-              <!-- <li>
-                  <a rel="tooltip" title="Follow us on Twitter" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank" class="btn btn-white btn-simple btn-just-icon">
-                      <i class="fa fa-twitter"></i>
-                  </a>
-              </li> -->
               <li>
                   <a rel="tooltip" title="Like us on Facebook" data-placement="bottom" href="https://www.facebook.com/LytesApp/" target="_blank" class="btn btn-white btn-simple btn-just-icon">
                       <i class="fa fa-facebook-square"></i>
                   </a>
               </li>
-              <!-- <li>
-                  <a rel="tooltip" title="Follow us on Instagram" data-placement="bottom" href="https://www.instagram.com/CreativeTimOfficial" target="_blank" class="btn btn-white btn-simple btn-just-icon">
-                      <i class="fa fa-instagram"></i>
-                  </a>
-              </li> -->
 
           </ul>
       </div>
@@ -295,8 +368,6 @@
                         <li><a href="#personal-row">Personal Information</a></li>
                         <li><a href="#business-row">Business Information</a></li>
                         <li><a href="#media-row">Image Uploads</a></li>
-                    
-
                     </ul>
                 </div>
             </div>
@@ -319,21 +390,21 @@
                             <div class="col-sm-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label" for="last-name">Surname*</label>
-                                        <input type="text" class="form-control" name="business_owner_last_name" id="last-name" required>
+                                        <input type="text" class="form-control" name="business_owner_last_name" id="last-name" value="{{old('business_owner_last_name')}}" required>
                                         {{--<small class="text-danger">{{ $errors->first('business_owner_last_name') }}</small>--}}
                                     </div>
                             </div>
                             <div class="col-sm-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label" for="given-names">Given Names*</label>
-                                        <input type="text" class="form-control" name="business_owner_given_names" id="given-names" required>
+                                        <input type="text" class="form-control" name="business_owner_given_names" id="given-names" value="{{old('business_owner_given_names')}}" required>
                                         <small class="text-danger">{{ $errors->first('business_owner_given_names') }}</small>
                                     </div>
                             </div>
                             <div class="col-sm-6">
                                     <div class="form-group label-floating has-validation">
-                                            <label class="control-label">Date of Birth*</label>
-                                            <input class="datepicker form-control" type="date" name="date_of_birth" id="dob" value="yyyy-MM-dd"/>
+                                            <label class="control-label" id="dob-lbl">Date of Birth*</label>
+                                            <input class="datepicker form-control" type="date" name="date_of_birth" id="dob"/>
                                     </div>
                                     <!-- <label class="control-label">Date of Birth</label>-->
                             </div>
@@ -348,30 +419,32 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group label-floating has-validation">
-                                    <label class="control-label">ID Type</label>
-                                    <select class="form-control"  name="id_type" value="{{old('id_type')}}">
+                                    <label class="control-label" id="id-label">ID Type</label>
+                                    <select class="form-control"  name="id_type" value="{{old('id_type')}}" id="id_type" required>
                                         @include('modules.id-types')
                                     </select>
+                                    <div class="help-block with-errors" id="id_error" style="color:red;margin-bottom: 1em">Choose a valid ID Type</div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">ID Number*</label>
-                                        <input type="text" class="form-control" name="id_number" required>
-                                        <small class="text-danger">{{ $errors->first('id_number') }}</small>
+                                        <input type="text" class="form-control" name="id_number" value="{{old('id_number')}}" id="id_number" onblur="checkID()" required>
+                                        <div  class="help-block with-errors" style="display: none" id="id-error-msg"></div>
+                                        {{--<small class="text-danger">{{ $errors->first('id_number') }}</small>--}}
                                     </div>
                             </div>
                             <div class="col-sm-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Phone Number*</label>
-                                        <input type="tel" class="form-control" name="phone_number" maxlength="10"  required>
+                                        <input type="tel" class="form-control" name="phone_number" maxlength="10"  value="{{old('phone_number')}}" required>
                                         <div class="help-block with-errors">Enter a Valid Ghanaian Number</div>
                                     </div>
                             </div>
                             <div class="col-sm-6">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Other Phone</label>
-                                        <input type="tel" class="form-control" name="phone_number_2" maxlength="10">
+                                        <input type="tel" class="form-control" name="phone_number_2" maxlength="10" value="{{old('phone_number_2')}}">
                                         <div class="help-block with-errors">Enter a Valid Ghanaian Number</div>
                                     </div>
                             </div>     
@@ -386,14 +459,14 @@
                                     <div class="col-sm-12">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Name of Business*</label>
-                                                <input type="text" class="form-control" name="business_name" maxlength="30" required>
+                                                <input type="text" class="form-control" name="business_name" maxlength="30" value="{{old('business_name')}}">
                                                 <div class="help-block with-errors">Business name should be max 30 letters</div>
                                             </div>
                                     </div>
                                     <div class="col-sm-12">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Describe your business*</label>
-                                                <textarea class="form-control" placeholder="" rows="3" name="business_description" maxlength="2000" required></textarea>
+                                                <textarea class="form-control" placeholder="" rows="3" name="business_description" maxlength="2000" value="{{old('business_description')}}"></textarea>
                                                 <div class="help-block with-errors">Max 200 words </div>
                                             </div>
                                     </div>
@@ -401,13 +474,13 @@
                                     <div class="col-sm-12">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">What's your tagline/motto?*</label>
-                                                <input type="text" class="form-control" name="business_tagline" required>
+                                                <input type="text" class="form-control" name="business_tagline" value="{{old('business_tagline')}}">
                                             </div>
                                     </div>
                                     <div class="col-sm-4">
                                             <div class="form-group label-floating">
-                                                <label class="control-label" id="slug-label">Business Slug (10 letters)*</label>
-                                                <input type="text" class="form-control" name="business_slug" id="slug" onblur="slugAvailability()" maxlength="10" minlength="3" required>
+                                                <label class="control-label" id="slug-label">Business URL*</label>
+                                                <input type="text" class="form-control" name="business_slug" id="slug" onblur="slugAvailability()" maxlength="10" minlength="3" value="{{old('business_slug')}}">
                                                 <span class="feedback">
                                                     <i class="material-icons" style="color:#4caf50; display: none" id="available">done</i>
                                                     <i class="material-icons" style="color:#f44336;display: none" id="unavailable">clear</i>
@@ -418,7 +491,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label" id="user-label">Business Email*</label>
-                                            <input type="email" class="form-control" id="user" name="business_email" data-error="Enter a valid email" onblur="userAvailability()" required>
+                                            <input type="email" class="form-control" id="user" name="business_email" data-error="Enter a valid email" onblur="userAvailability()" value="{{old('business_email')}}">
                                             <span class="feedback">
                                                     <i class="material-icons" style="color:#4caf50; display: none" id="user-available">done</i>
                                                     <i class="material-icons" style="color:#f44336;display: none" id="user-unavailable">clear</i>
@@ -456,23 +529,66 @@
                                     <div class="col-sm-4">
                                         <div class="form-group label-floating has-validation">
                                             <label class="control-label">Area or Location*</label>
-                                            <input type="text" class="form-control" name="area" value="{{old('area')}}" required>
+                                            <input type="text" class="form-control" name="area" value="{{old('area')}}">
                                             {{--<select class="form-control" name="area" value="{{old('area')}}">--}}
                                                 {{--@include('modules.area')--}}
                                             {{--</select>--}}
                                         </div>
                                     </div>
+
+                                    <!--OPENING TIMES -->
+                                    <div class="col-sm-4" id="open-days">
+                                        <div class="form-group label-floating has-validation">
+                                            <label class="control-label">Open Days*</label>
+                                            <div class="col-md-12 dropdown">
+                                                <a href="#" class="btn btn-simple dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton">
+                                                    <span style="float:left !important;line-height: 1.42857" id="selected"> Select open days </span>
+                                                    <b class="caret" style="float:right; margin-top: 0.5em"></b>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><input type="checkbox" value="Every day" name="all" id="all"/> Every day</li>
+                                                    <li><hr></li>
+                                                    <li><input type="checkbox" name="days[]" value="Monday"/> Monday </li>
+                                                    <li><input type="checkbox" name="days[]" value="Tuesday"/> Tuesday </li>
+                                                    <li><input type="checkbox" name="days[]" value="Wednesday"/> Wednesday </li>
+                                                    <li><input type="checkbox" name="days[]" value="Thursday"/> Thursday </li>
+                                                    <li><input type="checkbox" name="days[]" value="Friday"/> Friday </li>
+                                                    <li><input type="checkbox" name="days[]" value="Saturday"/> Saturday</li>
+                                                    <li><input type="checkbox" name="days[]" value="Sunday"/> Sunday </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating has-validation">
+                                            <label class="control-label">Open Times*</label>
+                                            <select class="form-control" name="open" value="{{old('open')}}">
+                                                @include('modules.times')
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group label-floating has-validation">
+                                            <label class="control-label">Close Times*</label>
+                                            <select class="form-control" name="close" value="{{old('close')}}">
+                                                @include('modules.times')
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- END OPENING TIMES -->
+
+
                                     <div class="col-md-12">
                                             <div class="form-group label-floating">
                                                     <label class="control-label">Address*</label>
-                                                    <input class="form-control" type="text" value="" name="address" required/>
+                                                    <input class="form-control" type="text" value="" name="address"/>
                                                     <small class="text-danger">{{ $errors->first('address') }}</small>
                                             </div>
                                     </div>
                                     <div class="col-sm-6">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Business Contact*</label>
-                                                <input type="tel" class="form-control" name="business_number" maxlength="10" required>
+                                                <input type="tel" class="form-control" name="business_number" maxlength="10">
                                                 <div class="help-block with-errors">Enter a Valid Ghanaian Number</div>
                                             </div>
                                     </div>
@@ -536,7 +652,7 @@
                 </div>
 
                 <div class="col-sm-12" style="text-align: center !important;" id="register-btn">
-                    <button class="btn btn-primary btn-lg" type="submit">
+                    <button class="btn btn-primary btn-lg" type="submit" id="submit">
                         Join Us
                         <i class="material-icons">favorite</i>
                     </button>
@@ -544,8 +660,6 @@
 
 
             </form>
-
-
 
                 <!-- end container -->
             </div>
@@ -562,7 +676,7 @@
                 <ul>
 					<li>
 						<a href="/">
-							Lytes.App
+							LytesApp
 						</a>
 					</li>
 					<li>
@@ -597,10 +711,84 @@
 
 </body>
 
+<script>
 
+    function displayError(message){
+        $("#id-label").css('color','#f44336');
+        $("#id-error-msg").css('color','#f44336');
+        $("#id-error-msg").html(message).append("<br>");
+        $("#id-error-msg").show();
+    }
+
+    function removeErrorDisp(){
+        $("#id-label").css('color','transparent');
+        $("#id-error-msg").hide();
+    }
+
+    function checkID(){
+        var id_type = $("#id_type").val();
+        var id_number = $("#id_number").val();
+
+        switch(id_type){
+            case '0':
+                removeErrorDisp();
+                break;
+            case '1':
+                removeErrorDisp();
+                break;
+            case '2':
+                removeErrorDisp();
+                break;
+            case '5':
+                removeErrorDisp();
+                break;
+            case '6':
+                if(isNaN(id_number) || (id_number.toString().length!=10)){
+                    displayError("Invalid Voter's ID Number");
+                }else{
+                    removeErrorDisp();
+                }
+                break;
+
+            case '4':
+                if(isNaN(id_number) || (id_number.toString().length!=8)){
+                    displayError("Invalid NHIS ID number");
+                }else{
+                    removeErrorDisp();
+                }
+                break;
+
+            case '3':
+                /*if(!/([A-Z]{3})-([0-9]{9})-([0-9])/.test()|| (id_number.toString().length!=15)){
+                    displayError("Invalid Non-Citizen ID");
+                }else{
+                    removeErrorDisp();
+                }*/
+                removeErrorDisp();
+                break;
+            default:
+                break;
+        }
+
+    }
+
+
+
+    $(document).ready(function() {
+        /*$("#submit").click(function (e) {
+            if (!$("#id_type").val() == 0) {
+                $("#id_error").css("display", "block");
+                e.preventDefault();
+            }
+
+        });*/
+    });
+
+</script>
 
 
 <script>
+
 
     function slugAvailability(){
         $.ajax({
@@ -684,6 +872,56 @@
             }
         });
     }
+
+
+    var setDates = function(){
+
+       //$.each($("input[type=checkbox]:checked"), function () {
+
+        if($(this).val()=== "Every day"){
+            if($("#all:checked")){
+                $.each($("input[type=checkbox]"), function () {
+                    $("input[type=checkbox]").prop("checked",true);
+                });
+                $("#selected").html($(this).val());
+            }else{
+                $.each($("input[type=checkbox]"), function () {
+                    $("input[type=checkbox]").prop("checked",false);
+                });
+                $("#selected").html($("input:checked").length + " days selected");
+            }
+
+        }else if($("input:checked").length == 0){
+            $("#selected").html("Select open days");
+        }else if($("input:checked").length == 1){
+            // $(this).attr('checked',true);
+            $("#selected").html($(this).val());
+        }else if($("input:checked").length > 1){
+
+            if($("input:checked").length == 8){
+                $("#selected").html($("#all").val());
+            }else if($("input:checked").length<8){
+                if($("#all:checked")){
+                    // console.log("About to uncheck you");
+                    $("#all").prop("checked",false);
+                    $("#selected").html($("input:checked").length + " days selected");
+                }else{
+                    // console.log("About to check");
+                    // if($("input:checked").length == 7){
+                    //     $("#all").prop("checked",true);
+                    //     $("#selected").html($("#all").val());
+                    // }else{
+                    //     $("#selected").html($("input:checked").length + " days selected");
+                    // }
+                }
+            }
+        }
+
+    };
+
+    //setDates();
+
+    $("input[type=checkbox]").on("click",setDates);
 </script>
 
 <script>
@@ -712,6 +950,12 @@
             format: 'yyyy-mm-dd',
             // format: 'dd/mm/YYYY'
         });
+
+        $('#dob').on('changeDate',function (ev) {
+            $(this).datepicker('hide');
+        });
+
+
         /*var checkout = $('#dob').datepicker({
             onRender: function(date) {
                     return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
