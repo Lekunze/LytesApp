@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
+    <meta name="keywords" content="Lytes, LytesApp, Ecommerce, Shopping, Online, Ghana, Online Shopping Ghana, sell online, sell, buy and sell">
+    <meta name="description" content="Shop online, set up online shop under few minutes">
 	<link rel="apple-touch-icon" sizes="76x76" href="{{asset('new-ui/img/apple-icon.png')}}">
 	<link rel="icon" type="image/png" href="{{asset('img/shopping-cart.png')}}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
